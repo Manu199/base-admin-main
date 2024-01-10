@@ -1,0 +1,27 @@
+@import '~bootstrap/scss/bootstrap';
+
+
+// LOGIN
+.card-header{
+    background-color: white;
+}
+
+.custom-checkbox{
+    border: none;
+    border-bottom: 1px solid;
+    border-radius: 0;
+}
+
+.custom-checkbox:focus{
+    box-shadow: none;
+    border-color: black;
+}
+
+.custom-check:focus{
+    background-color: black;
+}
+
+.title-login{
+    font-size: 30px;
+    font-family: 'Times New Roman', Times, serif;
+}
