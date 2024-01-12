@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Apartment;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,10 @@ class ApartmentSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $apartmentsData = include 'apartments_data.php';
+
+        foreach ($apartmentsData as $data) {
+            Apartment::create($data);
+        }
     }
 }
