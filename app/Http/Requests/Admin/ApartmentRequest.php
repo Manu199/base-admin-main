@@ -22,17 +22,18 @@ class ApartmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-        'title'=>'required|min:8|max:50',
-        'description'=>'required|min:15',
-        'price' =>'required|numeric|regex:/^(?!0\d)\d{1,4}(.\d{1,2})?$/',
-        'square_meters'=>'required|numeric|min:20',
-        'num_of_room'=>'required|numeric|min:1',
-        'num_of_bed'=>'required|numeric|min:1',
-        'num_of_bathroom'=>'required|numeric|min:1',
-        'country'=>'required|min:2',
-        'street_address'=>'required|min:5',
-        'city_name'=>'required|min:2',
-        'postal_code'=>'required|min:4',
+        'title' => 'required|min:8|max:50',
+        'description' => 'required|min:15',
+        'price' => 'required|numeric|min:1',
+        'square_meters' => 'required|numeric|min:20',
+        'num_of_room' => 'required|numeric|min:1',
+        'num_of_bed' => 'required|numeric|min:1',
+        'num_of_bathroom' => 'required|numeric|min:1',
+        'country' => 'required|min:2',
+        'street_address' => 'required|min:5',
+        'city_name' => 'required|min:2',
+        'postal_code' => 'required|min:4',
+        'image_url' => 'required|url|regex:/.(jpeg|jpg|png|gif)$/i'
         ];
 
 
@@ -49,7 +50,7 @@ class ApartmentRequest extends FormRequest
 
             'price.required' => 'Il prezzo è obbligatorio.',
             'price.numeric' => 'Il prezzo deve essere un numero.',
-            'price.regex' => 'Il prezzo deve essere un numero con al massimo due cifre decimali e senza zeri iniziali.',
+            'price.min' => 'Il prezzo deve essere almeno :min euro.',
 
             'square_meters.required' => 'I metri quadrati sono obbligatori.',
             'square_meters.numeric' => 'I metri quadrati devono essere un numero.',
@@ -78,6 +79,10 @@ class ApartmentRequest extends FormRequest
 
             'postal_code.required' => 'Il codice postale è obbligatorio.',
             'postal_code.min' => 'Il codice postale deve essere lungo almeno :min caratteri.',
+
+            'image_url.required' => 'Il campo URL dell\'immagine è obbligatorio.',
+            'image_url.url' => 'Il campo URL dell\'immagine deve essere un URL valido.',
+            'image_url.regex' => 'Il campo URL dell\'immagine deve avere un\'estensione valida (.jpeg, .jpg, .png, .gif).'
         ];
     }
 }
