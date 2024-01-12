@@ -35,7 +35,7 @@ return new class extends Migration
             $table->string('postal_code');
             $table->decimal('lat', 7, 5);
             $table->decimal('lon', 8, 5);
-            $table->string('image_url');
+            $table->string('image_path');
             $table->boolean('visible');
         });
     }
