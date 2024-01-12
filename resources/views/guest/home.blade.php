@@ -3,7 +3,8 @@
 @section('content')
 <div class="home">
     <h1 class="my-3 text-center ">WELCOME</h1>
-    <button class=" rounded-2 px-4"><a class=" text-decoration-none text-black mt-4" href="{{route('admin.home')}}">Login</a></button>
-
+    <div class="text-center">
+        <a class="btn btn-secondary" href="{{route('admin.home')}}">Login</a>
+    </div>
 </div>
 @endsection

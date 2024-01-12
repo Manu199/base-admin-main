@@ -19,14 +19,11 @@
     @include('admin.partials.header')
 
     <main>
-        <div class="m-auto position-relative text-center">
-            <div class="content position-absolute top-0 start-0 bottom-0 end-0">
-                <div class="container">
-                    @yield('content')
-                </div>
+        <div class="content">
+            <div class="container">
+                @yield('content')
             </div>
         </div>
-
     </main>
 
 </body>

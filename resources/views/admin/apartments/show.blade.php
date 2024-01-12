@@ -2,6 +2,6 @@
 
 @section('content')
     <div class="show-apartment">
-        <h1>Apartment detail</h1>
+        <h1 class="text-center">Apartment detail</h1>
     </div>
 @endsection

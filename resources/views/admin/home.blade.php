@@ -1,6 +1,5 @@
 @extends('layouts.main')
 
 @section('content')
-    <h1>Home</h1>
-    Ciao
+    <h1 class="text-center">Home Admin</h1>
 @endsection
