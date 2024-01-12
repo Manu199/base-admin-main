@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug');
             $table->text('description');
-            $table->decimal('price', 6, 2)->unsigned();
+            $table->integer('price')->unsigned();
             $table->integer('square_meters')->unsigned();
             $table->integer('num_of_room')->unsigned();
             $table->integer('num_of_bed')->unsigned();
@@ -35,7 +35,7 @@ return new class extends Migration
             $table->string('postal_code');
             $table->decimal('lat', 7, 5);
             $table->decimal('lon', 8, 5);
-            $table->string('image_path');
+            $table->text('image_path');
             $table->boolean('visible')->default(1);
         });
     }
