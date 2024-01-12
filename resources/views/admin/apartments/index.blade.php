@@ -51,15 +51,18 @@
             <div class="row">
                 @foreach ($apartments as $apartment)
                     <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <img src="https://via.placeholder.com/280x200" class="card-img-top rounded rounded-4" alt="Appartamento">
-                            <div class="card-body">
-                                <h6 class="card-title single-line-ellipsis fw-bold">{{ $apartment->title }}</h6>
-                                <p class="card-text single-line-ellipsis">{{ $apartment->street_address }}, {{ $apartment->city_name }} - {{ $apartment->country }}</p>
-                                <p class="card-text">{{ $apartment->num_of_bed }} bed - {{ $apartment->num_of_bathroom }} bath - {{ $apartment->square_meters }} mq</p>
-                                <p class="card-text fw-bold">&euro;{{ $apartment->price }}/day</p>
+                        {{-- link alla show dell'appartamento --}}
+                        <a class="text-decoration-none" href="#">
+                            <div class="card">
+                                <img src="https://via.placeholder.com/280x200" class="card-img-top rounded rounded-4" alt="Appartamento">
+                                <div class="card-body">
+                                    <h6 class="card-title single-line-ellipsis fw-bold">{{ $apartment->title }}</h6>
+                                    <p class="card-text single-line-ellipsis">{{ $apartment->street_address }}, {{ $apartment->city_name }} - {{ $apartment->country }}</p>
+                                    <p class="card-text">{{ $apartment->num_of_bed }} bed - {{ $apartment->num_of_bathroom }} bath - {{ $apartment->square_meters }} mq</p>
+                                    <p class="card-text fw-bold">&euro;{{ $apartment->price }}/day</p>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 @endforeach
             </div>
