@@ -26,6 +26,42 @@
 
                         <div class="mb-4 row justify-content-center">
                             <div class="col-md-6">
+                                <input id="lastname" type="text" placeholder="Lastname" class="form-control custom-checkbox @error('lastname') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}" required autocomplete="lastname" autofocus>
+
+                                @error('lastname')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="mb-4 row justify-content-center">
+                            <div class="col-md-6">
+                                <input id="date_of_birth" type="date" class="form-control custom-checkbox @error('date_of_birth') is-invalid @enderror" name="date_of_birth" value="{{ old('date_of_birth') }}" required autocomplete="date_of_birth" autofocus>
+
+                                @error('date_of_birth')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="mb-4 row justify-content-center">
+                            <div class="col-md-6">
+                                <input id="phone_number" type="tel" placeholder="Tel +00 123456789" class="form-control custom-checkbox @error('phone_number') is-invalid @enderror" name="phone_number" value="{{ old('phone_number') }}" required autocomplete="phone_number" autofocus>
+
+                                @error('phone_number')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="mb-4 row justify-content-center">
+                            <div class="col-md-6">
                                 <input id="email" placeholder="E-Mail Address" type="email" class="form-control custom-checkbox @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                 @error('email')
@@ -38,7 +74,7 @@
 
                         <div class="mb-4 row justify-content-center">
                             <div class="col-md-6">
-                                <input id="password" placeholder="Passsword" type="password" class="form-control custom-checkbox @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input id="password" placeholder="Password" type="password" class="form-control custom-checkbox @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
