@@ -14,13 +14,11 @@ return new class extends Migration
         Schema::create('apartments', function (Blueprint $table) {
             $table->id();
 
-
             $table->unsignedBigInteger('type_id');
             $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
 
-            $table->unsignedBigInteger('users_id');
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
 
             $table->timestamps();
             $table->string('title');
