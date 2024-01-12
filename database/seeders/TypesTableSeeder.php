@@ -21,8 +21,8 @@ class TypesTableSeeder extends Seeder
             ['name' => 'Case a schiera', 'description' => 'Case adiacenti tra loro in una fila, condividendo pareti laterali. Offrono un compromesso tra la privacy delle case unifamiliari e la compattezza degli appartamenti, creando un\'atmosfera di vicinato.'],
         ];
 
-        foreach ($data as $sponsorData) {
-            Type::create($sponsorData);
+        foreach ($data as $typeData) {
+            Type::create($typeData);
         }
     }
 }

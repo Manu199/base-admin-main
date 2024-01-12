@@ -36,8 +36,8 @@ class ServicesTableSeeder extends Seeder
             ['name' => 'Ferro da stiro'],
         ];
 
-        foreach ($data as $sponsorData) {
-            Service::create($sponsorData);
+        foreach ($data as $serviceData) {
+            Service::create($serviceData);
         }
     }
 }
