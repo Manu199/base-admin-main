@@ -40,8 +40,44 @@ class ApartmentRequest extends FormRequest
 
     public function messages() {
         return [
-            'title.required' => 'Il titolo è un campo richiesto',
-            'title.min' => 'Il titolo deve contenere almeno 8 caratteri',
+            'title.required' => 'Il titolo è obbligatorio.',
+            'title.min' => 'Il titolo deve essere lungo almeno :min caratteri.',
+            'title.max' => 'Il titolo non può superare :max caratteri.',
+
+            'description.required' => 'La descrizione è obbligatoria.',
+            'description.min' => 'La descrizione deve essere lunga almeno :min caratteri.',
+
+            'price.required' => 'Il prezzo è obbligatorio.',
+            'price.numeric' => 'Il prezzo deve essere un numero.',
+            'price.regex' => 'Il prezzo deve essere un numero con al massimo due cifre decimali e senza zeri iniziali.',
+
+            'square_meters.required' => 'I metri quadrati sono obbligatori.',
+            'square_meters.numeric' => 'I metri quadrati devono essere un numero.',
+            'square_meters.min' => 'I metri quadrati devono essere almeno :min.',
+
+            'num_of_room.required' => 'Il numero di stanze è obbligatorio.',
+            'num_of_room.numeric' => 'Il numero di stanze deve essere un numero.',
+            'num_of_room.min' => 'Il numero di stanze deve essere almeno :min.',
+
+            'num_of_bed.required' => 'Il numero di camere da letto è obbligatorio.',
+            'num_of_bed.numeric' => 'Il numero di camere da letto deve essere un numero.',
+            'num_of_bed.min' => 'Il numero di camere da letto deve essere almeno :min.',
+
+            'num_of_bathroom.required' => 'Il numero di bagni è obbligatorio.',
+            'num_of_bathroom.numeric' => 'Il numero di bagni deve essere un numero.',
+            'num_of_bathroom.min' => 'Il numero di bagni deve essere almeno :min.',
+
+            'country.required' => 'Il paese è obbligatorio.',
+            'country.min' => 'Il paese deve essere lungo almeno :min caratteri.',
+
+            'street_address.required' => 'L\'indirizzo è obbligatorio.',
+            'street_address.min' => 'L\'indirizzo deve essere lungo almeno :min caratteri.',
+
+            'city_name.required' => 'Il nome della città è obbligatorio.',
+            'city_name.min' => 'Il nome della città deve essere lungo almeno :min caratteri.',
+
+            'postal_code.required' => 'Il codice postale è obbligatorio.',
+            'postal_code.min' => 'Il codice postale deve essere lungo almeno :min caratteri.',
         ];
     }
 }
