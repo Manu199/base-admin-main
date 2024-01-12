@@ -43,7 +43,7 @@
 
         @foreach ($apartments as $apartment)
         <div class="container mt-5">
-            <div class="row p-2">
+            <div class="row">
               <div class="col-md-4 mb-4">
                 <div class="card">
                   <img src="https://via.placeholder.com/300" class="card-img-top" alt="Appartamento">
