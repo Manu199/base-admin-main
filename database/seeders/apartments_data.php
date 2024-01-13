@@ -18,7 +18,7 @@ $data = [
         'postal_code' => '00040',
         'lat' => 41.7458,
         'lon' => 12.6508,
-        'image_path' => 'images/apartment1.jpg',
+        'image_path' => 'apartment1.jpg',
         'visible' => true,
     ],
     [
@@ -38,7 +38,7 @@ $data = [
         'postal_code' => '08001',
         'lat' => 41.3833,
         'lon' => 2.1833,
-        'image_path' => 'images/apartment2.jpg',
+        'image_path' => 'apartment2.jpg',
         'visible' => true,
     ],
     [
@@ -58,7 +58,7 @@ $data = [
         'postal_code' => '75002',
         'lat' => 48.8695,
         'lon' => 2.3312,
-        'image_path' => 'images/apartment3.jpg',
+        'image_path' => 'apartment3.jpg',
         'visible' => true,
     ],
     [
@@ -78,7 +78,7 @@ $data = [
         'postal_code' => '10827',
         'lat' => 52.4810,
         'lon' => 13.3469,
-        'image_path' => 'images/apartment4.jpg',
+        'image_path' => 'apartment4.jpg',
         'visible' => true,
     ],
     [
@@ -98,7 +98,7 @@ $data = [
         'postal_code' => 'W3 6LJ',
         'lat' => 51.5066,
         'lon' => -0.2643,
-        'image_path' => 'images/apartment5.jpg',
+        'image_path' => 'apartment5.jpg',
         'visible' => true,
     ],
     [
@@ -118,7 +118,7 @@ $data = [
         'postal_code' => '11354',
         'lat' => 40.7625,
         'lon' => -73.8314,
-        'image_path' => 'images/apartment6.jpg',
+        'image_path' => 'apartment6.jpg',
         'visible' => true,
     ],
     [
@@ -138,7 +138,7 @@ $data = [
         'postal_code' => 'M5A 2N3',
         'lat' => 43.6606,
         'lon' => -79.3748,
-        'image_path' => 'images/apartment7.jpg',
+        'image_path' => 'apartment7.jpg',
         'visible' => true,
     ],
     [
@@ -158,7 +158,7 @@ $data = [
         'postal_code' => '106 77',
         'lat' => 37.9858,
         'lon' => 23.7303,
-        'image_path' => 'images/apartment8.jpg',
+        'image_path' => 'apartment8.jpg',
         'visible' => true,
     ],
     [
@@ -178,7 +178,7 @@ $data = [
         'postal_code' => '2000',
         'lat' => -33.8638,
         'lon' => 151.2087,
-        'image_path' => 'images/apartment9.jpg',
+        'image_path' => 'apartment9.jpg',
         'visible' => true,
     ],
     [
@@ -198,7 +198,7 @@ $data = [
         'postal_code' => '8006',
         'lat' => 47.3809,
         'lon' => 8.5439,
-        'image_path' => 'images/apartment10.jpg',
+        'image_path' => 'apartment10.jpg',
         'visible' => true,
     ],
 ];
