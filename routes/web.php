@@ -34,8 +34,6 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth','verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::resource('apartment', ApartmentController::class);
-
-
 });
 
 

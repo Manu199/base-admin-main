@@ -11,7 +11,7 @@ class ApartmentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -33,10 +33,8 @@ class ApartmentRequest extends FormRequest
         'street_address' => 'required|min:5',
         'city_name' => 'required|min:2',
         'postal_code' => 'required|min:4',
-        'image_url' => 'required|url|regex:/.(jpeg|jpg|png|gif)$/i|max:65535'
+        'image_path' => 'required|file|mimes:jpeg,jpg,png,gif|max:65535'
         ];
-
-
     }
 
     public function messages() {
@@ -80,10 +78,10 @@ class ApartmentRequest extends FormRequest
             'postal_code.required' => 'Il codice postale è obbligatorio.',
             'postal_code.min' => 'Il codice postale deve essere lungo almeno :min caratteri.',
 
-            'image_url.required' => 'Il campo URL dell\'immagine è obbligatorio.',
-            'image_url.url' => 'Il campo URL dell\'immagine deve essere un URL valido.',
-            'image_url.regex' => 'Il campo URL dell\'immagine deve avere un\'estensione valida (.jpeg, .jpg, .png, .gif).',
-            'image_url.max' => 'Il campo URL dell\'immagine non può superare :max caratteri.'
+            'image_path.required' => 'Il campo URL dell\'immagine è obbligatorio.',
+            'image_path.file' => 'Il campo :attribute deve essere un file.',
+            'image_path.mimes' => 'Il campo :attribute deve essere un file di tipo JPEG, JPG, PNG o GIF.',
+            'image_path.max' => 'Il campo URL dell\'immagine non può superare :max caratteri.'
         ];
     }
 }

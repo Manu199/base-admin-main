@@ -1,50 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
-    {{-- font Figtree --}}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Figtree&display=swap" rel="stylesheet">
 
-    <style>
-        .apartment {
-            font-family: 'Figtree', sans-serif;
-        }
-
-        .card {
-            border-radius: 15px;
-            overflow: hidden;
-            transition: transform 0.2s;
-        }
-
-        .card:hover {
-            transform: scale(1.05);
-        }
-
-        .card-img-top {
-            border-top-left-radius: 15px;
-            border-top-right-radius: 15px;
-        }
-
-        .card-body {
-            border-bottom-left-radius: 15px;
-            border-bottom-right-radius: 15px;
-        }
-
-        p {
-            font-size: 12px;
-            margin: 0;
-        }
-
-        .single-line-ellipsis {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            /* Aggiunge i puntini di sospensione */
-        }
-    </style>
-
-    <div class="apartment">
+    <div class="apartment-list">
         <h1 class="text-center">Apartments List</h1>
 
         <div class="container mt-5">
@@ -54,7 +12,7 @@
                         {{-- link alla show dell'appartamento --}}
                         <a class="text-decoration-none" href="{{ route('admin.apartment.show', $apartment) }}">
                             <div class="card">
-                                <img src="https://via.placeholder.com/280x200" class="card-img-top rounded rounded-4"
+                                <img src="{{ asset('storage/uploads/' . $apartment->image_path) }}" class="card-img-top rounded rounded-4"
                                     alt="Appartamento">
                                 <div class="card-body">
                                     <h6 class="card-title single-line-ellipsis fw-bold">{{ $apartment->title }}</h6>

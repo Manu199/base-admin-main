@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\ApartmentRequest;
 use App\Models\Apartment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,11 +15,8 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        // dd(Auth::id());
         $apartments = Apartment::where('user_id',Auth::id())->get();
-
         return view ('admin.apartments.index', compact('apartments'));
-
     }
 
     /**
@@ -26,31 +24,22 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        return view ('admin.apartments.create_edit');
+        $title = 'Apartment - Create';
+        $method = 'POST';
+        $route = route('admin.apartment.store');
+        $apartment = null;
+        return view ('admin.apartments.create_edit',compact('title','route','method','apartment'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ApartmentRequest $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'price' => 'required',
-            'square_meters' => 'required',
-            'num_of_room' => 'required',
-            'num_of_bed' => 'required',
-            'num_of_bathroom' => 'required',
-            'country' => 'required',
-            'street_address' => 'required',
-            'city_name' => 'required',
-            'postal_code' => 'required',
-            'image_url' => 'required'
-
-        ]);
-
-        return redirect()->route('admin.apartment.index');
+        $form_data = $request->all();
+        $apartment = null;
+        dd($form_data);
+        return redirect()->route('admin.project.show', $apartment )->with('success','Creazione avvenuta con successo!');
     }
 
     /**
@@ -68,9 +57,14 @@ class ApartmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Apartment $apartment)
     {
-        return view ('admin.apartments.create_edit');
+
+        $title = 'Apartment - Edit';
+        $method = 'PUT';
+        $route = route('admin.apartment.update', $apartment);
+
+        return view ('admin.apartments.create_edit',compact('title','route','method','apartment'));
     }
 
     /**
