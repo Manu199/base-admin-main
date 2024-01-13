@@ -33,24 +33,24 @@
 
 @media screen and (max-width:768px) {
     .card-login{
-        min-width: 200px;
-        max-width: 400px;
+        min-width: 400px;
+        max-width: 100%;
     }
 }
 
-@media screen and (min-width:768px) and (max-width:1200px){
+@media screen and (min-width:768px){
     .card-login{
-        min-width: 800px;
-        max-width: 1200px;
+        min-width: 350px;
+        max-width: 516px;
     }
 }
 
-@media screen and (min-width:1200px) {
-    .card-login{
-        min-width: 700px;
-        max-width: 1200px;
-    }
-}
+// @media screen and (min-width:1200px) {
+//     .card-login{
+//         min-width: 700px;
+//         max-width: 1200px;
+//     }
+// }
 
 
 
