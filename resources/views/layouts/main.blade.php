@@ -19,10 +19,8 @@
     @include('admin.partials.header')
 
     <main>
-        <div class="content">
-            <div class="container">
-                @yield('content')
-            </div>
+        <div class="container">
+            @yield('content')
         </div>
     </main>
 

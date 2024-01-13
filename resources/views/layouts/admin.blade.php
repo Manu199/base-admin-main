@@ -19,14 +19,9 @@
     @include('admin.partials.header')
 
     <main>
-        <div class="m-auto">
-            <div class="content">
-                <div class="container">
-                    @yield('content')
-                </div>
-            </div>
+        <div class="container">
+            @yield('content')
         </div>
-
     </main>
 
 </body>
