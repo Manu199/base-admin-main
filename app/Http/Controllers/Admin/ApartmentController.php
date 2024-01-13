@@ -34,7 +34,23 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'square_meters' => 'required',
+            'num_of_room' => 'required',
+            'num_of_bed' => 'required',
+            'num_of_bathroom' => 'required',
+            'country' => 'required',
+            'street_address' => 'required',
+            'city_name' => 'required',
+            'postal_code' => 'required',
+            'image_url' => 'required'
+
+        ]);
+
+        return redirect()->route('admin.apartment.index');
     }
 
     /**
