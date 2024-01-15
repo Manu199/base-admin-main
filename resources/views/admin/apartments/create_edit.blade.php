@@ -10,8 +10,13 @@
             {{-- TITLE --}}
             <div class="row">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
-                        name="title" placeholder="title" value="{{ old('title', $apartment?->title) }}">
+                    <input
+                        type="text"
+                        class="form-control @error('title') is-invalid @enderror"
+                        id="title"
+                        name="title"
+                        placeholder="title"
+                        value="{{ old('title', $apartment?->title) }}">
                     <label class="left-initial" for="title">Title</label>
                     @error('title')
                         <p class="text-danger">{{ $message }}</p>
@@ -22,10 +27,14 @@
             {{-- DESCRIPTION --}}
             <div class="row">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control @error('description') is-invalid @enderror" id="description"
-                        name="description" placeholder="description"
-                        value="{{ old('description', $apartment?->description) }}">
-                    <label class="left-initial" for="description">description</label>
+                    <textarea
+                        style="height:150px;"
+                        class="form-control @error('description') is-invalid @enderror"
+                        id="description"
+                        placeholder="description"
+                        id="floatingTextarea">{{ old('description', $apartment?->description) }}</textarea>
+
+                    <label class="left-initial" for="description">Description</label>
                     @error('description')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
@@ -35,9 +44,14 @@
             {{-- PRICE --}}
             <div class="row">
                 <div class="form-floating mb-3">
-                    <input type="number" class="form-control @error('price') is-invalid @enderror" id="price"
-                        name="price" placeholder="price" value="{{ old('price', $apartment?->price) }}">
-                    <label class="left-initial" for="price">price</label>
+                    <input
+                        type="number"
+                        class="form-control @error('price') is-invalid @enderror"
+                        id="price"
+                        name="price"
+                        placeholder="price"
+                        value="{{ old('price', $apartment?->price) }}">
+                    <label class="left-initial" for="price">Price</label>
                     @error('price')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
@@ -46,10 +60,14 @@
             {{-- SQUARE METERS --}}
             <div class="row">
                 <div class="form-floating mb-3">
-                    <input type="number" class="form-control @error('square_meters') is-invalid @enderror"
-                        id="square_meters" name="square_meters" placeholder="square_meters"
+                    <input
+                        type="number"
+                        class="form-control @error('square_meters') is-invalid @enderror"
+                        id="square_meters"
+                        name="square_meters"
+                        placeholder="square_meters"
                         value="{{ old('square_meters', $apartment?->square_meters) }}">
-                    <label class="left-initial" for="square_meters">square_meters</label>
+                    <label class="left-initial" for="square_meters">Total Area</label>
                     @error('square_meters')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
@@ -59,10 +77,14 @@
             {{-- NUM of ROOM --}}
             <div class="row">
                 <div class="form-floating mb-3">
-                    <input type="number" class="form-control @error('num_of_room') is-invalid @enderror" id="num_of_room"
-                        name="num_of_room" placeholder="num_of_room"
+                    <input
+                        type="number"
+                        class="form-control @error('num_of_room') is-invalid @enderror"
+                        id="num_of_room"
+                        name="num_of_room"
+                        placeholder="num_of_room"
                         value="{{ old('num_of_room', $apartment?->num_of_room) }}">
-                    <label class="left-initial" for="num_of_room">num_of_room</label>
+                    <label class="left-initial" for="num_of_room">Rooms</label>
                     @error('num_of_room')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
@@ -72,10 +94,14 @@
             {{-- NUM of BED --}}
             <div class="row">
                 <div class="form-floating mb-3">
-                    <input type="number" class="form-control @error('num_of_bed') is-invalid @enderror" id="num_of_bed"
-                        name="num_of_bed" placeholder="num_of_bed"
+                    <input
+                        type="number"
+                        class="form-control @error('num_of_bed') is-invalid @enderror"
+                        id="num_of_bed"
+                        name="num_of_bed"
+                        placeholder="num_of_bed"
                         value="{{ old('num_of_bed', $apartment?->num_of_bed) }}">
-                    <label class="left-initial" for="num_of_bed">num_of_bed</label>
+                    <label class="left-initial" for="num_of_bed">Bed</label>
                     @error('num_of_bed')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
@@ -85,10 +111,14 @@
             {{-- NUM of BATHROOM --}}
             <div class="row">
                 <div class="form-floating mb-3">
-                    <input type="number" class="form-control @error('num_of_bathroom') is-invalid @enderror"
-                        id="num_of_bathroom" name="num_of_bathroom" placeholder="num_of_bathroom"
+                    <input
+                        type="number"
+                        class="form-control @error('num_of_bathroom') is-invalid @enderror"
+                        id="num_of_bathroom"
+                        name="num_of_bathroom"
+                        placeholder="num_of_bathroom"
                         value="{{ old('num_of_bathroom', $apartment?->num_of_bathroom) }}">
-                    <label class="left-initial" for="num_of_bathroom">num_of_bathroom</label>
+                    <label class="left-initial" for="num_of_bathroom">Bathrooms</label>
                     @error('num_of_bathroom')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
@@ -98,9 +128,14 @@
             {{-- COUNTRY --}}
             <div class="row">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control @error('country') is-invalid @enderror" id="country"
-                        name="country" placeholder="country" value="{{ old('country', $apartment?->country) }}">
-                    <label class="left-initial" for="country">country</label>
+                    <input
+                        type="text"
+                        class="form-control @error('country') is-invalid @enderror"
+                        id="country"
+                        name="country"
+                        placeholder="country"
+                        value="{{ old('country', $apartment?->country) }}">
+                    <label class="left-initial" for="country">Country</label>
                     @error('country')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
@@ -110,10 +145,14 @@
             {{-- STREET ADDRESS --}}
             <div class="row">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control @error('street_address') is-invalid @enderror"
-                        id="street_address" name="street_address" placeholder="street_address"
+                    <input
+                        type="text"
+                        class="form-control @error('street_address') is-invalid @enderror"
+                        id="street_address"
+                        name="street_address"
+                        placeholder="street_address"
                         value="{{ old('street_address', $apartment?->street_address) }}">
-                    <label class="left-initial" for="street_address">street_address and number</label>
+                    <label class="left-initial" for="street_address">Street Address, House number</label>
                     @error('street_address')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
@@ -123,9 +162,14 @@
             {{-- CITY NAME --}}
             <div class="row">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control @error('city_name') is-invalid @enderror" id="city_name"
-                        name="city_name" placeholder="city_name" value="{{ old('city_name', $apartment?->city_name) }}">
-                    <label class="left-initial" for="city_name">city_name</label>
+                    <input
+                        type="text"
+                        class="form-control @error('city_name') is-invalid @enderror"
+                        id="city_name"
+                        name="city_name"
+                        placeholder="city_name"
+                        value="{{ old('city_name', $apartment?->city_name) }}">
+                    <label class="left-initial" for="city_name">City</label>
                     @error('city_name')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
@@ -135,10 +179,14 @@
             {{-- POSTAL CODE --}}
             <div class="row">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control @error('postal_code') is-invalid @enderror"
-                        id="postal_code" name="postal_code" placeholder="postal_code"
+                    <input
+                        type="text"
+                        class="form-control @error('postal_code') is-invalid @enderror"
+                        id="postal_code"
+                        name="postal_code"
+                        placeholder="postal_code"
                         value="{{ old('postal_code', $apartment?->postal_code) }}">
-                    <label class="left-initial" for="postal_code">postal_code</label>
+                    <label class="left-initial" for="postal_code">Postal Code</label>
                     @error('postal_code')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
@@ -166,10 +214,17 @@
             <div class="row">
                 <div class="mb-3">
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
-                            name="visible" value="1" {{-- create first time --}}
-                            @if (!$errors->count() && $apartment === null) checked @endif {{-- no errori, edit --}}
-                            @if (!$errors->count() && $apartment?->visible) checked @endif {{-- errori, old data --}}
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            role="switch"
+                            id="flexSwitchCheckDefault"
+                            name="visible" value="1"
+                            {{-- create first time --}}
+                            @if (!$errors->count() && $apartment === null) checked @endif
+                            {{-- no errori, edit --}}
+                            @if (!$errors->count() && $apartment?->visible) checked @endif
+                            {{-- errori, old data --}}
                             @if ($errors->count() && old('visible')) checked @endif>
                         <label class="form-check-label" for="flexSwitchCheckDefault">Visible</label>
                     </div>
@@ -182,11 +237,17 @@
                     <div role="group" aria-label="Basic checkbox toggle button group">
 
                         @foreach ($services as $service)
-                            <input type="checkbox" class="btn-check btn-check-custom" id="btncheck{{ $service->id }}"
-                                value="{{ $service->id }}" name="services[]" {{-- $errors->count() mi restituisce quanti errori ci sono stati --}}
-                                {{-- se non ci sono errori, devo checkare solo se mi trovo nell'edit --}} @if (!$errors->count() && $apartment?->services->contains($service->id)) checked @endif
-                                {{-- se ci sono errori, devo checkare i vecchi elementi passati dall'old --}} @if ($errors->count() && in_array($service->id, old('services', []))) checked @endif>
-
+                            <input
+                                type="checkbox"
+                                class="btn-check btn-check-custom"
+                                id="btncheck{{ $service->id }}"
+                                value="{{ $service->id }}"
+                                name="services[]"
+                                {{-- $errors->count() mi restituisce quanti errori ci sono stati --}}
+                                {{-- se non ci sono errori, devo checkare solo se mi trovo nell'edit --}}
+                                @if (!$errors->count() && $apartment?->services->contains($service->id)) checked @endif
+                                {{-- se ci sono errori, devo checkare i vecchi elementi passati dall'old --}}
+                                @if ($errors->count() && in_array($service->id, old('services', []))) checked @endif>
 
                             <label class="badge btn badge-custom px-3 py-1 m-1" for="{{ 'btncheck' . $service->id }}">
                                 {!! $service['name'] !!}
