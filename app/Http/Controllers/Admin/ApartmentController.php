@@ -113,6 +113,10 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
+        if ($apartment->user_id != Auth::id()) {
+            $apartments = Apartment::where('user_id', Auth::id())->get();
+            return redirect()->route('admin.apartment.index', compact('apartments'));
+        }
 
         $title = 'Apartment - Edit';
         $method = 'PUT';
@@ -184,6 +188,12 @@ class ApartmentController extends Controller
         }
 
         $apartment->update($form_data);
+
+        // Update della tabella pivot
+        $apartment->services()->detach();
+        if(array_key_exists('services', $form_data)){
+            $apartment->services()->attach($form_data['services']);
+        }
 
         return redirect()->route('admin.apartment.show', $apartment)->with('success', 'Modificato con successo!');
     }
