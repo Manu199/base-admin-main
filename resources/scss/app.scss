@@ -42,12 +42,17 @@ p {
 
 .btn-header{
     background-color: transparent;
-    color: black;
+    color: rgba(0, 0, 0, 0.822);
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
 }
 
 .btn-header:hover{
     background-color: transparent;
-    color: #10D1A0;
+    color: black;
+    border-radius: 0;
+    box-shadow: 0 2px 0 0 #17c499;
 
 }
 

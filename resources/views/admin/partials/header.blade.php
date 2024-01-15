@@ -10,7 +10,7 @@
     </div>
     <div class="col-6 ">
         <ul class="nav justify-content-end pe-4">
-            <li class="nav-item">
+            <li class="nav-item mx-3">
                 <a class="nav-link btn fw-bold btn-header {{ Route::currentRouteName() === 'home' ? 'text-bg-info' : ''}}" href="{{ route('admin.apartment.index') }}">Apartments List</a>
             </li>
             <li class="nav-item">
