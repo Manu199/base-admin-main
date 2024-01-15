@@ -18,8 +18,8 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::where('user_id',Auth::id())->get();
-        return view ('admin.apartments.index', compact('apartments'));
+        $apartments = Apartment::where('user_id', Auth::id())->get();
+        return view('admin.apartments.index', compact('apartments'));
     }
 
     /**
@@ -32,7 +32,7 @@ class ApartmentController extends Controller
         $route = route('admin.apartment.store');
         $apartment = null;
         $services = Service::all();
-        return view ('admin.apartments.create_edit',compact('title','route','method','apartment','services'));
+        return view('admin.apartments.create_edit', compact('title', 'route', 'method', 'apartment', 'services'));
     }
 
     /**
@@ -64,8 +64,7 @@ class ApartmentController extends Controller
         $position = $data_decode['results'][0]['position'];
 
         $form_data['country'] = $address['country'];
-        if(!array_key_exists('streetNumber',$address))
-        {
+        if (!array_key_exists('streetNumber', $address)) {
             $address['streetNumber'] = 1;
         }
         $form_data['street_address'] = $address['streetName'] . ' ' . $address['streetNumber'];
@@ -75,14 +74,14 @@ class ApartmentController extends Controller
         $form_data['lon'] = $position['lon'];
 
         // visible
-        if(!array_key_exists('visible',$form_data)){
+        if (!array_key_exists('visible', $form_data)) {
             $form_data['visible'] = 0;
-        }else{
+        } else {
             $form_data['visible'] = 1;
         }
 
         // verifico se esiste l'immagine
-        if(array_key_exists('image_path', $form_data)){
+        if (array_key_exists('image_path', $form_data)) {
             $img_path = Storage::put('uploads', $form_data['image_path']);
             $form_data['image_path'] = basename($img_path);
         }
@@ -90,11 +89,11 @@ class ApartmentController extends Controller
         $apartment = Apartment::create($form_data);
 
         // Attach dei servizi
-        if(array_key_exists('services', $form_data)){
+        if (array_key_exists('services', $form_data)) {
             $apartment->services()->attach($form_data['services']);
         }
 
-        return redirect()->route('admin.apartment.show', $apartment )->with('success','Creazione avvenuta con successo!');
+        return redirect()->route('admin.apartment.show', $apartment)->with('success', 'Creazione avvenuta con successo!');
     }
 
     /**
@@ -102,11 +101,11 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        if($apartment->user_id != Auth::id()) {
-            $apartments = Apartment::where('user_id',Auth::id())->get();
-            return redirect() -> route('admin.apartment.index', compact('apartments'));
+        if ($apartment->user_id != Auth::id()) {
+            $apartments = Apartment::where('user_id', Auth::id())->get();
+            return redirect()->route('admin.apartment.index', compact('apartments'));
         }
-        return view ('admin.apartments.show', compact('apartment'));
+        return view('admin.apartments.show', compact('apartment'));
     }
 
     /**
@@ -120,7 +119,7 @@ class ApartmentController extends Controller
         $route = route('admin.apartment.update', $apartment);
         $services = Service::all();
 
-        return view ('admin.apartments.create_edit',compact('title','route','method','apartment','services'));
+        return view('admin.apartments.create_edit', compact('title', 'route', 'method', 'apartment', 'services'));
     }
 
     /**
@@ -131,14 +130,14 @@ class ApartmentController extends Controller
         $form_data = $request->all();
 
         // se il titolo dell'appartamento cambia, cambia anche lo slug
-        if($apartment->title === $form_data['title']){
+        if ($apartment->title === $form_data['title']) {
             $form_data['slug'] = $apartment->slug;
-        }else{
-            $form_data['slug'] = Helper::generateSlug($form_data['title'] , Apartment::class);
+        } else {
+            $form_data['slug'] = Helper::generateSlug($form_data['title'], Apartment::class);
         }
 
         // se ['street_address'] ['postal_code'] sono cambiati, cambio dati di tom tom
-        if($apartment->street_address !== $form_data['street_address'] || $apartment->postal_code !== $form_data['postal_code']){
+        if ($apartment->street_address !== $form_data['street_address'] || $apartment->postal_code !== $form_data['postal_code']) {
             $apiUrl = 'https://api.tomtom.com/search/2/geocode/';
             $apiQuery = $form_data['street_address'] . ' ' . $form_data['postal_code'] . '.json';
             $encodedAddress = urlencode($apiQuery);
@@ -156,8 +155,7 @@ class ApartmentController extends Controller
             $position = $data_decode['results'][0]['position'];
 
             $form_data['country'] = $address['country'];
-            if(!array_key_exists('streetNumber',$address))
-            {
+            if (!array_key_exists('streetNumber', $address)) {
                 $address['streetNumber'] = 1;
             }
             $form_data['street_address'] = $address['streetName'] . ' ' . $address['streetNumber'];
@@ -168,15 +166,15 @@ class ApartmentController extends Controller
         }
 
         // visible
-        if(!array_key_exists('visible',$form_data)){
+        if (!array_key_exists('visible', $form_data)) {
             $form_data['visible'] = 0;
-        }else{
+        } else {
             $form_data['visible'] = 1;
         }
 
         // controllo che nei miei dati ricevuti dal form sia stata aggiunta un'immagine
-        if(array_key_exists('image_path', $form_data)){
-            if($apartment->image_path){
+        if (array_key_exists('image_path', $form_data)) {
+            if ($apartment->image_path) {
                 // cancello la vecchia immmagine se esiste
                 Storage::delete('uploads/' . $apartment->image_path);
             }
@@ -187,14 +185,19 @@ class ApartmentController extends Controller
 
         $apartment->update($form_data);
 
-        return redirect()->route('admin.apartment.show', $apartment)->with('success','Modificato con successo!');
+        return redirect()->route('admin.apartment.show', $apartment)->with('success', 'Modificato con successo!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Apartment $apartment)
     {
-        //
+        if ($apartment->image_path) {
+            // cancello la vecchia immmagine se esiste
+            Storage::delete('uploads/' . $apartment->image_path);
+        }
+        $apartment->delete();
+        return redirect()->route('admin.apartment.index')->with('success', 'Progetto cancellato definitivamente!');
     }
 }
