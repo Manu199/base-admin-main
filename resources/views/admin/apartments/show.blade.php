@@ -30,6 +30,10 @@
             {{ $apartment->square_meters }} mq</p>
 
         <p>SERIVIZI</p>
+        @foreach ($apartment->services as $service)
+            <span class="badge text-bg-primary my-2">{{ $service->name }}</span>
+        @endforeach
+
 
         <p>{{ $apartment->description }}</p>
     </div>

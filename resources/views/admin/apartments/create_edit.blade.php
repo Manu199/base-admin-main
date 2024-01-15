@@ -124,8 +124,7 @@
             <div class="row">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control @error('city_name') is-invalid @enderror" id="city_name"
-                        name="city_name" placeholder="city_name"
-                        value="{{ old('city_name', $apartment?->city_name) }}">
+                        name="city_name" placeholder="city_name" value="{{ old('city_name', $apartment?->city_name) }}">
                     <label class="left-initial" for="city_name">city_name</label>
                     @error('city_name')
                         <p class="text-danger">{{ $message }}</p>
@@ -149,7 +148,6 @@
             <div class="row">
                 <div class=" mb-3">
                     <label for="image" class="form-label fw-bold">Image: </label>
-                    @dump(asset('storage/uploads/' . $apartment?->image_path))
                     <div class="mb-3 position-relative">
                         <img id="image-preview" class="img-fluid rounded"
                             onerror="this.src ='{{ asset('img/placeholder.png') }}'"
@@ -168,8 +166,6 @@
             <div class="row">
                 <div class="mb-3">
                     <div class="form-check form-switch">
-                        @dump('old: ' . old('visible'))
-                        @dump('apa visi: ' . $apartment?->visible)
                         <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
                             name="visible" value="1" {{-- create first time --}}
                             @if (!$errors->count() && $apartment === null) checked @endif {{-- no errori, edit --}}

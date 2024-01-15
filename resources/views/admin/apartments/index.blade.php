@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-
     <div class="apartment-list">
         <h1 class="text-center">Apartments List</h1>
 
@@ -12,8 +11,8 @@
                         {{-- link alla show dell'appartamento --}}
                         <a class="text-decoration-none" href="{{ route('admin.apartment.show', $apartment) }}">
                             <div class="card">
-                                <img src="{{ asset('storage/uploads/' . $apartment->image_path) }}" class="card-img-top rounded rounded-4"
-                                    alt="Appartamento">
+                                <img src="{{ asset('storage/uploads/' . $apartment->image_path) }}"
+                                    class="card-img-top rounded rounded-4" alt="Appartamento">
                                 <div class="card-body">
                                     <h6 class="card-title single-line-ellipsis fw-bold">{{ $apartment->title }}</h6>
                                     <p class="card-text single-line-ellipsis">{{ $apartment->street_address }},
@@ -29,6 +28,5 @@
             </div>
         </div>
 
-        @dump($apartments)
     </div>
 @endsection
