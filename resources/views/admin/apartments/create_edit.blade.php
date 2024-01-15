@@ -182,13 +182,15 @@
                     <div role="group" aria-label="Basic checkbox toggle button group">
 
                         @foreach ($services as $service)
-                            <input type="checkbox" class="btn-check" id="btncheck{{ $service->id }}"
+                            <input type="checkbox" class="btn-check btn-check-custom" id="btncheck{{ $service->id }}"
                                 value="{{ $service->id }}" name="services[]" {{-- $errors->count() mi restituisce quanti errori ci sono stati --}}
                                 {{-- se non ci sono errori, devo checkare solo se mi trovo nell'edit --}} @if (!$errors->count() && $apartment?->services->contains($service->id)) checked @endif
                                 {{-- se ci sono errori, devo checkare i vecchi elementi passati dall'old --}} @if ($errors->count() && in_array($service->id, old('services', []))) checked @endif>
 
-                            <label class="badge btn btn-info"
-                                for="btncheck{{ $service->id }}">{{ $service->name }}</label>
+
+                            <label class="badge btn badge-custom px-3 py-1 m-1" for="{{ 'btncheck' . $service->id }}">
+                                {!! $service['name'] !!}
+                            </label>
                         @endforeach
                     </div>
                 </div>
