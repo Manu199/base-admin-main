@@ -31,7 +31,7 @@ class ApartmentRequest extends FormRequest
         'num_of_bathroom' => 'required|numeric|min:1',
         'street_address' => 'required|min:5',
         'postal_code' => 'required|min:4',
-        'image_path' => 'required|file|mimes:jpeg,jpg,png,gif|max:65535'
+        'image_path' => 'file|mimes:jpeg,jpg,png,gif|max:65535'
         ];
     }
 
@@ -70,7 +70,6 @@ class ApartmentRequest extends FormRequest
             'postal_code.required' => 'Il codice postale è obbligatorio.',
             'postal_code.min' => 'Il codice postale deve essere lungo almeno :min caratteri.',
 
-            'image_path.required' => 'Il campo URL dell\'immagine è obbligatorio.',
             'image_path.file' => 'Il campo :attribute deve essere un file.',
             'image_path.mimes' => 'Il campo :attribute deve essere un file di tipo JPEG, JPG, PNG o GIF.',
             'image_path.max' => 'Il campo URL dell\'immagine non può superare :max caratteri.'

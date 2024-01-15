@@ -135,6 +135,7 @@
             <div class="row">
                 <div class=" mb-3">
                     <label for="image" class="form-label fw-bold">Image: </label>
+                    @dump(asset('storage/uploads/' . $apartment?->image_path))
                     <div class="mb-3 position-relative">
                         <img id="image-preview" class="img-fluid rounded"
                             onerror="this.src ='{{ asset('img/placeholder.png') }}'"
@@ -162,10 +163,12 @@
                             id="flexSwitchCheckDefault"
                             name="visible"
                             value="1"
+                            {{-- create first time --}}
+                            @if(!$errors->count() && $apartment === null) checked @endif
                             {{-- no errori, edit --}}
-                            @if(!$errors->count() && $apartment?->visible == 1) checked @endif
+                            @if(!$errors->count() && $apartment?->visible) checked @endif
                             {{-- errori, old data --}}
-                            @if($errors->count() && old('visible') == 1) checked @endif
+                            @if($errors->count() && old('visible')) checked @endif
                             >
                         <label class="form-check-label" for="flexSwitchCheckDefault">Visible</label>
                     </div>
