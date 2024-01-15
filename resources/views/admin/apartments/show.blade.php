@@ -5,7 +5,10 @@
     <div class="show-apartment">
         <h1 class="text-center">Apartment detail</h1>
 
-        <h3>{{ $apartment->title }}</h3>
+        <div class="d-flex align-items-center">
+            <h3 class=" d-inline-block">{{ $apartment->title }}</h3>
+            <a class="btn btn-warning" href="{{ route('admin.apartment.edit', $apartment) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+        </div>
 
         <h6>{{ $apartment->street_address }}, {{ $apartment->city_name }} {{ $apartment->postal_code }} -
             {{ $apartment->country }}</h6>

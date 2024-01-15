@@ -9,6 +9,7 @@ use App\Models\Apartment;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
 {
@@ -80,6 +81,12 @@ class ApartmentController extends Controller
             $form_data['visible'] = 1;
         }
 
+        // verifico se esiste l'immagine
+        if(array_key_exists('image_path', $form_data)){
+            $img_path = Storage::put('uploads', $form_data['image_path']);
+            $form_data['image_path'] = basename($img_path);
+        }
+
         $apartment = Apartment::create($form_data);
 
         // Attach dei servizi
@@ -111,16 +118,17 @@ class ApartmentController extends Controller
         $title = 'Apartment - Edit';
         $method = 'PUT';
         $route = route('admin.apartment.update', $apartment);
+        $services = Service::all();
 
-        return view ('admin.apartments.create_edit',compact('title','route','method','apartment'));
+        return view ('admin.apartments.create_edit',compact('title','route','method','apartment','services'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ApartmentRequest $request, Apartment $apartment)
     {
-        //
+        dump($request->all());
     }
 
     /**
