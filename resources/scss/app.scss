@@ -12,6 +12,7 @@ p {
     margin: 0;
 }
 
+
 // LOGIN
 .card-header{
     background-color: white;
@@ -36,6 +37,35 @@ p {
     font-size: 30px;
     font-family: 'Times New Roman', Times, serif;
 }
+
+// HEADER
+
+.btn-header{
+    background-color: transparent;
+    color: black;
+}
+
+.btn-header:hover{
+    background-color: transparent;
+    color: #10D1A0;
+
+}
+
+.btn-header-2{
+    background-color: #10D1A0;
+    color: white;
+    border-radius: 5px;
+}
+
+.btn-header-2:hover{
+    background-color: #48bb9e;
+    color: white;
+    border-radius: 5px;
+}
+
+
+
+
 
 
 // LOGIN CARD SIZE
