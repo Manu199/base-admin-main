@@ -3,11 +3,15 @@
 @section('content')
     <div class="create-edit-apartment">
 
-        <h1 class="text-center">{{ $title }}</h1>
-        {{-- TOOGLE VISIBLE --}}
-        <div class="row">
-            <div class="col">
-                <div class="form-check form-switch">
+        <form action="{{ $route }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method($method)
+
+            <div class="position-relative">
+                <h1 class="text-center">{{ $title }}</h1>
+
+                {{-- TOOGLE VISIBLE --}}
+                <div class="form-check form-switch position-absolute bottom-0 end-0">
                     <input
                         class="form-check-input"
                         type="checkbox"
@@ -23,10 +27,6 @@
                     <label class="form-check-label" for="flexSwitchCheckDefault">Visible</label>
                 </div>
             </div>
-        </div>
-        <form action="{{ $route }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method($method)
 
             <div class="row">
                 <div class="col-6">
@@ -55,8 +55,8 @@
                                     style="height:100px;"
                                     class="form-control @error('description') is-invalid @enderror"
                                     id="description"
-                                    placeholder="description"
-                                    id="floatingTextarea">{{ old('description', $apartment?->description) }}</textarea>
+                                    name="description"
+                                    placeholder="description">{{ old('description', $apartment?->description) }}</textarea>
 
                                 <label class="left-initial" for="description">Description</label>
                                 @error('description')
@@ -102,23 +102,6 @@
                             </div>
                         </div>
 
-                        {{-- STREET ADDRESS --}}
-                        <div class="row">
-                            <div class="form-floating mb-3">
-                                <input
-                                    type="text"
-                                    class="form-control @error('street_address') is-invalid @enderror"
-                                    id="street_address"
-                                    name="street_address"
-                                    placeholder="street_address"
-                                    value="{{ old('street_address', $apartment?->street_address) }}">
-                                <label class="left-initial" for="street_address">Street Address, House number</label>
-                                @error('street_address')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-
                         {{-- CITY NAME --}}
                         <div class="row">
                             <div class="form-floating mb-3">
@@ -131,6 +114,23 @@
                                     value="{{ old('city_name', $apartment?->city_name) }}">
                                 <label class="left-initial" for="city_name">City</label>
                                 @error('city_name')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+
+                        {{-- STREET ADDRESS --}}
+                        <div class="row">
+                            <div class="form-floating mb-3">
+                                <input
+                                    type="text"
+                                    class="form-control @error('street_address') is-invalid @enderror"
+                                    id="street_address"
+                                    name="street_address"
+                                    placeholder="street_address"
+                                    value="{{ old('street_address', $apartment?->street_address) }}">
+                                <label class="left-initial" for="street_address">Street Address, House number</label>
+                                @error('street_address')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
