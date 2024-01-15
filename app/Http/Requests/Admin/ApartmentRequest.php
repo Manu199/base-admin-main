@@ -29,9 +29,7 @@ class ApartmentRequest extends FormRequest
         'num_of_room' => 'required|numeric|min:1',
         'num_of_bed' => 'required|numeric|min:1',
         'num_of_bathroom' => 'required|numeric|min:1',
-        'country' => 'required|min:2',
         'street_address' => 'required|min:5',
-        'city_name' => 'required|min:2',
         'postal_code' => 'required|min:4',
         'image_path' => 'required|file|mimes:jpeg,jpg,png,gif|max:65535'
         ];
@@ -66,14 +64,8 @@ class ApartmentRequest extends FormRequest
             'num_of_bathroom.numeric' => 'Il numero di bagni deve essere un numero.',
             'num_of_bathroom.min' => 'Il numero di bagni deve essere almeno :min.',
 
-            'country.required' => 'Il paese è obbligatorio.',
-            'country.min' => 'Il paese deve essere lungo almeno :min caratteri.',
-
             'street_address.required' => 'L\'indirizzo è obbligatorio.',
             'street_address.min' => 'L\'indirizzo deve essere lungo almeno :min caratteri.',
-
-            'city_name.required' => 'Il nome della città è obbligatorio.',
-            'city_name.min' => 'Il nome della città deve essere lungo almeno :min caratteri.',
 
             'postal_code.required' => 'Il codice postale è obbligatorio.',
             'postal_code.min' => 'Il codice postale deve essere lungo almeno :min caratteri.',

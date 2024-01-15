@@ -12,8 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('apartment_sponsor', function (Blueprint $table) {
-            $table->timestamps();
-
             $table->unsignedBigInteger('sponsor_id');
             $table->foreign('sponsor_id')->references('id')->on('sponsors')->onDelete('cascade');
 
