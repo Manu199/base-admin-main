@@ -22,20 +22,20 @@ class ApartmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-        'title' => 'required|min:8|max:50',
-        'description' => 'required|min:15',
-        'price' => 'required|numeric|min:1',
-        'square_meters' => 'required|numeric|min:20',
-        'num_of_room' => 'required|numeric|min:1',
-        'num_of_bed' => 'required|numeric|min:1',
-        'num_of_bathroom' => 'required|numeric|min:1',
-        'street_address' => 'required|min:5',
-        'postal_code' => 'required|min:4',
-        'image_path' => 'file|mimes:jpeg,jpg,png,gif|max:65535'
+            'title' => 'required|min:8|max:50',
+            'description' => 'required|min:15',
+            'price' => 'required|numeric|min:1',
+            'square_meters' => 'required|numeric|min:20',
+            'num_of_room' => 'required|numeric|min:1',
+            'num_of_bed' => 'required|numeric|min:1',
+            'num_of_bathroom' => 'required|numeric|min:1',
+            'address' => 'required|min:5',
+            'image_path' => 'file|mimes:jpeg,jpg,png,gif|max:65535'
         ];
     }
 
-    public function messages() {
+    public function messages()
+    {
         return [
             'title.required' => 'Il titolo è obbligatorio.',
             'title.min' => 'Il titolo deve essere lungo almeno :min caratteri.',
@@ -64,11 +64,9 @@ class ApartmentRequest extends FormRequest
             'num_of_bathroom.numeric' => 'Il numero di bagni deve essere un numero.',
             'num_of_bathroom.min' => 'Il numero di bagni deve essere almeno :min.',
 
-            'street_address.required' => 'L\'indirizzo è obbligatorio.',
-            'street_address.min' => 'L\'indirizzo deve essere lungo almeno :min caratteri.',
+            'address.required' => 'L\'indirizzo è obbligatorio.',
+            'address.min' => 'L\'indirizzo deve essere lungo almeno :min caratteri.',
 
-            'postal_code.required' => 'Il codice postale è obbligatorio.',
-            'postal_code.min' => 'Il codice postale deve essere lungo almeno :min caratteri.',
 
             'image_path.file' => 'Il campo :attribute deve essere un file.',
             'image_path.mimes' => 'Il campo :attribute deve essere un file di tipo JPEG, JPG, PNG o GIF.',
