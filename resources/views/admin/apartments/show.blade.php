@@ -15,7 +15,6 @@
                 'element' => $apartment,
             ])
 
-
         </div>
 
         <h6>{{ $apartment->address }}</h6>
@@ -38,6 +37,8 @@
 
         <p>{{ $apartment->description }}</p>
     </div>
+
+    @include(('admin.partials.delete_apartment'))
 
 @endsection
 

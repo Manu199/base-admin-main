@@ -1,20 +1,26 @@
 
     <!-- Messaggio -->
-    <div class=" w-100 h-100 p-3 rounded-2 position-absolute custom-messaggio-delete" id="mostrareMessaggio" style="display: none;">
+    <div class="custom-messaggio-delete" id="mostrareMessaggio">
         <div class="messaggio-eliminare bg-white rounded-2">
             <p class="text-messaggio-elimina">Vuoi eliminare l'appartamento?</p>
-            <button class="btn btn-elimina-appartamento" onclick="cancelareEliminazione()">No</button>
-            <button class="btn btn-elimina-appartamento" onclick="confirmareEliminazione()">Sí</button>
-
+            <button id="cancel" class="btn btn-elimina-appartamento">Annulla</button>
+            <button id="delete-button" class="btn btn-elimina-appartamento">Conferma</button>
         </div>
-
     </div>
 
 
 
 
 <script>
+
+    const deleteButton = document.getElementById('delete-button');
+    const cancel = document.getElementById('cancel');
+
+    deleteButton.addEventListener("click", confirmareEliminazione);
+    cancel.addEventListener("click", cancelareEliminazione);
+
     function mostrareMessaggio() {
+        console.log('mostra messaggio');
         document.getElementById('mostrareMessaggio').style.display = 'block';
     }
 

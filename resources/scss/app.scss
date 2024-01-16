@@ -5,6 +5,9 @@
 
 body{
     font-family: 'Figtree', sans-serif;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 p{
@@ -159,14 +162,17 @@ p{
 
 // MESSAGGIO ELIMINARE APPARTAMENTO
 .custom-messaggio-delete{
-    background-color: rgba(0, 0, 0, 0.628);
+    display: none;
+    background-color: rgba(0, 0, 0, 0.6);
     position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 
 }
 
 .messaggio-eliminare{
-    width: 240px;
-    height: 140px;
     padding: 30px 15px;
     text-align: center;
     position: fixed;
