@@ -39,6 +39,9 @@ p{
 
 // HEADER
 
+.navBar{
+    width: 100vw;
+}
 .btn-header{
     background-color: transparent;
     color: rgba(0, 0, 0, 0.822);
@@ -156,4 +159,14 @@ p{
     color: white;
 }
 
-
+.pageNotFound{
+    a {
+        color: #10D1A0;
+        border-color: #10D1A0;
+        &:hover {
+            background-color: #10D1A0;
+            color: white;
+            border-color: white;
+        }
+    }
+}

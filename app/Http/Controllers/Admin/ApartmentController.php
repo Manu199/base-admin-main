@@ -98,7 +98,7 @@ class ApartmentController extends Controller
     {
         if ($apartment->user_id != Auth::id()) {
             $apartments = Apartment::where('user_id', Auth::id())->get();
-            return redirect()->route('admin.apartment.index', compact('apartments'));
+            abort(404);
         }
         return view('admin.apartments.show', compact('apartment'));
     }
@@ -110,7 +110,7 @@ class ApartmentController extends Controller
     {
         if ($apartment->user_id != Auth::id()) {
             $apartments = Apartment::where('user_id', Auth::id())->get();
-            return redirect()->route('admin.apartment.index', compact('apartments'));
+            abort(404);
         }
 
         $title = 'Modifica';
