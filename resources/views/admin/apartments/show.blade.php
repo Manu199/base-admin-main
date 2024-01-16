@@ -10,10 +10,11 @@
             <a class="btn btn-warning" href="{{ route('admin.apartment.edit', $apartment) }}"><i
                     class="fa-solid fa-pen-to-square"></i></a>
 
-            @include('admin.partials.delete_form', [
+            @include('admin.partials.delete_apartment', [
                 'route' => 'admin.apartment.destroy',
                 'element' => $apartment,
             ])
+
         </div>
 
         <h6>{{ $apartment->street_address }}, {{ $apartment->city_name }} {{ $apartment->postal_code }} -
