@@ -139,6 +139,12 @@ p {
     background-color: transparent;
 }
 
+.badge-custom:active{
+    border-color: #10D1A0;
+    color: #10D1A0;
+    background-color: transparent;
+}
+
 
 
 .btn-check:checked + .btn{
@@ -146,10 +152,14 @@ p {
     color: white;
 }
 
-.badge-custom-show{
-    border:0.5px solid black ;
-    color: black;
-    background-color: transparent;
+.btn-check:active + .btn{
+    background-color: #10D1A0;
+    color: white;
+}
+
+.btn-check:hover + .btn{
+    background-color: #0c9a76;
+    color: white;
 }
 
 
