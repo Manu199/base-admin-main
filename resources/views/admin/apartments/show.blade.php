@@ -7,13 +7,14 @@
 
         <div class="d-flex align-items-center">
             <h3 class=" d-inline-block">{{ $apartment->title }}</h3>
-            <a class="btn btn-warning" href="{{ route('admin.apartment.edit', $apartment) }}"><i
+            <a class="btn ms-3 border-black py-1" href="{{ route('admin.apartment.edit', $apartment) }}"><i
                     class="fa-solid fa-pen-to-square"></i></a>
 
             @include('admin.partials.delete_form', [
                 'route' => 'admin.apartment.destroy',
                 'element' => $apartment,
             ])
+
         </div>
 
         <h6>{{ $apartment->address }}</h6>
@@ -36,4 +37,8 @@
 
         <p>{{ $apartment->description }}</p>
     </div>
+
+    @include(('admin.partials.delete_apartment'))
+
 @endsection
+

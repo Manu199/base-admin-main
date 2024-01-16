@@ -5,6 +5,9 @@
 
 body{
     font-family: 'Figtree', sans-serif;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 p{
@@ -169,4 +172,43 @@ p{
             border-color: white;
         }
     }
+}
+// MESSAGGIO ELIMINARE APPARTAMENTO
+.custom-messaggio-delete{
+    display: none;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+}
+
+.messaggio-eliminare{
+    padding: 30px 15px;
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .text-messaggio-elimina{
+        font-size: 12px;
+    }
+
+}
+
+.btn-elimina-appartamento{
+    border:1px solid #0c9a76;
+    margin: 15px 10px 0 10px;
+    padding: 4px 14px;
+
+
+}
+
+.btn-elimina-appartamento:hover{
+    background-color: #0c9a76;
+    color: white;
+
 }
