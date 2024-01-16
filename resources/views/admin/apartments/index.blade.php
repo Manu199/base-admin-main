@@ -17,8 +17,8 @@
                                     <h6 class="card-title single-line-ellipsis fw-bold">{{ $apartment->title }}</h6>
                                     <p class="card-text single-line-ellipsis">{{ $apartment->street_address }},
                                         {{ $apartment->city_name }} - {{ $apartment->country }}</p>
-                                    <p class="card-text">{{ $apartment->num_of_bed }} letto/i -
-                                        {{ $apartment->num_of_bathroom }} bagno/i - {{ $apartment->square_meters }} mq</p>
+                                    <p class="card-text">{{ $apartment->num_of_bed }} letto/i &middot;
+                                        {{ $apartment->num_of_bathroom }} bagno/i &middot; {{ $apartment->square_meters }} mq</p>
                                     <p class="card-text fw-bold">&euro;{{ $apartment->price }}/notte</p>
                                 </div>
                             </div>

@@ -8,7 +8,7 @@
             @method($method)
 
             <div class="position-relative">
-                <h1 class="text-center">{{ $title }}</h1>
+                <h1 class="text-center">{{ $title }} Appartamento</h1>
 
                 {{-- TOOGLE VISIBLE --}}
                 <div class="form-check form-switch position-absolute bottom-0 end-0">

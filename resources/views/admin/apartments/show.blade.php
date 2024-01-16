@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="show-apartment">
-        <h1 class="text-center">Apartment detail</h1>
+        <h1 class="text-center">Dettaglio Appartamento</h1>
 
         <div class="d-flex align-items-center">
             <h3 class=" d-inline-block">{{ $apartment->title }}</h3>
@@ -25,8 +25,8 @@
 
         <p>&euro;{{ $apartment->price }},00/day</p>
 
-        <p>{{ $apartment->num_of_room }} rooms &middot; {{ $apartment->num_of_bed }} bedrooms &middot;
-            {{ $apartment->num_of_bathroom }} bathrooms &middot;
+        <p>{{ $apartment->num_of_room }} stanze &middot; {{ $apartment->num_of_bed }} letti &middot;
+            {{ $apartment->num_of_bathroom }} bagni &middot;
             {{ $apartment->square_meters }} mq</p>
 
         <p>SERIVIZI</p>
