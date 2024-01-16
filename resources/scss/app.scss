@@ -47,7 +47,7 @@ p{
     padding-bottom: 0;
 }
 
-.btn-header:hover{
+.btn-header:hover , .btn-header.active{
     background-color: transparent;
     color: black;
     border-radius: 0;
@@ -61,7 +61,7 @@ p{
     border-radius: 5px;
 }
 
-.btn-header-2:hover{
+.btn-header-2:hover, .btn-header-2.active{
     background-color: #48bb9e;
     color: white;
     border-radius: 5px;
@@ -133,15 +133,27 @@ p{
     background-color: transparent;
 }
 
+.badge-custom:active{
+    border-color: #10D1A0;
+    color: #10D1A0;
+    background-color: transparent;
+}
+
+
+
 .btn-check:checked + .btn{
     background-color: #10D1A0;
     color: white;
 }
 
-.badge-custom-show{
-    border:0.5px solid black ;
-    color: black;
-    background-color: transparent;
+.btn-check:active + .btn{
+    background-color: #10D1A0;
+    color: white;
+}
+
+.btn-check:hover + .btn{
+    background-color: #0c9a76;
+    color: white;
 }
 
 
