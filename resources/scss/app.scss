@@ -3,15 +3,14 @@
 
 // GENERAL
 
-body {
+body{
     font-family: 'Figtree', sans-serif;
 }
 
-p {
+p{
     font-size: 12px;
     margin: 0;
 }
-
 
 // LOGIN
 .card-header{
@@ -68,14 +67,9 @@ p {
     border-radius: 5px;
 }
 
-
-
-
-
-
 // LOGIN CARD SIZE
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:768px){
     .card-login{
         min-width: 400px;
         max-width: 100%;
@@ -91,7 +85,7 @@ p {
 
 // UTILITY
 
-.single-line-ellipsis {
+.single-line-ellipsis{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -103,27 +97,27 @@ p {
 }
 
 // APARTMENT LIST
+.apartment-list{
+    .card{
+        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.2s;
+    }
 
-.card {
-    border-radius: 15px;
-    overflow: hidden;
-    transition: transform 0.2s;
+    .card:hover{
+        transform: scale(1.05);
+    }
+
+    .card-img-top{
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .card-body{
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+    }
 }
-
-.card:hover {
-    transform: scale(1.05);
-}
-
-.card-img-top {
-    height: 200px;
-    object-fit: cover;
-}
-
-.card-body {
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
 
 // SERVIZI
 

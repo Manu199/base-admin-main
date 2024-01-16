@@ -27,7 +27,7 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        $title = 'Apartment - Create';
+        $title = 'Crea';
         $method = 'POST';
         $route = route('admin.apartment.store');
         $apartment = null;
@@ -118,7 +118,7 @@ class ApartmentController extends Controller
             return redirect()->route('admin.apartment.index', compact('apartments'));
         }
 
-        $title = 'Apartment - Edit';
+        $title = 'Modifica';
         $method = 'PUT';
         $route = route('admin.apartment.update', $apartment);
         $services = Service::all();

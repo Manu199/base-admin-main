@@ -17,8 +17,6 @@
 </head>
 <body class="text">
 
-    @include('admin.partials.header')
-
     <main>
         <div class="container">
             @yield('content')
