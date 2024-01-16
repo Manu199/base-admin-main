@@ -48,7 +48,7 @@ class ApartmentController extends Controller
         // chiamata all'api tom tom
         // https://api.tomtom.com/search/2/geocode/Via Roma 33.json?key=JFycdOFju9JHTRcWGALUGaqq5FULPTe8
         $apiUrl = 'https://api.tomtom.com/search/2/geocode/';
-        $apiQuery = $form_data['street_address'] . ' ' . $form_data['postal_code'] . '.json';
+        $apiQuery = $form_data['address'] . '.json';
         $encodedAddress = urlencode($apiQuery);
         $apiKey = '?key=JFycdOFju9JHTRcWGALUGaqq5FULPTe8';
 
@@ -63,12 +63,7 @@ class ApartmentController extends Controller
         $address = $data_decode['results'][0]['address'];
         $position = $data_decode['results'][0]['position'];
 
-        $form_data['country'] = $address['country'];
-        if (!array_key_exists('streetNumber', $address)) {
-            $address['streetNumber'] = 1;
-        }
-        $form_data['street_address'] = $address['streetName'] . ' ' . $address['streetNumber'];
-        $form_data['city_name'] = $address['municipality'];
+        $form_data['address'] = $address['freeformAddress'];
 
         $form_data['lat'] = $position['lat'];
         $form_data['lon'] = $position['lon'];
@@ -141,9 +136,9 @@ class ApartmentController extends Controller
         }
 
         // se ['street_address'] ['postal_code'] sono cambiati, cambio dati di tom tom
-        if ($apartment->street_address !== $form_data['street_address'] || $apartment->postal_code !== $form_data['postal_code']) {
+        if ($apartment->address !== $form_data['address']) {
             $apiUrl = 'https://api.tomtom.com/search/2/geocode/';
-            $apiQuery = $form_data['street_address'] . ' ' . $form_data['postal_code'] . '.json';
+            $apiQuery = $form_data['address'] . '.json';
             $encodedAddress = urlencode($apiQuery);
             $apiKey = '?key=JFycdOFju9JHTRcWGALUGaqq5FULPTe8';
 
@@ -158,12 +153,7 @@ class ApartmentController extends Controller
             $address = $data_decode['results'][0]['address'];
             $position = $data_decode['results'][0]['position'];
 
-            $form_data['country'] = $address['country'];
-            if (!array_key_exists('streetNumber', $address)) {
-                $address['streetNumber'] = 1;
-            }
-            $form_data['street_address'] = $address['streetName'] . ' ' . $address['streetNumber'];
-            $form_data['city_name'] = $address['municipality'];
+            $form_data['address'] = $address['freeformAddress'];
 
             $form_data['lat'] = $position['lat'];
             $form_data['lon'] = $position['lon'];

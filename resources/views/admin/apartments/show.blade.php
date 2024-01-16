@@ -17,8 +17,7 @@
 
         </div>
 
-        <h6>{{ $apartment->street_address }}, {{ $apartment->city_name }} {{ $apartment->postal_code }} -
-            {{ $apartment->country }}</h6>
+        <h6>{{ $apartment->address }}</h6>
 
         <div class="image">
             <img class="img-fluid" src="{{ asset('storage/uploads/' . $apartment->image_path) }}" alt="">
