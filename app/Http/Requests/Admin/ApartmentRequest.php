@@ -30,7 +30,8 @@ class ApartmentRequest extends FormRequest
             'num_of_bed' => 'required|numeric|min:1',
             'num_of_bathroom' => 'required|numeric|min:1',
             'address' => 'required|min:5',
-            'image_path' => 'file|mimes:jpeg,jpg,png,gif|max:65535'
+            'image_path' => 'file|mimes:jpeg,jpg,png,gif|max:65535',
+            'services' => 'required|array|min:1',
         ];
     }
 
@@ -67,10 +68,13 @@ class ApartmentRequest extends FormRequest
             'address.required' => 'L\'indirizzo è obbligatorio.',
             'address.min' => 'L\'indirizzo deve essere lungo almeno :min caratteri.',
 
-
             'image_path.file' => 'Il campo :attribute deve essere un file.',
             'image_path.mimes' => 'Il campo :attribute deve essere un file di tipo JPEG, JPG, PNG o GIF.',
-            'image_path.max' => 'Il campo URL dell\'immagine non può superare :max caratteri.'
+            'image_path.max' => 'Il campo URL dell\'immagine non può superare :max caratteri.',
+
+            'services.required' => 'Il campo Servizi è obbligatorio.',
+            'services.array' => 'Il campo Servizi deve essere un array.',
+            'services.min' => 'Il campo Servizi deve contenere almeno un elemento.',
         ];
     }
 }

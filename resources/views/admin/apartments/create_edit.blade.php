@@ -222,6 +222,9 @@
                                         {!! $service['name'] !!}
                                     </label>
                                 @endforeach
+                                @error('services')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                     </div>
