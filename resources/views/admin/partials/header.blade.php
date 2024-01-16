@@ -13,11 +13,11 @@
         <ul class="nav justify-content-end pe-4">
             <li class="nav-item mx-3">
                 <a class="nav-link btn fw-bold btn-header {{ Route::currentRouteName() === 'admin.apartment.index' ? 'active' : '' }}"
-                    href="{{ route('admin.apartment.index') }}">Apartments List</a>
+                    href="{{ route('admin.apartment.index') }}">Lista Appartamenti</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link btn fw-bold btn-header-2 {{ Route::currentRouteName() === 'admin.apartment.create' ? 'active' : '' }}"
-                    href="{{ route('admin.apartment.create') }}"><i class="fa-solid fa-plus"></i> New Apartment</a>
+                    href="{{ route('admin.apartment.create') }}"><i class="fa-solid fa-plus"></i> Nuovo Appartamento</a>
             </li>
 
             <!-- Authentication Links -->
@@ -38,7 +38,7 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ url('profile') }}">{{ __('Profile') }}</a>
+                        <a class="dropdown-item" href="{{ url('profile') }}">{{ __('Profilo') }}</a>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
