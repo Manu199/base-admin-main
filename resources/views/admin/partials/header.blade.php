@@ -1,16 +1,18 @@
 <header class="navBar">
     <div class="container my-3">
         <div class="row">
-            <ul class="nav">
+            <div class="col">
+                <ul class="nav">
 
-                <div class="col-1">
                     <li class="nav-item">
                         <a class="nav-link btn fw-bold btn-header {{ Route::currentRouteName() === 'home' ? 'active' : '' }}"
                             href="{{ route('home') }}">Home</a>
                     </li>
-                </div>
+                </ul>
+            </div>
 
-                <div class="col d-flex justify-content-end">
+            <div class="col-10">
+                <ul class="nav justify-content-end ">
                     <li class="nav-item mx-3">
                         <a class="nav-link btn fw-bold btn-header {{ Route::currentRouteName() === 'admin.apartment.index' ? 'active' : '' }}"
                             href="{{ route('admin.apartment.index') }}">Lista Appartamenti</a>
@@ -45,7 +47,7 @@
                                 <a class="dropdown-item" href="{{ url('profile') }}">{{ __('Profilo') }}</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
+                                            document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
 
@@ -55,10 +57,8 @@
                             </div>
                         </li>
                     @endguest
-                </div>
-
-
-            </ul>
+                </ul>
+            </div>
 
         </div>
         {{-- <div class="col-10">
