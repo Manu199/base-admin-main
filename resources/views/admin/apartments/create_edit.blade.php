@@ -233,9 +233,12 @@
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3 position-relative">
-                                    <img id="image-preview" class="img-fluid rounded"
+                                    <img
+                                        id="image-preview"
+                                        class="img-fluid rounded"
                                         onerror="this.src ='{{ asset('img/placeholder.png') }}'"
-                                        src="{{ asset('storage/uploads/' . $apartment?->image_path) }}" alt="image">
+                                        src="{{ asset('storage/uploads/' . $apartment?->image_path) }}"
+                                        alt="image">
                                 </div>
 
                                 <input onchange="previewImage(event)" type="file"
@@ -274,21 +277,6 @@
                     </div>
                 </div>
             </div>
-
-
-            <div class="row">
-
-            </div>
-
-
-
-
-
-
-
-
-
-
 
             {{-- BUTTON SUBMIT --}}
             <div class="d-flex justify-content-center mb-3">
