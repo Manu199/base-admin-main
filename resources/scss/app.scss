@@ -97,25 +97,26 @@ p{
 }
 
 // APARTMENT LIST
+.apartment-list{
+    .card{
+        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.2s;
+    }
 
-.card{
-    border-radius: 15px;
-    overflow: hidden;
-    transition: transform 0.2s;
-}
+    .card:hover{
+        transform: scale(1.05);
+    }
 
-.card:hover{
-    transform: scale(1.05);
-}
+    .card-img-top{
+        height: 200px;
+        object-fit: cover;
+    }
 
-.card-img-top{
-    height: 200px;
-    object-fit: cover;
-}
-
-.card-body{
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
+    .card-body{
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+    }
 }
 
 // SERVIZI

@@ -3,8 +3,8 @@
     <div class=" col-2">
         <ul class="nav ps-4">
             <li class="nav-item">
-                <a class="nav-link btn fw-bold btn-header {{ Route::currentRouteName() === 'home' ? 'text-bg-info' : '' }}"
-                    href="{{ route('admin.home') }}">Home</a>
+                <a class="nav-link btn fw-bold btn-header {{ Route::currentRouteName() === 'home' ? 'active' : '' }}"
+                    href="{{ route('home') }}">Home</a>
             </li>
         </ul>
 
@@ -12,13 +12,14 @@
     <div class="col-6 ">
         <ul class="nav justify-content-end pe-4">
             <li class="nav-item mx-3">
-                <a class="nav-link btn fw-bold btn-header {{ Route::currentRouteName() === 'home' ? 'text-bg-info' : '' }}"
+                <a class="nav-link btn fw-bold btn-header {{ Route::currentRouteName() === 'admin.apartment.index' ? 'active' : '' }}"
                     href="{{ route('admin.apartment.index') }}">Apartments List</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link btn fw-bold btn-header-2 {{ Route::currentRouteName() === 'home' ? 'text-bg-info' : '' }}"
+                <a class="nav-link btn fw-bold btn-header-2 {{ Route::currentRouteName() === 'admin.apartment.create' ? 'active' : '' }}"
                     href="{{ route('admin.apartment.create') }}"><i class="fa-solid fa-plus"></i> New Apartment</a>
             </li>
+
             <!-- Authentication Links -->
             @guest
                 <li class="nav-item">
@@ -37,11 +38,10 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ url('dashboard') }}">{{ __('Dashboard') }}</a>
                         <a class="dropdown-item" href="{{ url('profile') }}">{{ __('Profile') }}</a>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
-                                         document.getElementById('logout-form').submit();">
+                            document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
 
