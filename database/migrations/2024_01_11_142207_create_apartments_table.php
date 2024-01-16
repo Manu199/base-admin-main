@@ -29,10 +29,7 @@ return new class extends Migration
             $table->integer('num_of_room')->unsigned();
             $table->integer('num_of_bed')->unsigned();
             $table->integer('num_of_bathroom')->unsigned();
-            $table->string('country');
-            $table->string('street_address');
-            $table->string('city_name');
-            $table->string('postal_code');
+            $table->string('address');
             $table->decimal('lat', 7, 5);
             $table->decimal('lon', 8, 5);
             $table->text('image_path');
