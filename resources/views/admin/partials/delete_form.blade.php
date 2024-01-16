@@ -1,6 +1,8 @@
 <form class="d-inline-block" action="{{ route($route, $element) }}" method="POST"
-    onsubmit="return confirm('Sicuro di voler eliminare -> {{ $element->name }}?')">
+  id="elimina">
     @csrf
     @method('DELETE')
-    <button class="btn btn-secondary btn-custom" type="submit"><i class="fa-solid fa-trash-can"></i></button>
+    <button class="btn btn-custom " type="button" onclick="mostrareMessaggio()">
+        <i class="fa-solid fa-trash-can"></i>
+     </button>
 </form>

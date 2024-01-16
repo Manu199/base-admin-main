@@ -157,3 +157,39 @@ p{
 }
 
 
+// MESSAGGIO ELIMINARE APPARTAMENTO
+.custom-messaggio-delete{
+    background-color: rgba(0, 0, 0, 0.628);
+    position: absolute;
+
+}
+
+.messaggio-eliminare{
+    width: 240px;
+    height: 140px;
+    padding: 30px 15px;
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .text-messaggio-elimina{
+        font-size: 12px;
+    }
+
+}
+
+.btn-elimina-appartamento{
+    border:1px solid #0c9a76;
+    margin: 15px 10px 0 10px;
+    padding: 4px 14px;
+
+
+}
+
+.btn-elimina-appartamento:hover{
+    background-color: #0c9a76;
+    color: white;
+
+}
