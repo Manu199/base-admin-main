@@ -9,7 +9,9 @@ use App\Models\Apartment;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ApartmentController extends Controller
 {
@@ -38,9 +40,103 @@ class ApartmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ApartmentRequest $request)
+    public function store(Request $request)
     {
+
         $form_data = $request->all();
+        $temp_path = null;
+
+        // verifico se non è null tempImagePath se esiste ritorno temp_path aggiornato
+        if ($form_data['tempImagePath']){
+            $temp_path = $form_data['tempImagePath'];
+        }
+
+        // verifico se non è null l'immagine
+        if (array_key_exists('image_path', $form_data)) {
+            if($temp_path){
+                Storage::delete('temp/' . $temp_path);
+            }
+            $img_path = Storage::put('temp', $form_data['image_path']);
+            $temp_path = basename($img_path);
+
+            // Rimuovi il campo 'image_path' dalla richiesta
+            unset($form_data['image_path']);
+        }
+
+        $validator = Validator::make($form_data, [
+            'title' => 'required|min:8|max:50',
+            'description' => 'required|min:15',
+            'price' => 'required|numeric|min:1',
+            'square_meters' => 'required|numeric|min:20',
+            'num_of_room' => 'required|numeric|min:1',
+            'num_of_bed' => 'required|numeric|min:1',
+            'num_of_bathroom' => 'required|numeric|min:1',
+            'address' => 'required|min:5',
+            'image_path' => 'required|file|mimes:jpeg,jpg,png,gif|max:65535',
+            'services' => 'required|array|min:1',
+        ], [
+            'title.required' => 'Il titolo è obbligatorio.',
+            'title.min' => 'Il titolo deve essere lungo almeno :min caratteri.',
+            'title.max' => 'Il titolo non può superare :max caratteri.',
+
+            'description.required' => 'La descrizione è obbligatoria.',
+            'description.min' => 'La descrizione deve essere lunga almeno :min caratteri.',
+
+            'price.required' => 'Il prezzo è obbligatorio.',
+            'price.numeric' => 'Il prezzo deve essere un numero.',
+            'price.min' => 'Il prezzo deve essere almeno :min euro.',
+
+            'square_meters.required' => 'I metri quadrati sono obbligatori.',
+            'square_meters.numeric' => 'I metri quadrati devono essere un numero.',
+            'square_meters.min' => 'I metri quadrati devono essere almeno :min.',
+
+            'num_of_room.required' => 'Il numero di stanze è obbligatorio.',
+            'num_of_room.numeric' => 'Il numero di stanze deve essere un numero.',
+            'num_of_room.min' => 'Il numero di stanze deve essere almeno :min.',
+
+            'num_of_bed.required' => 'Il numero di camere da letto è obbligatorio.',
+            'num_of_bed.numeric' => 'Il numero di camere da letto deve essere un numero.',
+            'num_of_bed.min' => 'Il numero di camere da letto deve essere almeno :min.',
+
+            'num_of_bathroom.required' => 'Il numero di bagni è obbligatorio.',
+            'num_of_bathroom.numeric' => 'Il numero di bagni deve essere un numero.',
+            'num_of_bathroom.min' => 'Il numero di bagni deve essere almeno :min.',
+
+            'address.required' => 'L\'indirizzo è obbligatorio.',
+            'address.min' => 'L\'indirizzo deve essere lungo almeno :min caratteri.',
+
+            'image_path.required' => 'L\'immagine è obbligatoria.',
+            'image_path.file' => 'Il campo :attribute deve essere un file.',
+            'image_path.mimes' => 'L\'immagine deve essere di uno dei seguenti formati: jpeg, jpg, png, gif.',
+            'image_path.max' => 'L\'immagine non può superare :max kilobytes.',
+
+            'services.required' => 'Il campo Servizi è obbligatorio.',
+            'services.array' => 'Il campo Servizi deve essere un array.',
+            'services.min' => 'Il campo Servizi deve contenere almeno :min elemento.',
+        ],);
+
+        if ($validator->fails()) {
+            if($temp_path){
+                // se ho un temp_path allora non genero l'errore di image_path
+                $errors = $validator->errors();
+                $errors->forget('image_path');
+                // se è stato inserita un'immagine allora la rinvio indietro con una variabile di sessione
+                if(count($errors)){
+                    return redirect()->back()->withErrors($validator)->withInput()->with('tempImagePath', $temp_path);
+                }
+            }else{
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+        }
+
+        // validazione superata, ora sposto il file temporanea nella mia cartella di upload
+        $percorsoOrigine = 'temp/' . $temp_path; // Imposta il percorso del file originale
+        $percorsoDestinazione = 'uploads/' . $temp_path; // Imposta il percorso di destinazione
+
+        // Sposta il file dalla cartella temp alla cartella uploads
+        Storage::put($percorsoDestinazione, Storage::get($percorsoOrigine));
+        $form_data['image_path'] = $temp_path;
+        Storage::delete($percorsoOrigine);
 
         $form_data['user_id'] = Auth::id();
         $form_data['type_id'] = 1; // debug
@@ -76,11 +172,7 @@ class ApartmentController extends Controller
             $form_data['visible'] = 1;
         }
 
-        // verifico se esiste l'immagine
-        if (array_key_exists('image_path', $form_data)) {
-            $img_path = Storage::put('uploads', $form_data['image_path']);
-            $form_data['image_path'] = basename($img_path);
-        }
+
 
         $apartment = Apartment::create($form_data);
 
@@ -98,7 +190,6 @@ class ApartmentController extends Controller
     public function show(Apartment $apartment)
     {
         if ($apartment->user_id != Auth::id()) {
-            $apartments = Apartment::where('user_id', Auth::id())->get();
             abort(404);
         }
         return view('admin.apartments.show', compact('apartment'));
@@ -110,7 +201,6 @@ class ApartmentController extends Controller
     public function edit(Apartment $apartment)
     {
         if ($apartment->user_id != Auth::id()) {
-            $apartments = Apartment::where('user_id', Auth::id())->get();
             abort(404);
         }
 
@@ -125,9 +215,79 @@ class ApartmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ApartmentRequest $request, Apartment $apartment)
+    public function update(Request $request, Apartment $apartment)
     {
         $form_data = $request->all();
+
+        $valImage = Validator::make($request->only('image_path'),[
+            'image_path' => 'file|mimes:jpeg,jpg,png,gif|max:65535',
+        ],[
+            'image_path.file' => 'Il campo :attribute deve essere un file.',
+            'image_path.mimes' => 'L\'immagine deve essere di uno dei seguenti formati: jpeg, jpg, png, gif.',
+            'image_path.max' => 'L\'immagine non può superare :max kilobytes.',
+        ]);
+
+        // controllo che nei miei dati ricevuti dal form sia stata aggiunta un'immagine
+        if (array_key_exists('image_path', $form_data)) {
+            if ($apartment->image_path) {
+                // cancello la vecchia immmagine se esiste
+                Storage::delete('uploads/' . $apartment->image_path);
+            }
+            // inserisco la nuova immagine
+            $img_path = Storage::put('uploads', $form_data['image_path']);
+            $only_image['image_path'] = basename($img_path);
+            $apartment->update($only_image);
+        }
+        unset($form_data['image_path']);
+
+        $validator = Validator::make($form_data, [
+            'title' => 'required|min:8|max:50',
+            'description' => 'required|min:15',
+            'price' => 'required|numeric|min:1',
+            'square_meters' => 'required|numeric|min:20',
+            'num_of_room' => 'required|numeric|min:1',
+            'num_of_bed' => 'required|numeric|min:1',
+            'num_of_bathroom' => 'required|numeric|min:1',
+            'address' => 'required|min:5',
+            'services' => 'required|array|min:1',
+        ], [
+            'title.required' => 'Il titolo è obbligatorio.',
+            'title.min' => 'Il titolo deve essere lungo almeno :min caratteri.',
+            'title.max' => 'Il titolo non può superare :max caratteri.',
+
+            'description.required' => 'La descrizione è obbligatoria.',
+            'description.min' => 'La descrizione deve essere lunga almeno :min caratteri.',
+
+            'price.required' => 'Il prezzo è obbligatorio.',
+            'price.numeric' => 'Il prezzo deve essere un numero.',
+            'price.min' => 'Il prezzo deve essere almeno :min euro.',
+
+            'square_meters.required' => 'I metri quadrati sono obbligatori.',
+            'square_meters.numeric' => 'I metri quadrati devono essere un numero.',
+            'square_meters.min' => 'I metri quadrati devono essere almeno :min.',
+
+            'num_of_room.required' => 'Il numero di stanze è obbligatorio.',
+            'num_of_room.numeric' => 'Il numero di stanze deve essere un numero.',
+            'num_of_room.min' => 'Il numero di stanze deve essere almeno :min.',
+
+            'num_of_bed.required' => 'Il numero di camere da letto è obbligatorio.',
+            'num_of_bed.numeric' => 'Il numero di camere da letto deve essere un numero.',
+            'num_of_bed.min' => 'Il numero di camere da letto deve essere almeno :min.',
+
+            'num_of_bathroom.required' => 'Il numero di bagni è obbligatorio.',
+            'num_of_bathroom.numeric' => 'Il numero di bagni deve essere un numero.',
+            'num_of_bathroom.min' => 'Il numero di bagni deve essere almeno :min.',
+
+            'address.required' => 'L\'indirizzo è obbligatorio.',
+            'address.min' => 'L\'indirizzo deve essere lungo almeno :min caratteri.',
+
+            'services.array' => 'Il campo Servizi deve essere un array.',
+            'services.min' => 'Il campo Servizi deve contenere almeno :min elemento.',
+        ],);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
 
         // se il titolo dell'appartamento cambia, cambia anche lo slug
         if ($apartment->title === $form_data['title']) {
@@ -167,16 +327,7 @@ class ApartmentController extends Controller
             $form_data['visible'] = 1;
         }
 
-        // controllo che nei miei dati ricevuti dal form sia stata aggiunta un'immagine
-        if (array_key_exists('image_path', $form_data)) {
-            if ($apartment->image_path) {
-                // cancello la vecchia immmagine se esiste
-                Storage::delete('uploads/' . $apartment->image_path);
-            }
-            // inserisco la nuova immagine
-            $img_path = Storage::put('uploads', $form_data['image_path']);
-            $form_data['image_path'] = basename($img_path);
-        }
+
 
         $apartment->update($form_data);
 

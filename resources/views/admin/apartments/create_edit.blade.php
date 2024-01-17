@@ -35,6 +35,7 @@
                         <div class="row">
                             <div class="form-floating mb-3">
                                 <input
+
                                     type="text"
                                     class="form-control @error('title') is-invalid @enderror"
                                     id="title"
@@ -52,6 +53,7 @@
                         <div class="row">
                             <div class="form-floating mb-3">
                                 <textarea
+
                                     style="height:200px;"
                                     class="form-control @error('description') is-invalid @enderror"
                                     id="description"
@@ -69,6 +71,7 @@
                         <div class="row">
                             <div class="form-floating">
                                 <input
+
                                     type="number"
                                     class="form-control @error('price') is-invalid @enderror"
                                     id="price"
@@ -89,6 +92,7 @@
                         <div class="row">
                             <div class="form-floating">
                                 <input
+
                                     type="text"
                                     class="form-control @error('address') is-invalid @enderror"
                                     id="address"
@@ -179,6 +183,12 @@
 
                 <div class="col-6">
                     <div class="p-2 border rounded mb-3">
+                        @php
+                            $tempPath = session('tempImagePath');
+                            dump($tempPath);
+                            dump(old());
+                            dump($errors->all());
+                        @endphp
                         {{-- IMAGE --}}
                         <div class="row">
                             <div class="col">
@@ -187,12 +197,20 @@
                                         id="image-preview"
                                         class="img-fluid rounded"
                                         onerror="this.src ='{{ asset('img/placeholder.png') }}'"
-                                        src="{{ asset('storage/uploads/' . $apartment?->image_path) }}"
+                                        src="{{ $tempPath ? asset('storage/temp/' . $tempPath) : asset('storage/uploads/' . $apartment?->image_path) }}"
                                         alt="image">
                                 </div>
 
-                                <input onchange="previewImage(event)" type="file"
-                                    class="form-control @error('image_path') is-invalid @enderror" id="image" name="image_path">
+
+                                <!-- Input  nascosto per memorizzare il percorso del file -->
+                                <input type="hidden" name="tempImagePath" id="hiddenFilePath" value="{{ $tempPath }}">
+
+                                <input
+                                    onchange="previewImage(event)"
+                                    type="file"
+                                    class="form-control @error('image_path') is-invalid @enderror"
+                                    id="image"
+                                    name="image_path">
                                 @error('image_path')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -241,7 +259,9 @@
     <script>
         function previewImage(event) {
             const imagePreview = document.getElementById('image-preview');
-            imagePreview.src = URL.createObjectURL(event.target.files[0]);
+            path = URL.createObjectURL(event.target.files[0]);
+            imagePreview.src = path
+            console.log(path);
         }
     </script>
 @endsection
