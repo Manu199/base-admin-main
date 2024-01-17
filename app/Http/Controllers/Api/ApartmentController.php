@@ -35,26 +35,53 @@ class ApartmentController extends Controller
     //         'data' => $apartments,
     //     ]);
 
-        public function getApartments($lat,$lon,$radius)
+    //     public function getApartments($lat,$lon,$radius)
+    // {
+
+    //     $circle_radius = 6371;
+    //     $houses = DB::select(DB::raw('SELECT *, ( '. $circle_radius .' * acos( cos( radians(' . $lat . ') ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(' . $lon . ') ) + sin( radians(' . $lat .') ) * sin( radians(latitude) ) ) ) AS distance FROM houses WHERE visible=1 HAVING distance < ' . $radius . ' ORDER BY distance') );
+    //     ;
+
+    //     // foreach ($houses as $key => $house) {
+    //     //     dd($house->services);
+    //     //     $house['services'] = $house->services;
+    //     // };
+
+    //     return response()->json([
+    //         'result' => 'success',
+    //         'data' => $houses,
+
+    //         // 'count' => $houses->count()
+    //     ]);
+    // }
+
+
+    public function getApartments($lat, $lon, $radius, $minRooms, $minBeds)
     {
-
         $circle_radius = 6371;
-        $houses = DB::select(DB::raw('SELECT *, ( '. $circle_radius .' * acos( cos( radians(' . $lat . ') ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(' . $lon . ') ) + sin( radians(' . $lat .') ) * sin( radians(latitude) ) ) ) AS distance FROM houses WHERE visible=1 HAVING distance < ' . $radius . ' ORDER BY distance') );
-        ;
 
-        // foreach ($houses as $key => $house) {
-        //     dd($house->services);
-        //     $house['services'] = $house->services;
-        // };
+        $query = "SELECT *, ({$circle_radius} * ACOS(COS(RADIANS($lat)) * COS(RADIANS(apartments.lat)) * COS(RADIANS(apartments.lon) - RADIANS($lon)) + SIN(RADIANS($lat)) * SIN(RADIANS(apartments.lat)))) AS distance
+              FROM apartments
+              WHERE visible = 1
+                AND num_of_room >= :minRooms
+                AND num_of_bed >= :minBeds
+              HAVING distance < :radius
+              ORDER BY distance";
+
+        $houses = DB::select(DB::raw($query), [
+            'lat' => $lat,
+            'lon' => $lon,
+            'radius' => $radius,
+            'minRooms' => $minRooms,
+            'minBeds' => $minBeds,
+        ]);
 
         return response()->json([
             'result' => 'success',
             'data' => $houses,
-
-            // 'count' => $houses->count()
         ]);
     }
-    }
+}
 
     // public function getHouse($lat, $lon, $radius)
     // {
@@ -74,5 +101,3 @@ class ApartmentController extends Controller
     //         'data' => $houses,
     //     ]);
     // }
-
-
