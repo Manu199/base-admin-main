@@ -31,7 +31,7 @@
 
         <p>SERIVIZI</p>
         @foreach ($apartment->services as $service)
-            <span class="badge my-2 badge-custom-show"> {!! $service['name'] !!}</span>
+            <span class="badge my-2 badge-custom"> {!! $service['name'] !!}</span>
         @endforeach
 
 
