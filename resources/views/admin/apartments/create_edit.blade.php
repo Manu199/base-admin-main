@@ -35,7 +35,6 @@
                         <div class="row">
                             <div class="form-floating mb-3">
                                 <input
-
                                     type="text"
                                     class="form-control @error('title') is-invalid @enderror"
                                     id="title"
@@ -53,7 +52,6 @@
                         <div class="row">
                             <div class="form-floating mb-3">
                                 <textarea
-
                                     style="height:200px;"
                                     class="form-control @error('description') is-invalid @enderror"
                                     id="description"
@@ -71,7 +69,6 @@
                         <div class="row">
                             <div class="form-floating">
                                 <input
-
                                     type="number"
                                     class="form-control @error('price') is-invalid @enderror"
                                     id="price"
@@ -88,11 +85,10 @@
 
                     {{-- sezione address --}}
                     <div class="p-2 border rounded mb-3">
-                        {{-- COUNTRY --}}
+                        {{-- ADDRESS --}}
                         <div class="row">
                             <div class="form-floating">
                                 <input
-
                                     type="text"
                                     class="form-control @error('address') is-invalid @enderror"
                                     id="address"
@@ -103,6 +99,9 @@
                                 @error('address')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
+                                <ul class="list-group" id="list-search">
+                                    {{-- list of search address --}}
+                                </ul>
                             </div>
                         </div>
 
@@ -201,15 +200,13 @@
                                         alt="image">
                                 </div>
 
-
                                 <!-- Input  nascosto per memorizzare il percorso del file -->
                                 <input type="hidden" name="tempImagePath" id="hiddenFilePath" value="{{ $tempPath }}">
 
                                 <input
-                                    onchange="previewImage(event)"
                                     type="file"
                                     class="form-control @error('image_path') is-invalid @enderror"
-                                    id="image"
+                                    id="image-input"
                                     name="image_path">
                                 @error('image_path')
                                     <p class="text-danger">{{ $message }}</p>
@@ -256,12 +253,78 @@
         </form>
     </div>
 
+    {{-- import axios cdn --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script> --}}
     <script>
+        // ------------------------------------------------------------------------------
+        const imageInput = document.getElementById('image-input');
+        imageInput.addEventListener("change", function(event) {
+            previewImage(event);
+        });
+
         function previewImage(event) {
             const imagePreview = document.getElementById('image-preview');
             path = URL.createObjectURL(event.target.files[0]);
-            imagePreview.src = path
-            console.log(path);
+            imagePreview.src = path;
         }
+        // ------------------------------------------------------------------------------
+
+        const listUl = document.getElementById('list-search');
+        const addressInput = document.getElementById('address');
+
+        let timeoutId;
+
+        addressInput.addEventListener('input', function(event) {
+            // Cancella il timer precedente se esiste
+            clearTimeout(timeoutId);
+
+            // Ottieni il valore attuale dell'input
+            const inputValue = event.target.value;
+
+            // Verifica se l'input è vuoto
+            if (!inputValue.trim()) {
+                // Se l'input è vuoto, non effettuare la chiamata
+                listUl.innerHTML = '';
+                return;
+            }
+
+            const apiUrl = 'https://api.tomtom.com/search/2/geocode/';
+            const apiQuery = inputValue + '.json';
+            const encodedAddress = encodeURIComponent(apiQuery);
+            const apiKey = '?limit=5&key=JFycdOFju9JHTRcWGALUGaqq5FULPTe8';
+
+            const endpoint = apiUrl + encodedAddress + apiKey;
+
+            // Imposta un timer per ritardare la chiamata di 300ms
+            timeoutId = setTimeout(() => {
+                // Fai la chiamata solo dopo che il timer è scaduto
+                axios.get(endpoint)
+                    .then(response => {
+                        listUl.innerHTML = '';
+                        arrayResult = response.data.results;
+                        console.log(arrayResult);
+                        arrayResult.forEach(element => {
+                            const newli = document.createElement('li');
+                            newli.innerHTML = element.address.freeformAddress;
+                            newli.className = 'list-group-item list-group-item-action list-group-item-secondary cursor-pointer';
+
+                            // Aggiungi event listener click a ciascun elemento <li>
+                            newli.addEventListener('click', function () {
+                                // Scrivi il testo dell'elemento cliccato nell'input
+                                addressInput.value = element.address.freeformAddress;
+                                // Svuota la lista dopo aver selezionato un elemento
+                                listUl.innerHTML = '';
+                            });
+
+                            listUl.appendChild(newli);
+                        });
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }, 300);
+        });
+
     </script>
+
 @endsection

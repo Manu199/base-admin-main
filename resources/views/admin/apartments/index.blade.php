@@ -7,7 +7,7 @@
         <div class="container mt-5">
             <div class="row">
                 @foreach ($apartments as $apartment)
-                    <div class="col-md-4 mb-4">
+                    <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
                         {{-- link alla show dell'appartamento --}}
                         <a class="text-decoration-none" href="{{ route('admin.apartment.show', $apartment) }}">
                             <div class="card">
