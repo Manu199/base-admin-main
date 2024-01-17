@@ -5,99 +5,73 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Apartment;
+use App\Models\Service;
 use Illuminate\Support\Facades\DB;
 
 class ApartmentController extends Controller
 {
     public function index()
     {
-        $apartments = Apartment::with('services', 'type')->get();
+        $apartments = Apartment::with('services', 'type')
+            ->where('visible', 1)
+            ->get();
+
+        foreach ($apartments as $apartment){
+            $apartment['image_path'] = asset('storage/uploads/' . $apartment['image_path']);
+        }
+
+        $apartments->makeHidden(['address', 'lat', 'lon']);
+        return response()->json([
+            'result' => 'success',
+            'num_result' => count($apartments),
+            'data' => $apartments,
+        ]);
+    }
+
+    public function getApartments(Request $request)
+    {
+        $lat = $request->query('lat');
+        $lon = $request->query('lon');
+        $radius = $request->query('radius');
+        $minRooms = $request->query('minRooms');
+        $minBeds = $request->query('minBeds');
+        $services = explode(" ",$request->query('services'));
+
+        $circle_radius = 6371;
+
+        $apartments = Apartment::with('services', 'type')
+            ->select(['apartments.*', DB::raw("($circle_radius * ACOS(COS(RADIANS($lat)) * COS(RADIANS(apartments.lat)) * COS(RADIANS(apartments.lon) - RADIANS($lon)) + SIN(RADIANS($lat)) * SIN(RADIANS(apartments.lat)))) AS distance")])
+            ->where('visible', 1)
+            ->where('num_of_room', '>=', $minRooms)
+            ->where('num_of_bed', '>=', $minBeds)
+            ->having('distance', '<', $radius)
+            ->whereHas('services', function ($query) use ($services) {
+                $query->whereIn('service_id', $services);
+            }, '=', count($services))
+            ->orderBy('distance')
+            ->get();
+
+        foreach ($apartments as $apartment){
+            $apartment['image_path'] = asset('storage/uploads/' . $apartment['image_path']);
+        }
 
         $apartments->makeHidden(['address', 'lat', 'lon']);
 
-        return response()->json($apartments);
+        return response()->json([
+            'result' => 'success',
+            'num_result' => count($apartments),
+            'data' => $apartments,
+        ]);
     }
 
-    // public function getApartments($searchLat, $searchLon, $radius)
-    // {
-    //     $apartments = Apartment::select(
-    //         'id',
-    //         'lat',
-    //         'lon',
-    //         DB::raw('(6371 * acos(cos(radians(?)) * cos(radians(lat)) * cos(radians(lon) - radians(?)) + sin(radians(?)) * sin(radians(lat)))) AS distance_in_km')
-    //     )
-    //         ->addSelect(DB::raw('6371 * acos(cos(radians(?)) * cos(radians(lat)) * cos(radians(lon) - radians(?)) + sin(radians(?)) * sin(radians(lat))) AS distance_in_km_filtered'))
-    //         ->where('distance_in_km_filtered', '<=', $radius)
-    //         ->get();
-
-    //     return response()->json([
-    //         'result' => 'success',
-    //         'data' => $apartments,
-    //     ]);
-
-    //     public function getApartments($lat,$lon,$radius)
-    // {
-
-    //     $circle_radius = 6371;
-    //     $houses = DB::select(DB::raw('SELECT *, ( '. $circle_radius .' * acos( cos( radians(' . $lat . ') ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(' . $lon . ') ) + sin( radians(' . $lat .') ) * sin( radians(latitude) ) ) ) AS distance FROM houses WHERE visible=1 HAVING distance < ' . $radius . ' ORDER BY distance') );
-    //     ;
-
-    //     // foreach ($houses as $key => $house) {
-    //     //     dd($house->services);
-    //     //     $house['services'] = $house->services;
-    //     // };
-
-    //     return response()->json([
-    //         'result' => 'success',
-    //         'data' => $houses,
-
-    //         // 'count' => $houses->count()
-    //     ]);
-    // }
-
-
-    public function getApartments($lat, $lon, $radius, $minRooms, $minBeds)
+    public function getAllServices()
     {
-        $circle_radius = 6371;
-
-        $query = "SELECT *, ({$circle_radius} * ACOS(COS(RADIANS($lat)) * COS(RADIANS(apartments.lat)) * COS(RADIANS(apartments.lon) - RADIANS($lon)) + SIN(RADIANS($lat)) * SIN(RADIANS(apartments.lat)))) AS distance
-              FROM apartments
-              WHERE visible = 1
-                AND num_of_room >= :minRooms
-                AND num_of_bed >= :minBeds
-              HAVING distance < :radius
-              ORDER BY distance";
-
-        $houses = DB::select(DB::raw($query), [
-            'lat' => $lat,
-            'lon' => $lon,
-            'radius' => $radius,
-            'minRooms' => $minRooms,
-            'minBeds' => $minBeds,
-        ]);
+        $services = Service::all();
 
         return response()->json([
             'result' => 'success',
-            'data' => $houses,
+            'num_result' => count($services),
+            'data' => $services,
         ]);
     }
 }
-
-    // public function getHouse($lat, $lon, $radius)
-    // {
-    //     $userLocation = Distance::fromLatLng($lat, $lon);
-
-    //     $houses = House::select(
-    //         '*',
-    //         $userLocation->sqlSelect('latitude', 'longitude', 'distance_in_km')
-    //     )
-    //         ->where('visible', 1)
-    //         ->having('distance_in_km', '<', $radius)
-    //         ->orderBy('distance_in_km')
-    //         ->get();
-
-    //     return response()->json([
-    //         'result' => 'success',
-    //         'data' => $houses,
-    //     ]);
-    // }
