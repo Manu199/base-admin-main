@@ -112,7 +112,7 @@
 
                                 <div class="mb-4 row mb-0 justify-content-center">
                                     <div class="col">
-                                        <button type="submit" class="btn btn-dark w-100">
+                                        <button id="button-register" type="submit" class="btn btn-dark w-100">
                                             {{ __('Register') }}
                                         </button>
                                     </div>

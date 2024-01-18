@@ -22,10 +22,12 @@
                 <div class="box-header">
 
                 </div>
-                <div class="dropdown-menu dropdown-menu-end d-md-flex d-lg-flex border-0" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu dropdown-menu-end d-md-flex d-lg-flex border-0"
+                    aria-labelledby="navbarDropdown">
                     <ul class="nav">
                         <li class="nav-item mx-3">
-                            <a class="nav-link btn fw-bold btn-header" href="{{ route('admin.apartment.index') }}">Lista Appartamenti</a>
+                            <a class="nav-link btn fw-bold btn-header" href="{{ route('admin.apartment.index') }}">Lista
+                                Appartamenti</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link btn fw-bold btn-header-2" href="{{ route('admin.apartment.create') }}">
@@ -51,15 +53,7 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
-
             </div>
-
         </div>
     </div>
-</header>
-
 </header>
