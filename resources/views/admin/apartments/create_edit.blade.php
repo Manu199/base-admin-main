@@ -184,9 +184,9 @@
                     <div class="p-2 border rounded mb-3">
                         @php
                             $tempPath = session('tempImagePath');
-                            dump($tempPath);
-                            dump(old());
-                            dump($errors->all());
+                            // dump($tempPath);
+                            // dump(old());
+                            // dump($errors->all());
                         @endphp
                         {{-- IMAGE --}}
                         <div class="row">
