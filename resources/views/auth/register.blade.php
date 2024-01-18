@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mt-4">
+    <div class="container my-5">
         <div class="card-login m-auto">
             <div class="row justify-content-center">
                 <div class="col">
-                    <div class="title-login my-5 text-center">BRAND</div>
+                    {{-- <div class="title-login my-5 text-center">BRAND</div> --}}
                     <div class="card">
                         <div class="card-header text-center bg-white border-0 my-3">{{ __('Register') }}</div>
 
                         <div class="card-body">
-                            <form method="POST" action="{{ route('register') }}">
+                            <form method="POST" action="{{ route('register') }}" onsubmit="return validatePasswords()">
                                 @csrf
 
                                 <div class="mb-4 row justify-content-center">
@@ -91,8 +91,8 @@
                                 <div class="mb-4 row justify-content-center">
                                     <div class="col">
                                         <input id="password" placeholder="Password" type="password"
-                                            class="form-control custom-checkbox @error('password') is-invalid @enderror"
-                                            name="password" required autocomplete="new-password">
+                                            class="form-control custom-checkbox @error('password') is-invalid @enderror" name="password"
+                                            required autocomplete="new-password">
 
                                         @error('password')
                                             <span class="invalid-feedback" role="alert">
@@ -107,6 +107,7 @@
                                         <input id="password-confirm" placeholder="Password confirm" type="password"
                                             class="form-control custom-checkbox" name="password_confirmation" required
                                             autocomplete="new-password">
+                                            <span id="password-error" class="text-danger"></span>
                                     </div>
                                 </div>
 
@@ -124,4 +125,20 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function validatePasswords() {
+            let password = document.getElementById('password').value;
+            let confirmPassword = document.getElementById('password-confirm').value;
+            let errorSpan = document.getElementById('password-error');
+
+            if (password !== confirmPassword) {
+                errorSpan.textContent = 'Le password non corrispondono.';
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+
 @endsection
