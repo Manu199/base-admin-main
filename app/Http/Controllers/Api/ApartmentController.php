@@ -109,6 +109,8 @@ class ApartmentController extends Controller
 
         $apartment['user'] = $apartment->user;
 
+        $apartment['user']->makeHidden(['date_of_birth', 'phone_number']);
+
         $apartment['image_path'] = asset('storage/uploads/' . $apartment['image_path']);
 
         return response()->json($apartment);
