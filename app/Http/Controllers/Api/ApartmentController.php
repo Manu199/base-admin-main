@@ -107,13 +107,9 @@ class ApartmentController extends Controller
     {
         $apartment = Apartment::where('slug', $slug)->with('services')->first();
 
-        if ($apartment['image_path']) {
+        $apartment['user'] = $apartment->user;
 
-            $apartment['image_path'] = asset('storage/uploads/' . $apartment['image_path']);
-        } else {
-
-            $apartment['image_path'] = 'https://via.placeholder.com/200x200';
-        }
+        $apartment['image_path'] = asset('storage/uploads/' . $apartment['image_path']);
 
         return response()->json($apartment);
     }
