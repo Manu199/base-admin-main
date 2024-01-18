@@ -35,11 +35,12 @@ class RegisteredUserController extends Controller
             'lastname' => ['required', 'string', 'max:255'],
             'date_of_birth' => ['required', 'date', 'before_or_equal:' . now()->subYears(18)->format('Y-m-d')],
             'phone_number' => ['required', 'regex:/^\+[\d\s()]+$/'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'email' => ['required', 'regex:/^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ], [
             'date_of_birth.before_or_equal' => 'Devi avere almeno 18 anni per registrarti.',
             'phone_number.regex' => 'Il formato del numero di telefono non è valido.',
+            'email.regex' => 'Il formato della email non è valido.',
             'required' => 'Il campo :attribute è obbligatorio.',
             'string' => 'Il campo :attribute deve essere una stringa.',
             'max' => 'Il campo :attribute non può superare :max caratteri.',
