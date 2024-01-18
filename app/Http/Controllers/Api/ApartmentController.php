@@ -33,6 +33,34 @@ class ApartmentController extends Controller
         $lat = $request->query('lat');
         $lon = $request->query('lon');
         $radius = $request->query('radius');
+
+        $circle_radius = 6371;
+
+        $apartments = Apartment::with('services', 'type')
+            ->select(['apartments.*', DB::raw("($circle_radius * ACOS(COS(RADIANS($lat)) * COS(RADIANS(apartments.lat)) * COS(RADIANS(apartments.lon) - RADIANS($lon)) + SIN(RADIANS($lat)) * SIN(RADIANS(apartments.lat)))) AS distance")])
+            ->where('visible', 1)
+            ->having('distance', '<', $radius)
+            ->orderBy('distance')
+            ->get();
+
+        foreach ($apartments as $apartment){
+            $apartment['image_path'] = asset('storage/uploads/' . $apartment['image_path']);
+        }
+
+        $apartments->makeHidden(['address', 'lat', 'lon']);
+
+        return response()->json([
+            'result' => 'success',
+            'num_result' => count($apartments),
+            'data' => $apartments,
+        ]);
+    }
+
+    public function getApartmentsAdvanced(Request $request)
+    {
+        $lat = $request->query('lat');
+        $lon = $request->query('lon');
+        $radius = $request->query('radius');
         $minRooms = $request->query('minRooms');
         $minBeds = $request->query('minBeds');
         $services = explode(" ",$request->query('services'));

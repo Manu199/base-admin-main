@@ -22,5 +22,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/apartments', [ApartmentController::class, 'index']);
 
 Route::get('/searchapartment', [ApartmentController::class, 'getApartments']);
+Route::get('/searchapartment-advanced', [ApartmentController::class, 'getApartmentsAdvanced']);
 
 Route::get('/services', [ApartmentController::class, 'getAllServices']);
