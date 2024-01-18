@@ -110,7 +110,7 @@ class ApartmentController extends Controller
             'image_path.mimes' => 'L\'immagine deve essere di uno dei seguenti formati: jpeg, jpg, png, gif.',
             'image_path.max' => 'L\'immagine non può superare :max kilobytes.',
 
-            'services.required' => 'Il campo Servizi è obbligatorio.',
+            'services.required' => 'Inserisci almeno 1 servizio.',
             'services.array' => 'Il campo Servizi deve essere un array.',
             'services.min' => 'Il campo Servizi deve contenere almeno :min elemento.',
         ],);
@@ -281,6 +281,7 @@ class ApartmentController extends Controller
             'address.required' => 'L\'indirizzo è obbligatorio.',
             'address.min' => 'L\'indirizzo deve essere lungo almeno :min caratteri.',
 
+            'services.required' => 'Inserisci almeno 1 servizio.',
             'services.array' => 'Il campo Servizi deve essere un array.',
             'services.min' => 'Il campo Servizi deve contenere almeno :min elemento.',
         ],);
