@@ -16,7 +16,7 @@ class ApartmentController extends Controller
             ->where('visible', 1)
             ->get();
 
-        foreach ($apartments as $apartment){
+        foreach ($apartments as $apartment) {
             $apartment['image_path'] = asset('storage/uploads/' . $apartment['image_path']);
         }
 
@@ -43,7 +43,7 @@ class ApartmentController extends Controller
             ->orderBy('distance')
             ->get();
 
-        foreach ($apartments as $apartment){
+        foreach ($apartments as $apartment) {
             $apartment['image_path'] = asset('storage/uploads/' . $apartment['image_path']);
         }
 
@@ -63,7 +63,7 @@ class ApartmentController extends Controller
         $radius = $request->query('radius');
         $minRooms = $request->query('minRooms');
         $minBeds = $request->query('minBeds');
-        $services = explode(" ",$request->query('services'));
+        $services = explode(" ", $request->query('services'));
 
         $circle_radius = 6371;
 
@@ -79,7 +79,7 @@ class ApartmentController extends Controller
             ->orderBy('distance')
             ->get();
 
-        foreach ($apartments as $apartment){
+        foreach ($apartments as $apartment) {
             $apartment['image_path'] = asset('storage/uploads/' . $apartment['image_path']);
         }
 
@@ -101,5 +101,20 @@ class ApartmentController extends Controller
             'num_result' => count($services),
             'data' => $services,
         ]);
+    }
+
+    public function getApartment($slug)
+    {
+        $apartment = Apartment::where('slug', $slug)->with('services')->first();
+
+        if ($apartment['image_path']) {
+
+            $apartment['image_path'] = asset('storage/uploads/' . $apartment['image_path']);
+        } else {
+
+            $apartment['image_path'] = 'https://via.placeholder.com/200x200';
+        }
+
+        return response()->json($apartment);
     }
 }
