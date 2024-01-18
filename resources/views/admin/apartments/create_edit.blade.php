@@ -34,7 +34,7 @@
                         {{-- TITLE --}}
                         <div class="row">
                             <div class="form-floating mb-3">
-                                <input
+                                <input required
                                     type="text"
                                     class="form-control @error('title') is-invalid @enderror"
                                     id="title"
@@ -68,7 +68,7 @@
                         {{-- PRICE --}}
                         <div class="row">
                             <div class="form-floating">
-                                <input
+                                <input required
                                     type="number"
                                     class="form-control @error('price') is-invalid @enderror"
                                     id="price"
@@ -88,7 +88,7 @@
                         {{-- ADDRESS --}}
                         <div class="row">
                             <div class="form-floating">
-                                <input
+                                <input required
                                     type="text"
                                     class="form-control @error('address') is-invalid @enderror"
                                     id="address"
@@ -112,7 +112,7 @@
                             {{-- SQUARE METERS --}}
                             <div class="col">
                                 <div class="form-floating">
-                                    <input
+                                    <input required
                                         type="number"
                                         class="form-control @error('square_meters') is-invalid @enderror"
                                         id="square_meters"
@@ -129,7 +129,7 @@
                             {{-- NUM of ROOM --}}
                             <div class="col">
                                 <div class="form-floating">
-                                    <input
+                                    <input required
                                         type="number"
                                         class="form-control @error('num_of_room') is-invalid @enderror"
                                         id="num_of_room"
@@ -146,7 +146,7 @@
                             {{-- NUM of BED --}}
                             <div class="col">
                                 <div class="form-floating">
-                                    <input
+                                    <input required
                                         type="number"
                                         class="form-control @error('num_of_bed') is-invalid @enderror"
                                         id="num_of_bed"
@@ -163,7 +163,7 @@
                             {{-- NUM of BATHROOM --}}
                             <div class="col">
                                 <div class="form-floating">
-                                    <input
+                                    <input required
                                         type="number"
                                         class="form-control @error('num_of_bathroom') is-invalid @enderror"
                                         id="num_of_bathroom"
@@ -203,7 +203,12 @@
                                 <!-- Input  nascosto per memorizzare il percorso del file -->
                                 <input type="hidden" name="tempImagePath" id="hiddenFilePath" value="{{ $tempPath }}">
 
+                                @dump($apartment?->image_path)
+                                @dump(!$apartment?->image_path)
+
                                 <input
+                                    @if (!$apartment?->image_path) required @endif
+                                    accept=".jpg, .jpeg, .png"
                                     type="file"
                                     class="form-control @error('image_path') is-invalid @enderror"
                                     id="image-input"
