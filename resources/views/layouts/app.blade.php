@@ -17,7 +17,9 @@
 
     {{-- fONT AWESOME  --}}
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Usando Vite -->
     @vite(['resources/js/app.js'])
@@ -26,54 +28,36 @@
 <body>
     <div id="app">
 
-        <header class="navBar">
-            <div class="container my-3">
-                <div class="row">
-                    <!-- Logo -->
-                    <div class="col-2">
-                        <ul class="nav">
+        <nav class="navbar">
+            <div class="container">
+                <div class="row w-100">
+
+                    <div class="col-4 left">
+                        <router-link class="nav-link btn fw-bold" :to="{ name: 'Home' }" href="#">
+                            <img class="logo-header" src="/logo (1).png" alt="logo (1).png" />
+                        </router-link>
+                    </div>
+
+                    <div class="col-4 middle">
+                        <a href="http://localhost:5000/ricerca-avanzata">
+                            <div class="_btn">Ricerca Avanzata</div>
+                        </a>
+                    </div>
+
+                    <div class="col-4 right">
+                        <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link btn fw-bold" href="http://localhost:5000/">
-                                    <img class="logo-header" src="/logo (1).png" alt="logo (1).png">
-                                </a>
+                                <a class="nav-link" href="http://127.0.0.1:8000/login">Accedi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://127.0.0.1:8000/register">Registrati</a>
                             </li>
                         </ul>
                     </div>
 
-                    <div class="col-10 d-flex align-items-center justify-content-end">
-
-                        <!-- {{-- HAMBURGUER MENU --}} -->
-                        <button class="navbar-toggler d-md-none d-lg-none" type="button" data-bs-toggle="dropdown">
-                            <i class="fa-solid fa-bars"></i>
-                        </button>
-
-                        <div class="dropdown-menu dropdown-menu-end d-md-flex d-lg-flex border-0" aria-labelledby="navbarDropdown">
-
-                          <div class="nav-item dropdown d-flex align-items-center ms-2">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                <i class="fa-regular fa-user"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <ul>
-                                    <li class="nav-item list-unstyled">
-                                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                    </li>
-                                    <li class="nav-item list-unstyled">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                    </li>
-                                </ul>
-
-                                <form id="logout-form" action="#" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
                 </div>
             </div>
-        </header>
+        </nav>
 
 
         <main class="">

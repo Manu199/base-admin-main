@@ -1,3 +1,67 @@
+<header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="row w-100">
+
+                <div class="col-3 left">
+                    {{-- <router-link class="nav-link btn fw-bold" :to="{ name: 'Home' }" href="#">
+                        <img class="logo-header" src="/logo (1).png" alt="logo (1).png" />
+                    </router-link> --}}
+                    <a href="http://localhost:5000/">
+                        <img class="logo-header" src="/logo (1).png" alt="logo (1).png" />
+                    </a>
+                </div>
+
+                <div class="col-4 middle">
+                    <a href="http://localhost:5000/ricerca-avanzata">
+                        <div class="_btn">Ricerca Avanzata</div>
+                    </a>
+                </div>
+
+                <div class="col-5 right">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin.apartment.index') }}">Lista Appartamenti</a>
+                        </li>
+                        <li class="nav-item new-apartment">
+                            <a class="nav-link" href="{{ route('admin.apartment.create') }}"><i
+                                    class="fa-solid fa-plus"></i>
+                                Nuovo Appartamento</a>
+                        </li>
+                    </ul>
+                    {{-- dropdown utente --}}
+                    <div class="nav-item dropdown d-flex align-items-center ms-2">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->name }}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ url('profile') }}">{{ __('Profilo') }}</a>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+
+
+{{--
+
+
+
+
+
 <header class="navBar">
     <div class="container my-3">
         <div class="row">
@@ -16,7 +80,7 @@
             <div class="col-10 d-flex align-items-center justify-content-end">
 
                 {{-- HAMBURGUER MENU --}}
-                <button class="navbar-toggler d-md-none d-lg-none" type="button" data-bs-toggle="dropdown">
+{{-- <button class="navbar-toggler d-md-none d-lg-none" type="button" data-bs-toggle="dropdown">
                     <i class="fa-solid fa-bars"></i>
                 </button>
                 <div class="box-header">
@@ -56,4 +120,4 @@
             </div>
         </div>
     </div>
-</header>
+</header> --}}
