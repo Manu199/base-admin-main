@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ApartmentController;
+use App\Http\Controllers\Api\MessageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +25,5 @@ Route::get('/searchapartment', [ApartmentController::class, 'getApartments']);
 Route::get('/searchapartment-advanced', [ApartmentController::class, 'getApartmentsAdvanced']);
 Route::get('/services', [ApartmentController::class, 'getAllServices']);
 Route::get('/apartment/{slug}', [ApartmentController::class, 'getApartment']);
+
+Route::post('/ricevi-messaggio', [MessageController::class, 'getMessage']);
