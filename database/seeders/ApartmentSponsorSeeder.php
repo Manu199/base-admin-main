@@ -16,7 +16,7 @@ class ApartmentSponsorSeeder extends Seeder
      */
     public function run()
     {
-        $sponsorApartmentData = [
+        $arrayData = [
             [
                 'sponsor_id' => 1,
                 'apartment_id' => 1,
@@ -40,27 +40,13 @@ class ApartmentSponsorSeeder extends Seeder
         ];
 
 
-        // foreach ($dataArray as $apartmentSponsor) {
-        //     $apartment = Apartment::id($apartmentSponsor['apartment_id']);
-        //     $sponsor = Sponsor::id($apartmentSponsor['sponsor_id']);
+        foreach ($arrayData as $data) {
+            $apartment = Apartment::find($data['apartment_id']);
+            $sponsor = Sponsor::find($data['sponsor_id']);
 
-        //     if ($apartment && $sponsor) {
-        //         $apartment->sponsors()->attach($sponsor, ['expiration_date' => $apartmentSponsor['expiration_date']]);
-        //     }
-        // }
-
-
-        // foreach ($sponsorApartmentData as $data) {
-        //     $apartment = Apartment::find($data['apartment_id']);
-        //     $sponsor = Sponsor::find($data['sponsor_id']);
-
-        //     if ($apartment && $sponsor) {
-        //         SponsorApartment::create([
-        //             'apartment_id' => $apartment->id,
-        //             'sponsor_id' => $sponsor->id,
-        //             'expiration_date' => $data['expiration_date'],
-        //         ]);
-        //     }
-        // }
+            if ($apartment && $sponsor) {
+                $apartment->sponsors()->attach($sponsor, ['expiration_date' => $data['expiration_date']]);
+            }
+        }
     }
 }
