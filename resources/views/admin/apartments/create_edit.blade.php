@@ -85,7 +85,7 @@
                     {{-- sezione address --}}
                     <div class="p-2 border rounded mb-3">
                         {{-- ADDRESS --}}
-                        <div class="row">
+                        <div class="row position-relative">
                             <div class="form-floating">
                                 <input required
                                     type="text"
@@ -98,10 +98,10 @@
                                 @error('address')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
-                                <ul class="list-group" id="list-search">
-                                    {{-- list of search address --}}
-                                </ul>
                             </div>
+                            <ul class="list-group" id="list-search">
+                                {{-- list of search address --}}
+                            </ul>
                         </div>
 
                     </div>
@@ -252,6 +252,17 @@
         </form>
     </div>
 
+    <style>
+        #list-search {
+            position: absolute;
+            z-index: 3;
+            top: 100%;
+            width: 100%;
+            padding-left: 0.7rem;
+            padding-right: 0.7rem;
+        }
+    </style>
+
     <script>
         // ------------------------------------------------------------------------------
         // IMAGE PREVIEW
@@ -271,6 +282,7 @@
         const addressInput = document.getElementById('address');
 
         let timeoutId;
+        let selectedFromList = false;
 
         addressInput.addEventListener('input', function(event) {
             // Cancella il timer precedente se esiste
@@ -298,9 +310,9 @@
                 // Fai la chiamata solo dopo che il timer è scaduto
                 axios.get(endpoint)
                     .then(response => {
+                        selectedFromList = false;
                         listUl.innerHTML = '';
                         arrayResult = response.data.results;
-                        console.log(arrayResult);
                         arrayResult.forEach(element => {
                             const newli = document.createElement('li');
                             newli.innerHTML = element.address.freeformAddress;
@@ -308,6 +320,7 @@
 
                             // Aggiungi event listener click a ciascun elemento <li>
                             newli.addEventListener('click', function () {
+                                selectedFromList = true;
                                 // Scrivi il testo dell'elemento cliccato nell'input
                                 addressInput.value = element.address.freeformAddress;
                                 // Svuota la lista dopo aver selezionato un elemento
@@ -321,6 +334,16 @@
                         console.error(error);
                     });
             }, 300);
+        });
+
+        // Svuota il dropdown quando l'utente esce dall'input
+        addressInput.addEventListener('blur', function() {
+            if(!selectedFromList){
+                addressInput.value = arrayResult[0].address.freeformAddress;
+            }
+            selectedFromList = false;
+            listUl.innerHTML = '';
+            arrayResult = [];
         });
         // ------------------------------------------------------------------------------
 
