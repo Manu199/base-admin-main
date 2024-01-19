@@ -1,17 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <style>
-        .icon-input {
-            position: absolute;
-            top: 50%;
-            right: 25px;
-            transform: translate(-50%, -50%)
-        }
-    </style>
 
-
-    <div class="container my-5">
+    <div class="container register-blade my-5">
         <div class="card-login m-auto">
             <div class="row justify-content-center">
                 <div class="col">
@@ -35,7 +26,6 @@
                                             required
                                             autocomplete="name"
                                             autofocus>
-                                        <span class="icon-input" id="icon-name"></span>
 
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
@@ -51,7 +41,6 @@
                                             class="form-control custom-checkbox pe-5 @error('lastname') is-invalid @enderror"
                                             name="lastname" value="{{ old('lastname') }}" required autocomplete="lastname"
                                             autofocus>
-                                        <span class="icon-input" id="icon-lastname"></span>
 
 
                                         @error('lastname')
@@ -84,7 +73,6 @@
                                             class="form-control custom-checkbox pe-5 @error('phone_number') is-invalid @enderror"
                                             name="phone_number" value="{{ old('phone_number') }}" required
                                             autocomplete="phone_number" autofocus>
-                                        <span class="icon-input" id="icon-phone_number"></span>
 
                                         @error('phone_number')
                                             <span class="invalid-feedback" role="alert">
@@ -99,7 +87,6 @@
                                         <input id="email" placeholder="E-Mail Address" type="email"
                                             class="form-control custom-checkbox pe-5 @error('email') is-invalid @enderror"
                                             name="email" value="{{ old('email') }}" required autocomplete="email">
-                                        <span class="icon-input" id="icon-email"></span>
 
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
@@ -114,7 +101,6 @@
                                         <input id="password" placeholder="Password" type="password"
                                             class="form-control custom-checkbox pe-5 @error('password') is-invalid @enderror"
                                             name="password" required autocomplete="new-password">
-                                        <span class="icon-input" id="icon-password"></span>
 
                                         @error('password')
                                             <span class="invalid-feedback" role="alert">
@@ -129,7 +115,6 @@
                                         <input id="password-confirm" placeholder="Password confirm" type="password"
                                             class="form-control custom-checkbox pe-5" name="password_confirmation" required
                                             autocomplete="new-password">
-                                        <span class="icon-input" id="icon-password-confirm"></span>
                                     </div>
                                 </div>
 
@@ -153,47 +138,37 @@
         // Name
         const name = document.getElementById('name');
         name.addEventListener('input', function() {
-            const iconName = document.getElementById('icon-name');
             if (name.value.length < 1) {
-                iconName.innerHTML = '&#x2718;';
-                iconName.classList.add('text-danger');
-                iconName.classList.remove('text-success');
+                name.classList.add('is-invalid');
+                name.classList.remove('is-valid');
             } else {
-                iconName.innerHTML = '&#x2714;';
-                iconName.classList.add('text-success');
-                iconName.classList.remove('text-danger');
-
+                name.classList.add('is-valid');
+                name.classList.remove('is-invalid');
             }
         });
 
         // Lastname
         const lastname = document.getElementById('lastname');
         lastname.addEventListener('input', function() {
-            const iconLastname = document.getElementById('icon-lastname');
             if (lastname.value.length < 1) {
-                iconLastname.innerHTML = '&#x2718;';
-                iconLastname.classList.add('text-danger');
-                iconLastname.classList.remove('text-success');
+                lastname.classList.add('is-invalid');
+                lastname.classList.remove('is-valid');
             } else {
-                iconLastname.innerHTML = '&#x2714;';
-                iconLastname.classList.add('text-success');
-                iconLastname.classList.remove('text-danger');
+                lastname.classList.add('is-valid');
+                lastname.classList.remove('is-invalid');
             }
         });
 
         // Phone Number
         const phoneNumber = document.getElementById('phone_number');
         phoneNumber.addEventListener('input', function() {
-            const icon = document.getElementById('icon-phone_number');
             if (/^\+\d+\s*\d{4,15}$/.test(phoneNumber.value)) {
-                icon.innerHTML = '&#x2714;';
-                icon.classList.add('text-success');
-                icon.classList.remove('text-danger');
+                phoneNumber.classList.add('is-valid');
+                phoneNumber.classList.remove('is-invalid');
                 phoneNumber.setCustomValidity('');
             } else {
-                icon.innerHTML = '&#x2718;';
-                icon.classList.add('text-danger');
-                icon.classList.remove('text-success');
+                phoneNumber.classList.add('is-invalid');
+                phoneNumber.classList.remove('is-valid');
                 phoneNumber.setCustomValidity('Deve essere con prefisso internazionale es.+00 123456789');
             }
         });
@@ -204,14 +179,12 @@
             const icon = document.getElementById('icon-email');
             const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
             if (emailRegex.test(email.value)) {
-                icon.innerHTML = '&#x2714;';
-                icon.classList.add('text-success');
-                icon.classList.remove('text-danger');
+                email.classList.add('is-valid');
+                email.classList.remove('is-invalid');
                 email.setCustomValidity('');
             } else {
-                icon.innerHTML = '&#x2718;';
-                icon.classList.add('text-danger');
-                icon.classList.remove('text-success');
+                email.classList.add('is-invalid');
+                email.classList.remove('is-valid');
                 email.setCustomValidity('Indirizzo email non valido, es. email@example.com');
             }
         });
@@ -221,14 +194,12 @@
         password.addEventListener('input', function() {
             const icon = document.getElementById('icon-password');
             if (password.value.length >= 8) {
-                icon.innerHTML = '&#x2714;';
-                icon.classList.add('text-success');
-                icon.classList.remove('text-danger');
+                password.classList.add('is-valid');
+                password.classList.remove('is-invalid');
                 password.setCustomValidity('');
             } else {
-                icon.innerHTML = '&#x2718;';
-                icon.classList.add('text-danger');
-                icon.classList.remove('text-success');
+                password.classList.add('is-invalid');
+                password.classList.remove('is-valid');
                 password.setCustomValidity('La password deve essere di almeno 8 caratteri');
             }
         });
@@ -238,14 +209,12 @@
         confirmPassword.addEventListener('input', function() {
             const icon = document.getElementById('icon-password-confirm');
             if (password.value !== confirmPassword.value) {
-                icon.innerHTML = '&#x2718;';
-                icon.classList.add('text-danger');
-                icon.classList.remove('text-success');
+                confirmPassword.classList.add('is-invalid');
+                confirmPassword.classList.remove('is-valid');
                 confirmPassword.setCustomValidity('Le password non corrispondono');
             } else {
-                icon.innerHTML = '&#x2714;';
-                icon.classList.remove('text-danger');
-                icon.classList.add('text-success');
+                confirmPassword.classList.add('is-valid');
+                confirmPassword.classList.remove('is-invalid');
                 confirmPassword.setCustomValidity('');
             }
         });

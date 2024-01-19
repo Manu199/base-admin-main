@@ -57,7 +57,6 @@
                                     id="description"
                                     name="description"
                                     placeholder="description">{{ old('description', $apartment?->description) }}</textarea>
-
                                 <label class="left-initial" for="description">Descrizione</label>
                                 @error('description')
                                     <p class="text-danger">{{ $message }}</p>
@@ -184,9 +183,6 @@
                     <div class="p-2 border rounded mb-3">
                         @php
                             $tempPath = session('tempImagePath');
-                            // dump($tempPath);
-                            // dump(old());
-                            // dump($errors->all());
                         @endphp
                         {{-- IMAGE --}}
                         <div class="row">
@@ -202,9 +198,6 @@
 
                                 <!-- Input  nascosto per memorizzare il percorso del file -->
                                 <input type="hidden" name="tempImagePath" id="hiddenFilePath" value="{{ $tempPath }}">
-
-                                @dump($apartment?->image_path)
-                                @dump(!$apartment?->image_path)
 
                                 <input
                                     @if (!$apartment?->image_path) required @endif
@@ -223,7 +216,7 @@
                     <div class="p-2 border rounded mb-3">
                         {{-- SERVICES --}}
                         <div class="row">
-                            <div role="group" aria-label="Basic checkbox toggle button group">
+                            <div id="services-container" role="group" aria-label="Basic checkbox toggle button group">
 
                                 @foreach ($services as $service)
                                     <input
@@ -242,6 +235,7 @@
                                         {!! $service['name'] !!}
                                     </label>
                                 @endforeach
+                                <p id="services-error" class="text-danger"></p>
                                 @error('services')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -258,10 +252,9 @@
         </form>
     </div>
 
-    {{-- import axios cdn --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script> --}}
     <script>
         // ------------------------------------------------------------------------------
+        // IMAGE PREVIEW
         const imageInput = document.getElementById('image-input');
         imageInput.addEventListener("change", function(event) {
             previewImage(event);
@@ -273,7 +266,7 @@
             imagePreview.src = path;
         }
         // ------------------------------------------------------------------------------
-
+        // AUTO COMPLETE address
         const listUl = document.getElementById('list-search');
         const addressInput = document.getElementById('address');
 
@@ -328,6 +321,121 @@
                         console.error(error);
                     });
             }, 300);
+        });
+        // ------------------------------------------------------------------------------
+
+        // Name
+        const title = document.getElementById('title');
+        title.addEventListener('input', function() {
+            if (title.value.length < 8 || title.value.length > 50) {
+                title.classList.add('is-invalid');
+                title.classList.remove('is-valid');
+                title.setCustomValidity('Inserisci un titolo con minimo 8 caratteri e massimo 50');
+            } else {
+                title.classList.add('is-valid');
+                title.classList.remove('is-invalid');
+                title.setCustomValidity('');
+            }
+        });
+
+        // description
+        const description = document.getElementById('description');
+        description.addEventListener('input', function() {
+            if (description.value.length < 15) {
+                description.classList.add('is-invalid');
+                description.classList.remove('is-valid');
+                description.setCustomValidity('Inserisci una descrizione con almeno 15 caratteri');
+            } else {
+                description.classList.add('is-valid');
+                description.classList.remove('is-invalid');
+                description.setCustomValidity('');
+            }
+        });
+
+        // price
+        const price = document.getElementById('price');
+        price.addEventListener('input', function() {
+            if (isNaN(price.value) || parseFloat(price.value) < 1) {
+                price.classList.add('is-invalid');
+                price.classList.remove('is-valid');
+                price.setCustomValidity('Inserisci un prezzo numerico maggiore di 1');
+            } else {
+                price.classList.add('is-valid');
+                price.classList.remove('is-invalid');
+                price.setCustomValidity('');
+            }
+        });
+
+        // square_meters
+        const squareMeters = document.getElementById('square_meters');
+        squareMeters.addEventListener('input', function() {
+            if (isNaN(squareMeters.value) || parseFloat(squareMeters.value) < 20) {
+                squareMeters.classList.add('is-invalid');
+                squareMeters.classList.remove('is-valid');
+                squareMeters.setCustomValidity('Inserisci un valore numerico maggiore o uguale a 20 per i metri quadrati');
+            } else {
+                squareMeters.classList.add('is-valid');
+                squareMeters.classList.remove('is-invalid');
+                squareMeters.setCustomValidity('');
+            }
+        });
+
+        // num_of_room, num_of_bed, num_of_bathroom
+        const numericFields = ['num_of_room', 'num_of_bed', 'num_of_bathroom'];
+        const nameFields = ['stanze', 'letti', 'bagni'];
+        numericFields.forEach((field, index) => {
+            const element = document.getElementById(field);
+            element.addEventListener('input', function() {
+                if (isNaN(element.value) || parseFloat(element.value) < 1) {
+                    element.classList.add('is-invalid');
+                    element.classList.remove('is-valid');
+                    element.setCustomValidity(`Inserisci un valore numerico maggiore di 1 per ${nameFields[index]}`);
+                } else {
+                    element.classList.add('is-valid');
+                    element.classList.remove('is-invalid');
+                    element.setCustomValidity('');
+                }
+            });
+        });
+
+
+        // address
+        const address = document.getElementById('address');
+        address.addEventListener('input', function() {
+            if (address.value.length < 5) {
+                address.classList.add('is-invalid');
+                address.classList.remove('is-valid');
+                address.setCustomValidity('Inserisci un indirizzo con almeno 5 caratteri');
+            } else {
+                address.classList.add('is-valid');
+                address.classList.remove('is-invalid');
+                address.setCustomValidity('');
+            }
+        });
+
+        // services
+        const serviceContainer = document.getElementById('services-container');
+        const serviceCheckboxes = document.querySelectorAll('input[name="services[]"]');
+        const serviceError = document.getElementById('services-error');
+
+        // Aggiungo un ascoltatore per l'evento change sull'elemento contenitore dei servizi
+        serviceContainer.addEventListener('change', function() {
+            let selectedCount = 0;
+
+            // Ciclo tutte le checkbox dei servizi
+            serviceCheckboxes.forEach(checkbox =>{
+                // Se la checkbox è selezionata, incremento il contatore
+                if (checkbox.checked) {
+                    selectedCount++;
+                }
+            });
+
+            // Verifico se almeno una checkbox è stata selezionata
+            if(selectedCount < 1){
+                serviceError.textContent = 'Seleziona almeno un servizio';
+            }else{
+                serviceError.textContent = '';
+            }
         });
 
     </script>
