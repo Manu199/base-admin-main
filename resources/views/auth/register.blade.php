@@ -1,15 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-
-<style>
-    .icon-input{
-        position: absolute;
-        top: 50%;
-        right: 25px;
-        transform: translate(-50%,-50%)
-    }
-</style>
+    <style>
+        .icon-input {
+            position: absolute;
+            top: 50%;
+            right: 25px;
+            transform: translate(-50%, -50%)
+        }
+    </style>
 
 
     <div class="container my-5">
@@ -26,9 +25,15 @@
 
                                 <div class="mb-4 row justify-content-center">
                                     <div class="col position-relative">
-                                        <input id="name" type="text" placeholder="Name"
+                                        <input
+                                            id="name"
+                                            type="text"
+                                            placeholder="Name"
                                             class="form-control custom-checkbox pe-5 @error('name') is-invalid @enderror"
-                                            name="name" value="{{ old('name') }}" required autocomplete="name"
+                                            name="name"
+                                            value="{{ old('name') }}"
+                                            required
+                                            autocomplete="name"
                                             autofocus>
                                         <span class="icon-input" id="icon-name"></span>
 
@@ -94,7 +99,7 @@
                                         <input id="email" placeholder="E-Mail Address" type="email"
                                             class="form-control custom-checkbox pe-5 @error('email') is-invalid @enderror"
                                             name="email" value="{{ old('email') }}" required autocomplete="email">
-                                            <span class="icon-input" id="icon-email"></span>
+                                        <span class="icon-input" id="icon-email"></span>
 
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
@@ -107,9 +112,9 @@
                                 <div class="mb-4 row justify-content-center">
                                     <div class="col position-relative">
                                         <input id="password" placeholder="Password" type="password"
-                                            class="form-control custom-checkbox pe-5 @error('password') is-invalid @enderror" name="password"
-                                            required autocomplete="new-password">
-                                            <span class="icon-input" id="icon-password"></span>
+                                            class="form-control custom-checkbox pe-5 @error('password') is-invalid @enderror"
+                                            name="password" required autocomplete="new-password">
+                                        <span class="icon-input" id="icon-password"></span>
 
                                         @error('password')
                                             <span class="invalid-feedback" role="alert">
@@ -124,7 +129,7 @@
                                         <input id="password-confirm" placeholder="Password confirm" type="password"
                                             class="form-control custom-checkbox pe-5" name="password_confirmation" required
                                             autocomplete="new-password">
-                                            <span class="icon-input" id="icon-password-confirm"></span>
+                                        <span class="icon-input" id="icon-password-confirm"></span>
                                     </div>
                                 </div>
 
@@ -144,30 +149,32 @@
     </div>
 
     <script>
+
         // Name
         const name = document.getElementById('name');
-        name.addEventListener('input', function(){
+        name.addEventListener('input', function() {
             const iconName = document.getElementById('icon-name');
-            if(name.value.length < 1 ){
+            if (name.value.length < 1) {
                 iconName.innerHTML = '&#x2718;';
                 iconName.classList.add('text-danger');
                 iconName.classList.remove('text-success');
-            }else{
+            } else {
                 iconName.innerHTML = '&#x2714;';
                 iconName.classList.add('text-success');
                 iconName.classList.remove('text-danger');
+
             }
         });
 
         // Lastname
         const lastname = document.getElementById('lastname');
-        lastname.addEventListener('input', function(){
+        lastname.addEventListener('input', function() {
             const iconLastname = document.getElementById('icon-lastname');
-            if(lastname.value.length < 1 ){
+            if (lastname.value.length < 1) {
                 iconLastname.innerHTML = '&#x2718;';
                 iconLastname.classList.add('text-danger');
                 iconLastname.classList.remove('text-success');
-            }else{
+            } else {
                 iconLastname.innerHTML = '&#x2714;';
                 iconLastname.classList.add('text-success');
                 iconLastname.classList.remove('text-danger');
@@ -176,47 +183,53 @@
 
         // Phone Number
         const phoneNumber = document.getElementById('phone_number');
-        phoneNumber.addEventListener('input', function(){
+        phoneNumber.addEventListener('input', function() {
             const icon = document.getElementById('icon-phone_number');
-            if (phoneNumber.value[0] === '+' && /^\+\d*$/.test(phoneNumber.value)) {
+            if (/^\+\d+\s*\d{4,15}$/.test(phoneNumber.value)) {
                 icon.innerHTML = '&#x2714;';
                 icon.classList.add('text-success');
                 icon.classList.remove('text-danger');
+                phoneNumber.setCustomValidity('');
             } else {
                 icon.innerHTML = '&#x2718;';
                 icon.classList.add('text-danger');
                 icon.classList.remove('text-success');
+                phoneNumber.setCustomValidity('Deve essere con prefisso internazionale es.+00 123456789');
             }
         });
 
         // Email
         const email = document.getElementById('email');
-        email.addEventListener('input', function(){
+        email.addEventListener('input', function() {
             const icon = document.getElementById('icon-email');
             const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-            if(emailRegex.test(email.value)){
+            if (emailRegex.test(email.value)) {
                 icon.innerHTML = '&#x2714;';
                 icon.classList.add('text-success');
                 icon.classList.remove('text-danger');
-            }else{
+                email.setCustomValidity('');
+            } else {
                 icon.innerHTML = '&#x2718;';
                 icon.classList.add('text-danger');
                 icon.classList.remove('text-success');
+                email.setCustomValidity('Indirizzo email non valido, es. email@example.com');
             }
         });
 
         // Password
         const password = document.getElementById('password');
-        password.addEventListener('input', function(){
+        password.addEventListener('input', function() {
             const icon = document.getElementById('icon-password');
-            if(password.value.length >= 8){
+            if (password.value.length >= 8) {
                 icon.innerHTML = '&#x2714;';
                 icon.classList.add('text-success');
                 icon.classList.remove('text-danger');
-            }else{
+                password.setCustomValidity('');
+            } else {
                 icon.innerHTML = '&#x2718;';
                 icon.classList.add('text-danger');
                 icon.classList.remove('text-success');
+                password.setCustomValidity('La password deve essere di almeno 8 caratteri');
             }
         });
 
@@ -228,29 +241,13 @@
                 icon.innerHTML = '&#x2718;';
                 icon.classList.add('text-danger');
                 icon.classList.remove('text-success');
+                confirmPassword.setCustomValidity('Le password non corrispondono');
             } else {
                 icon.innerHTML = '&#x2714;';
                 icon.classList.remove('text-danger');
                 icon.classList.add('text-success');
+                confirmPassword.setCustomValidity('');
             }
         });
-
-        function validateForm(){
-            if (
-                name.value.length < 1 ||
-                lastname.value.length < 1 ||
-                (phoneNumber.value[0] !== '+' || !/^\+\d*$/.test(phoneNumber.value)) ||
-                !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email.value) ||
-                password.value.length < 8 ||
-                password.value !== confirmPassword.value){
-                    return false;
-                }else{
-                    return true;
-                }
-        }
-
-
-
     </script>
-
 @endsection
