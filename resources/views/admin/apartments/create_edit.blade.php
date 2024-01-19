@@ -252,17 +252,6 @@
         </form>
     </div>
 
-    <style>
-        #list-search {
-            position: absolute;
-            z-index: 3;
-            top: 100%;
-            width: 100%;
-            padding-left: 0.7rem;
-            padding-right: 0.7rem;
-        }
-    </style>
-
     <script>
         // ------------------------------------------------------------------------------
         // IMAGE PREVIEW
