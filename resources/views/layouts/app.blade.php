@@ -33,9 +33,12 @@
                 <div class="row w-100">
 
                     <div class="col-4 left">
-                        <router-link class="nav-link btn fw-bold" :to="{ name: 'Home' }" href="#">
+                        {{-- <router-link class="nav-link btn fw-bold" :to="{ name: 'Home' }" href="#">
                             <img class="logo-header" src="/logo (1).png" alt="logo (1).png" />
-                        </router-link>
+                        </router-link> --}}
+                        <a href="http://localhost:5000/">
+                            <img class="logo-header" src="/logo (1).png" alt="logo (1).png" />
+                        </a>
                     </div>
 
                     <div class="col-4 middle">
