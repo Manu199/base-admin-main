@@ -28,42 +28,11 @@
 <body>
     <div id="app">
 
-        <nav class="navbar">
-            <div class="container">
-                <div class="row w-100">
 
-                    <div class="col-4 left">
-                        {{-- <router-link class="nav-link btn fw-bold" :to="{ name: 'Home' }" href="#">
-                            <img class="logo-header" src="/logo (1).png" alt="logo (1).png" />
-                        </router-link> --}}
-                        <a href="http://localhost:5000/">
-                            <img class="logo-header" src="/logo (1).png" alt="logo (1).png" />
-                        </a>
-                    </div>
-
-                    <div class="col-4 middle">
-                        <a href="http://localhost:5000/ricerca-avanzata">
-                            <div class="_btn">Ricerca Avanzata</div>
-                        </a>
-                    </div>
-
-                    <div class="col-4 right">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="http://127.0.0.1:8000/login">Accedi</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="http://127.0.0.1:8000/register">Registrati</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-        </nav>
 
 
         <main class="">
+            @include('admin.partials.header')
             @yield('content')
         </main>
     </div>

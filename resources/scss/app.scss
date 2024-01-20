@@ -58,16 +58,15 @@ nav {
             display: flex;
             flex-direction: row;
             margin-right: 20px;
-            .nav-item {
+            a {
                 color: rgba(0, 0, 0, 0.822);
                 padding-left: 0;
                 padding-right: 0;
-            }
-            .nav-item:hover {
-                background-color: transparent;
-                color: black;
-                border-radius: 0;
-                box-shadow: 0 2px 0 0 #17c499;
+
+                &:hover {
+                    color: black;
+                    box-shadow: 0 2px 0 0 #17c499;
+                }
             }
         }
 

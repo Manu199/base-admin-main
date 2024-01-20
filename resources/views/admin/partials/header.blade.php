@@ -1,65 +1,58 @@
 <header>
     <nav class="navbar">
         <div class="container">
-            <div class="row w-100">
 
-                <nav class="navbar navbar-expand-lg w-100">
-                    <div class="container-fluid">
-                        <a class="navbar-brand" href="http://localhost:5000/">
-                            <img class="logo-header" src="/logo (1).png" alt="logo (1).png" />
+            <nav class="navbar navbar-expand-lg w-100 justify-content-between">
+                <a class="navbar-brand" href="http://localhost:5000/">
+                    <img class="logo-header" src="/logo (1).png" alt="logo (1).png" />
+                </a>
+
+                <div class="d-flex">
+                    <ul class="navbar-nav">
+                        <li>
+                            <a class="nav-link text-black" href="http://localhost:5000/ricerca-avanzata">
+                                Ricerca Avanzata
+                            </a>
+                        </li>
+                        <li>
+                            <a class="nav-link text-black" href="{{ route('admin.apartment.index') }}">Lista
+                                Appartamenti</a>
+                        </li>
+                        <li>
+                            <a class="nav-link text-black" href="{{ route('admin.apartment.create') }}">Nuovo
+                                Appartamento</a>
+                        </li>
+                    </ul>
+
+
+                    <div class="collapse navbar-collapse d-flex justify-content-end"
+                        aria-labelledby="navbarDropdown"id="navbarNavDarkDropdown">
+
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle user-name" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->name }}
                         </a>
-
-                        <div class="d-flex">
-                            <ul class="navbar-nav">
-                                <li class="dropdown-item">
-                                    <a class="nav-link text-black nav-item"
-                                        href="http://localhost:5000/ricerca-avanzata">
-                                        Ricerca Avanzata
-                                    </a>
-                                </li>
-                                <li class="dropdown-item">
-                                    <a class="nav-link text-black nav-item"
-                                        href="{{ route('admin.apartment.index') }}">Lista
-                                        Appartamenti</a>
-                                </li>
-                                <li class="dropdown-item">
-                                    <a class="nav-link text-black nav-item"
-                                        href="{{ route('admin.apartment.create') }}">Nuovo
-                                        Appartamento</a>
-                                </li>
-                            </ul>
-
-
-                            <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNavDarkDropdown">
-
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle user-name" href="#"
-                                    role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                    v-pre>
-                                    {{ Auth::user()->name }}
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li class="dropdown-item">
+                                <a class="nav-link text-black" href="{{ url('profile') }}"><i
+                                        class="fa-solid fa-user me-2"></i>{{ __('Profilo') }}</a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a class="nav-link text-black" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="fa-solid fa-right-from-bracket me-2"></i>{{ __('Logout') }}
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li class="dropdown-item">
-                                        <a class="nav-link text-black" href="{{ url('profile') }}"><i
-                                                class="fa-solid fa-user me-2"></i>{{ __('Profilo') }}</a>
-                                    </li>
-                                    <li class="dropdown-item">
-                                        <a class="nav-link text-black" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            <i class="fa-solid fa-right-from-bracket me-2"></i>{{ __('Logout') }}
-                                        </a>
-                                    </li>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </ul>
+                            </li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </ul>
 
-                            </div>
-                        </div>
                     </div>
 
-                </nav>
+            </nav>
 
-                {{-- <div class="col-2 left">
+            {{-- <div class="col-2 left">
                     <router-link class="nav-link btn fw-bold" :to="{ name: 'Home' }" href="#">
                         <img class="logo-header" src="/logo (1).png" alt="logo (1).png" />
                     </router-link>
@@ -69,7 +62,7 @@
                 </div> --}}
 
 
-                {{-- <div class="dropdown">
+            {{-- <div class="dropdown">
 
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
                         menu
@@ -89,13 +82,13 @@
                         </li>
                     </ul>
                 </div> --}}
-                {{-- <div class="col-10 d-flex align-items-center justify-content-end right">
+            {{-- <div class="col-10 d-flex align-items-center justify-content-end right">
                         <button class="navbar-toggle d-md-none d-lg-none" type="button" data-bs-toggle="dropdown">
                             <i class="fa-solid fa-bars"></i>
                         </button>
                         --}}
-                {{-- dropdown utente --}}
-                {{-- <div class="nav-item dropdown d-flex align-items-center ms-2">
+            {{-- dropdown utente --}}
+            {{-- <div class="nav-item dropdown d-flex align-items-center ms-2">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::user()->name }}
@@ -111,8 +104,8 @@
                         </form>
                     </div>
                 </div>  --}}
-                {{-- </div> --}}
-            </div>
+            {{-- </div> --}}
+        </div>
         </div>
     </nav>
 </header>
