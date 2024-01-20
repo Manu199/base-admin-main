@@ -12,30 +12,32 @@
                         <div class="d-flex">
                             <ul class="navbar-nav">
                                 <li class="dropdown-item">
-                                    <a class="nav-link text-black" href="http://localhost:5000/ricerca-avanzata">
+                                    <a class="nav-link text-black nav-item"
+                                        href="http://localhost:5000/ricerca-avanzata">
                                         Ricerca Avanzata
                                     </a>
                                 </li>
                                 <li class="dropdown-item">
-                                    <a class="nav-link text-black" href="{{ route('admin.apartment.index') }}">Lista
+                                    <a class="nav-link text-black nav-item"
+                                        href="{{ route('admin.apartment.index') }}">Lista
                                         Appartamenti</a>
                                 </li>
                                 <li class="dropdown-item">
-                                    <a class="nav-link text-black" href="{{ route('admin.apartment.create') }}">Nuovo
+                                    <a class="nav-link text-black nav-item"
+                                        href="{{ route('admin.apartment.create') }}">Nuovo
                                         Appartamento</a>
                                 </li>
                             </ul>
 
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                                aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
+
                             <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNavDarkDropdown">
 
-                                <button class="btn" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa-solid fa-bars"></i>
-                                </button>
-                                <ul class="dropdown-menu">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle user-name" href="#"
+                                    role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
                                     <li class="dropdown-item">
                                         <a class="nav-link text-black" href="{{ url('profile') }}"><i
                                                 class="fa-solid fa-user me-2"></i>{{ __('Profilo') }}</a>
@@ -54,10 +56,7 @@
                             </div>
                         </div>
                     </div>
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        {{ Auth::user()->name }}
-                    </a>
+
                 </nav>
 
                 {{-- <div class="col-2 left">
@@ -100,7 +99,7 @@
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{ Auth::user()->name }}
-                    </a>
+                            </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{ url('profile') }}">{{ __('Profilo') }}</a>
                         <a class="dropdown-item" href="{{ route('logout') }}"

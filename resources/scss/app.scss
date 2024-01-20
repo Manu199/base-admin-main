@@ -43,94 +43,40 @@ p{
 // HEADER
 
 nav {
-    .left {
-      display: flex;
-      align-items: center;
-      justify-content: start;
-      .logo-header {
-        width: 150px;
-      }
+
+    .logo-header{
+        width: 120px;
     }
-    .middle {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      a {
-        text-decoration: none;
-        ._btn {
-          background-color: #10D1A0;
-          padding: 3px 10px 3px 10px;
-          border-radius: 5px;
-          color: white;
-        }
-        ._btn:hover {
-          transform: scale(1.1);
-        }
-      }
+
+    .user-name {
+        padding: 5px 10px;
+        border: 2px solid #17c499;
+        border-radius: 5px;
     }
-    .right {
-      display: flex;
-      align-items: center;
-      justify-content: end;
+
         .navbar-nav {
             display: flex;
             flex-direction: row;
+            margin-right: 20px;
             .nav-item {
-                padding-right: 12px;
-                padding-left: 12px;
-                margin: 0px 5px 0px 5px;
+                color: rgba(0, 0, 0, 0.822);
+                padding-left: 0;
+                padding-right: 0;
             }
             .nav-item:hover {
-                transform: scale(1.1);
+                background-color: transparent;
+                color: black;
+                border-radius: 0;
+                box-shadow: 0 2px 0 0 #17c499;
             }
         }
-        .new-apartment {
-            background-color: #10D1A0;
-            border-radius: 5px;
-                a {
-                    color: white;
-                }
-        }
+
         .dropdown {
             margin-left: 5px;
         }
     }
-}
 
-.navBar{
-    width: 100%
-}
 
-.logo-header{
-    width: 120px;
-}
-
-.btn-header{
-    background-color: transparent;
-    color: rgba(0, 0, 0, 0.822);
-    padding-left: 0;
-    padding-right: 0;
-    padding-bottom: 0;
-}
-
-.btn-header:hover , .btn-header.active{
-    background-color: transparent;
-    color: black;
-    border-radius: 0;
-    box-shadow: 0 2px 0 0 #17c499;
-}
-
-.btn-header-2{
-    background-color: #10D1A0;
-    color: white;
-    border-radius: 5px;
-}
-
-.btn-header-2:hover, .btn-header-2.active{
-    background-color: #48bb9e;
-    color: white;
-    border-radius: 5px;
-}
 
 // LOGIN CARD SIZE
 
