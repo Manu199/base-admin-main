@@ -61,9 +61,14 @@ class ApartmentController extends Controller
         $lat = $request->query('lat');
         $lon = $request->query('lon');
         $radius = $request->query('radius');
-        $minRooms = $request->query('minRooms');
-        $minBeds = $request->query('minBeds');
-        $services = explode(" ", $request->query('services'));
+        $minRooms = $request->query('minRooms') ?? 1;
+        $minBeds = $request->query('minBeds') ?? 1;
+        $services = $request->query('services') ? explode(" ", $request->query('services')) : [];
+
+        if (!$lat || !$lon || !$radius) {
+            // Almeno uno dei valori obbligatori manca
+            return response()->json(['error' => 'Almeno uno dei parametri obbligatori manca.'], 400);
+        }
 
         $circle_radius = 6371;
 
