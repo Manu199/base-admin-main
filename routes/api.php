@@ -26,4 +26,4 @@ Route::get('/searchapartment-advanced', [ApartmentController::class, 'getApartme
 Route::get('/services', [ApartmentController::class, 'getAllServices']);
 Route::get('/apartment/{slug}', [ApartmentController::class, 'getApartment']);
 
-Route::post('/ricevi-messaggio', [MessageController::class, 'getMessage']);
+Route::post('/send-message', [MessageController::class, 'getMessage']);

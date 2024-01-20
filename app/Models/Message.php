@@ -17,6 +17,7 @@ class Message extends Model
         'name',
         'email_sender',
         'text',
-        'date'
+        'date',
+        'apartment_id'
     ];
 }
