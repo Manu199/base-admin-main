@@ -40,7 +40,8 @@
                             <li class="dropdown-item">
                                 <a class="nav-link text-black" href="{{ route('logout') }}"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    <i class="fa-solid fa-right-from-bracket me-2"></i>{{ __('Logout') }}
+                                    <i
+                                        class="fa-solid fa-right-from-bracket fa-flip-horizontal me-2"></i>{{ __('Logout') }}
                                 </a>
                             </li>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
