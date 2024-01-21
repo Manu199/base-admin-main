@@ -84,7 +84,7 @@ class ApartmentController extends Controller
         ]);
     }
 
-    public function getApartment($slug)
+    public function getApartmentFromSlug($slug)
     {
         $apartment = Apartment::where('slug', $slug)->with('services')->first();
         $apartment->user->makeHidden(['date_of_birth', 'phone_number']);

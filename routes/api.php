@@ -21,9 +21,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/apartments', [ApartmentController::class, 'index']);
-Route::get('/searchapartment', [ApartmentController::class, 'getApartments']);
-Route::get('/searchapartment-advanced', [ApartmentController::class, 'getApartmentsAdvanced']);
+Route::get('/search-apartments', [ApartmentController::class, 'getApartments']);
 Route::get('/services', [ApartmentController::class, 'getAllServices']);
-Route::get('/apartment/{slug}', [ApartmentController::class, 'getApartment']);
+Route::get('/apartment/{slug}', [ApartmentController::class, 'getApartmentFromSlug']);
 
 Route::post('/send-message', [MessageController::class, 'getMessage']);
