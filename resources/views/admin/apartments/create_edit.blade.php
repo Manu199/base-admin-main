@@ -3,7 +3,7 @@
 @section('content')
     <div class="create-edit-apartment">
 
-        <form action="{{ $route }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ $route }}" method="POST" id="form-create-edit" enctype="multipart/form-data">
             @csrf
             @method($method)
 
@@ -425,6 +425,23 @@
             }
         });
 
+        // Image Path
+        const imagePath = document.getElementById('image-input');
+        imagePath.addEventListener('input', function() {
+            const allowedExtensions = ['.jpg', '.jpeg', '.png'];
+            const isValidExtension = allowedExtensions.some(ext => imagePath.value.endsWith(ext));
+
+            if (!isValidExtension || (imagePath.hasAttribute('required') && imagePath.files.length === 0)) {
+                imagePath.classList.add('is-invalid');
+                imagePath.classList.remove('is-valid');
+                imagePath.setCustomValidity('Inserisci un file con estensione .jpg, .jpeg o .png');
+            } else {
+                imagePath.classList.add('is-valid');
+                imagePath.classList.remove('is-invalid');
+                imagePath.setCustomValidity('');
+            }
+        });
+
         // services
         const serviceContainer = document.getElementById('services-container');
         const serviceCheckboxes = document.querySelectorAll('input[name="services[]"]');
@@ -432,6 +449,10 @@
 
         // Aggiungo un ascoltatore per l'evento change sull'elemento contenitore dei servizi
         serviceContainer.addEventListener('change', function() {
+            serviceControllerSuccess();
+        });
+
+        function serviceControllerSuccess(){
             let selectedCount = 0;
 
             // Ciclo tutte le checkbox dei servizi
@@ -445,10 +466,19 @@
             // Verifico se almeno una checkbox è stata selezionata
             if(selectedCount < 1){
                 serviceError.textContent = 'Seleziona almeno un servizio';
+                return false;
             }else{
                 serviceError.textContent = '';
+                return true;
             }
-        });
+        }
+
+        const formCreateEdit = document.getElementById('form-create-edit');
+        formCreateEdit.addEventListener('submit', function(event){
+            if(!serviceControllerSuccess()){
+                event.preventDefault();
+            }
+        })
 
     </script>
 
