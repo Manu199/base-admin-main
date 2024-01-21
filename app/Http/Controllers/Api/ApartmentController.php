@@ -33,41 +33,17 @@ class ApartmentController extends Controller
         $lat = $request->query('lat');
         $lon = $request->query('lon');
         $radius = $request->query('radius');
-
-        $circle_radius = 6371;
-
-        $apartments = Apartment::with('services', 'type')
-            ->select(['apartments.*', DB::raw("($circle_radius * ACOS(COS(RADIANS($lat)) * COS(RADIANS(apartments.lat)) * COS(RADIANS(apartments.lon) - RADIANS($lon)) + SIN(RADIANS($lat)) * SIN(RADIANS(apartments.lat)))) AS distance")])
-            ->where('visible', 1)
-            ->having('distance', '<', $radius)
-            ->orderBy('distance')
-            ->get();
-
-        foreach ($apartments as $apartment) {
-            $apartment['image_path'] = asset('storage/uploads/' . $apartment['image_path']);
-        }
-
-        $apartments->makeHidden(['address', 'lat', 'lon']);
-
-        return response()->json([
-            'result' => 'success',
-            'num_result' => count($apartments),
-            'data' => $apartments,
-        ]);
-    }
-
-    public function getApartmentsAdvanced(Request $request)
-    {
-        $lat = $request->query('lat');
-        $lon = $request->query('lon');
-        $radius = $request->query('radius');
         $minRooms = $request->query('minRooms') ?? 1;
         $minBeds = $request->query('minBeds') ?? 1;
         $services = $request->query('services') ? explode(" ", $request->query('services')) : [];
 
         if (!$lat || !$lon || !$radius) {
             // Almeno uno dei valori obbligatori manca
-            return response()->json(['error' => 'Almeno uno dei parametri obbligatori manca.'], 400);
+            return response()->json([
+                'result' => 'failed',
+                'num_result' => 0,
+                'data' => [],
+            ]);
         }
 
         $circle_radius = 6371;
@@ -111,13 +87,8 @@ class ApartmentController extends Controller
     public function getApartment($slug)
     {
         $apartment = Apartment::where('slug', $slug)->with('services')->first();
-
-        $apartment['user'] = $apartment->user;
-
-        $apartment['user']->makeHidden(['date_of_birth', 'phone_number']);
-
+        $apartment->user->makeHidden(['date_of_birth', 'phone_number']);
         $apartment['image_path'] = asset('storage/uploads/' . $apartment['image_path']);
-
         return response()->json($apartment);
     }
 }
