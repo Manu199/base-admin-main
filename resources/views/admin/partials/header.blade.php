@@ -24,32 +24,33 @@
                         </li>
                     </ul>
 
+                    @auth
+                        <div class="collapse navbar-collapse d-flex justify-content-end"
+                            aria-labelledby="navbarDropdown"id="navbarNavDarkDropdown">
 
-                    <div class="collapse navbar-collapse d-flex justify-content-end"
-                        aria-labelledby="navbarDropdown"id="navbarNavDarkDropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle user-name" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->name }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li class="dropdown-item">
+                                    <a class="nav-link text-black" href="{{ url('profile') }}"><i
+                                            class="fa-solid fa-user me-2"></i>{{ __('Profilo') }}</a>
+                                </li>
+                                <li class="dropdown-item">
+                                    <a class="nav-link text-black" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <i
+                                            class="fa-solid fa-right-from-bracket fa-flip-horizontal me-2"></i>{{ __('Logout') }}
+                                    </a>
+                                </li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </ul>
 
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle user-name" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }}
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li class="dropdown-item">
-                                <a class="nav-link text-black" href="{{ url('profile') }}"><i
-                                        class="fa-solid fa-user me-2"></i>{{ __('Profilo') }}</a>
-                            </li>
-                            <li class="dropdown-item">
-                                <a class="nav-link text-black" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    <i
-                                        class="fa-solid fa-right-from-bracket fa-flip-horizontal me-2"></i>{{ __('Logout') }}
-                                </a>
-                            </li>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </ul>
-
-                    </div>
+                        </div>
+                    @endauth
 
             </nav>
 
