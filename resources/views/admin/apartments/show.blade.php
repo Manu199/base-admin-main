@@ -210,6 +210,7 @@
                             console.log(response);
                             if (response.success) {
                                 alert('Payment successfull!');
+                                location.reload();
                             } else {
                                 alert('Payment failed');
                             }
@@ -217,18 +218,6 @@
                     }
                 });
             });
-        });
-    </script>
-
-
-
-    <!-- Includi jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-
-    <!-- Inizializza i tooltip utilizzando JavaScript -->
-    <script>
-        $(document).ready(function () {
-            $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
 @endsection
