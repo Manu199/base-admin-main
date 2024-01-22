@@ -13,6 +13,8 @@
                             <div class="card">
                                 <img src="{{ asset('storage/uploads/' . $apartment->image_path) }}"
                                     class="card-img-top rounded rounded-4" alt="Appartamento">
+                                    <i class="far fa-eye text-white position-absolute"></i> <!-- Icona occhio chiuso -->
+                                    <i class="far fa-eye-slash text-white position-absolute" style="display: none"></i> <!-- Icona occhio aperto -->
                                 <div class="card-body">
                                     <h6 class="card-title single-line-ellipsis fw-bold">{{ $apartment->title }}</h6>
                                     <p class="card-text single-line-ellipsis">{{ $apartment->address }}</p>

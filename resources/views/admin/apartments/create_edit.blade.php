@@ -12,19 +12,15 @@
 
                 {{-- TOOGLE VISIBLE --}}
                 <div class="form-check form-switch position-absolute bottom-0 end-0">
-                    <input
-                        class="form-check-input"
-                        type="checkbox"
-                        role="switch"
-                        id="flexSwitchCheckDefault"
-                        name="visible" value="1"
-                        {{-- create first time --}}
-                        @if (!$errors->count() && $apartment === null) checked @endif
-                        {{-- no errori, edit --}}
-                        @if (!$errors->count() && $apartment?->visible) checked @endif
-                        {{-- errori, old data --}}
-                        @if ($errors->count() && old('visible')) checked @endif>
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Visibile</label>
+
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="visible"
+                        value="1">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">
+                        <i class="far fa-eye"></i> <!-- Icona occhio chiuso -->
+                        <i class="far fa-eye-slash"></i> <!-- Icona occhio aperto -->
+                        Visibile
+                    </label>
+
                 </div>
             </div>
 
@@ -34,12 +30,8 @@
                         {{-- TITLE --}}
                         <div class="row">
                             <div class="form-floating mb-3">
-                                <input required
-                                    type="text"
-                                    class="form-control @error('title') is-invalid @enderror"
-                                    id="title"
-                                    name="title"
-                                    placeholder="title"
+                                <input required type="text" class="form-control @error('title') is-invalid @enderror"
+                                    id="title" name="title" placeholder="title"
                                     value="{{ old('title', $apartment?->title) }}">
                                 <label class="left-initial" for="title">Titolo</label>
                                 @error('title')
@@ -51,12 +43,8 @@
                         {{-- DESCRIPTION --}}
                         <div class="row">
                             <div class="form-floating mb-3">
-                                <textarea
-                                    style="height:200px;"
-                                    class="form-control @error('description') is-invalid @enderror"
-                                    id="description"
-                                    name="description"
-                                    placeholder="description">{{ old('description', $apartment?->description) }}</textarea>
+                                <textarea style="height:200px;" class="form-control @error('description') is-invalid @enderror" id="description"
+                                    name="description" placeholder="description">{{ old('description', $apartment?->description) }}</textarea>
                                 <label class="left-initial" for="description">Descrizione</label>
                                 @error('description')
                                     <p class="text-danger">{{ $message }}</p>
@@ -67,12 +55,8 @@
                         {{-- PRICE --}}
                         <div class="row">
                             <div class="form-floating">
-                                <input required
-                                    type="number"
-                                    class="form-control @error('price') is-invalid @enderror"
-                                    id="price"
-                                    name="price"
-                                    placeholder="price"
+                                <input required type="number" class="form-control @error('price') is-invalid @enderror"
+                                    id="price" name="price" placeholder="price"
                                     value="{{ old('price', $apartment?->price) }}">
                                 <label class="left-initial" for="price">Prezzo</label>
                                 @error('price')
@@ -87,12 +71,8 @@
                         {{-- ADDRESS --}}
                         <div class="row position-relative">
                             <div class="form-floating">
-                                <input required
-                                    type="text"
-                                    class="form-control @error('address') is-invalid @enderror"
-                                    id="address"
-                                    name="address"
-                                    placeholder="address"
+                                <input required type="text" class="form-control @error('address') is-invalid @enderror"
+                                    id="address" name="address" placeholder="address"
                                     value="{{ old('address', $apartment?->address) }}">
                                 <label class="left-initial" for="address">Indirizzo</label>
                                 @error('address')
@@ -111,12 +91,9 @@
                             {{-- SQUARE METERS --}}
                             <div class="col">
                                 <div class="form-floating">
-                                    <input required
-                                        type="number"
-                                        class="form-control @error('square_meters') is-invalid @enderror"
-                                        id="square_meters"
-                                        name="square_meters"
-                                        placeholder="square_meters"
+                                    <input required type="number"
+                                        class="form-control @error('square_meters') is-invalid @enderror" id="square_meters"
+                                        name="square_meters" placeholder="square_meters"
                                         value="{{ old('square_meters', $apartment?->square_meters) }}">
                                     <label class="left-initial" for="square_meters">Mq</label>
                                     @error('square_meters')
@@ -128,12 +105,9 @@
                             {{-- NUM of ROOM --}}
                             <div class="col">
                                 <div class="form-floating">
-                                    <input required
-                                        type="number"
-                                        class="form-control @error('num_of_room') is-invalid @enderror"
-                                        id="num_of_room"
-                                        name="num_of_room"
-                                        placeholder="num_of_room"
+                                    <input required type="number"
+                                        class="form-control @error('num_of_room') is-invalid @enderror" id="num_of_room"
+                                        name="num_of_room" placeholder="num_of_room"
                                         value="{{ old('num_of_room', $apartment?->num_of_room) }}">
                                     <label class="left-initial" for="num_of_room">Stanze</label>
                                     @error('num_of_room')
@@ -145,12 +119,9 @@
                             {{-- NUM of BED --}}
                             <div class="col">
                                 <div class="form-floating">
-                                    <input required
-                                        type="number"
-                                        class="form-control @error('num_of_bed') is-invalid @enderror"
-                                        id="num_of_bed"
-                                        name="num_of_bed"
-                                        placeholder="num_of_bed"
+                                    <input required type="number"
+                                        class="form-control @error('num_of_bed') is-invalid @enderror" id="num_of_bed"
+                                        name="num_of_bed" placeholder="num_of_bed"
                                         value="{{ old('num_of_bed', $apartment?->num_of_bed) }}">
                                     <label class="left-initial" for="num_of_bed">Letti</label>
                                     @error('num_of_bed')
@@ -162,12 +133,9 @@
                             {{-- NUM of BATHROOM --}}
                             <div class="col">
                                 <div class="form-floating">
-                                    <input required
-                                        type="number"
+                                    <input required type="number"
                                         class="form-control @error('num_of_bathroom') is-invalid @enderror"
-                                        id="num_of_bathroom"
-                                        name="num_of_bathroom"
-                                        placeholder="num_of_bathroom"
+                                        id="num_of_bathroom" name="num_of_bathroom" placeholder="num_of_bathroom"
                                         value="{{ old('num_of_bathroom', $apartment?->num_of_bathroom) }}">
                                     <label class="left-initial" for="num_of_bathroom">Bagni</label>
                                     @error('num_of_bathroom')
@@ -188,24 +156,19 @@
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3 position-relative">
-                                    <img
-                                        id="image-preview"
-                                        class="img-fluid rounded"
+                                    <img id="image-preview" class="img-fluid rounded"
                                         onerror="this.src ='{{ asset('img/placeholder.png') }}'"
                                         src="{{ $tempPath ? asset('storage/temp/' . $tempPath) : asset('storage/uploads/' . $apartment?->image_path) }}"
                                         alt="image">
                                 </div>
 
                                 <!-- Input  nascosto per memorizzare il percorso del file -->
-                                <input type="hidden" name="tempImagePath" id="hiddenFilePath" value="{{ $tempPath }}">
+                                <input type="hidden" name="tempImagePath" id="hiddenFilePath"
+                                    value="{{ $tempPath }}">
 
-                                <input
-                                    @if (!$apartment?->image_path) required @endif
-                                    accept=".jpg, .jpeg, .png"
-                                    type="file"
-                                    class="form-control @error('image_path') is-invalid @enderror"
-                                    id="image-input"
-                                    name="image_path">
+                                <input @if (!$apartment?->image_path) required @endif accept=".jpg, .jpeg, .png"
+                                    type="file" class="form-control @error('image_path') is-invalid @enderror"
+                                    id="image-input" name="image_path">
                                 @error('image_path')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -219,19 +182,14 @@
                             <div id="services-container" role="group" aria-label="Basic checkbox toggle button group">
 
                                 @foreach ($services as $service)
-                                    <input
-                                        type="checkbox"
-                                        class="btn-check btn-check-custom"
-                                        id="btncheck{{ $service->id }}"
-                                        value="{{ $service->id }}"
-                                        name="services[]"
-                                        {{-- $errors->count() mi restituisce quanti errori ci sono stati --}}
-                                        {{-- se non ci sono errori, devo checkare solo se mi trovo nell'edit --}}
-                                        @if (!$errors->count() && $apartment?->services->contains($service->id)) checked @endif
-                                        {{-- se ci sono errori, devo checkare i vecchi elementi passati dall'old --}}
+                                    <input type="checkbox" class="btn-check btn-check-custom"
+                                        id="btncheck{{ $service->id }}" value="{{ $service->id }}" name="services[]"
+                                        {{-- $errors->count() mi restituisce quanti errori ci sono stati --}} {{-- se non ci sono errori, devo checkare solo se mi trovo nell'edit --}}
+                                        @if (!$errors->count() && $apartment?->services->contains($service->id)) checked @endif {{-- se ci sono errori, devo checkare i vecchi elementi passati dall'old --}}
                                         @if ($errors->count() && in_array($service->id, old('services', []))) checked @endif>
 
-                                    <label class="badge btn badge-custom px-3 py-1 m-1" for="{{ 'btncheck' . $service->id }}">
+                                    <label class="badge btn badge-custom px-3 py-1 m-1"
+                                        for="{{ 'btncheck' . $service->id }}">
                                         {!! $service['name'] !!}
                                     </label>
                                 @endforeach
@@ -259,4 +217,20 @@
 
     @stack('createEditClienValidateAp')
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var switchInput = document.getElementById('flexSwitchCheckDefault');
+            var iconOpen = document.querySelector('.form-check-label .fa-eye');
+            var iconClosed = document.querySelector('.form-check-label .fa-eye-slash');
+
+            switchInput.addEventListener('change', function() {
+                iconOpen.style.display = switchInput.checked ? 'inline' : 'none';
+                iconClosed.style.display = switchInput.checked ? 'none' : 'inline';
+            });
+
+            // Inizializza lo stato iniziale
+            iconOpen.style.display = switchInput.checked ? 'none' : 'inline';
+            iconClosed.style.display = switchInput.checked ? 'inline' : 'none';
+        });
+    </script>
 @endsection

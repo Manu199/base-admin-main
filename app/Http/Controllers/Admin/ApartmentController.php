@@ -4,12 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Functions\Helper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\ApartmentRequest;
 use App\Models\Apartment;
 use App\Models\Service;
+use App\Models\Sponsor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -192,7 +191,9 @@ class ApartmentController extends Controller
         if ($apartment->user_id != Auth::id()) {
             abort(404);
         }
-        return view('admin.apartments.show', compact('apartment'));
+
+        $sponsors = Sponsor::all();
+        return view('admin.apartments.show', compact('apartment','sponsors'));
     }
 
     /**
