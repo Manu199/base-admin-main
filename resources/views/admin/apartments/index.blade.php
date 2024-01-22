@@ -12,14 +12,38 @@
                         <a class="text-decoration-none" href="{{ route('admin.apartment.show', $apartment) }}">
                             <div class="card">
 
+                                <style lang="scss">
+                                        .visible-badge{
+                                            position: absolute;
+                                            bottom: 10px;
+                                            right: 10px;
+                                            width: 32px;
+                                            height: 32px;
+                                            border-radius: 50%;
+                                            display: flex;
+                                            justify-content: center;
+                                            align-items: center;
+                                        }
+                                        .sponsor-badge{
+                                            position: absolute;
+                                            top: 0;
+                                            left: -50%;
+
+                                            width: 100px;
+                                            height: 32px;
+                                            transform: translate(-50%) rotate(-45deg)
+                                        }
+                                </style>
+
                                 <div class="position-relative">
                                     <img src="{{ asset('storage/uploads/' . $apartment->image_path) }}"
                                         class="card-img-top rounded rounded-4" alt="Appartamento">
-                                    <i class="far fa-eye-slash text-white position-absolute @if ($apartment->visible) invisible @endif bg-success rounded rounded-3 p-1"
-                                        style="bottom: 10px; right: 10px"></i>
-                                    <i class="far fa-eye text-white position-absolute
-                                    @unless ($apartment->visible) invisible @endif bg-success rounded rounded-3 p-1"
-                                        style="bottom: 10px; right: 10px;"></i>
+                                    <div class="visible-badge text-bg-success">
+                                        <i class="far {{ $apartment->visible ? 'fa-eye' : 'fa-eye-slash' }} p-1" ></i>
+                                    </div>
+                                    <div class="sponsor-badge text-bg-warning">
+                                        ciao
+                                    </div>
                                 </div>
 
                                 <div class="card-body">
