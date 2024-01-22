@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ApartmentController;
+use App\Http\Controllers\Admin\PaymentsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
@@ -35,6 +36,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth','verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('apartment', ApartmentController::class);
+    Route::get('/payment-process',[PaymentsController::class, 'process'])->name('payment.process');
 });
 
 
