@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Apartment;
+use App\Models\Sponsor;
 use Braintree\Transaction;
+use Illuminate\Support\Facades\DB;
 
 class PaymentsController extends Controller
 {
@@ -19,13 +22,27 @@ class PaymentsController extends Controller
         $nonce = $payload['nonce'];
 
         // controllare se nella mia tabella Apartment/sponsor, se c'è una sposorizazione attiva if(now >= dataExpired || no dataExpired)
+        // apartment_sponsor->where
+        $latestExpirationDate = DB::table('apartment_sponsor')
+            ->where('apartment_id', $idApartment)
+            // ->orderBy('expiration_date', 'desc') /* se uso il sync, nn ho bisogno dell'orderBy */
+            ->value('expiration_date');
 
+        $apartment = Apartment::find($idApartment);
+        $sponsor = Sponsor::find($idSponsor);
 
-        // vero
-        // attach nella tabella Apartment/sponsor, aggiungere calc dataExpired = now + durata
+        if (strtotime($latestExpirationDate) <= time() || !$latestExpirationDate) {
+            // Data scaduta o nessuna data di scadenza presente
+            // Calcola la nuova data di scadenza come (data corrente + durata del sponsor)
+            $expirationDate = time() + ($sponsor->duration * 3600);
+        } else {
+            // Data di scadenza presente e non scaduta
+            // Calcola la nuova data di scadenza come (data di scadenza attuale + durata del sponsor)
+            $expirationDate = strtotime($latestExpirationDate) + ($sponsor->duration * 3600);
+        }
+        // Esegui il sync con la nuova data di scadenza
+        $apartment->sponsors()->sync([$idSponsor => ['expiration_date' => date('Y-m-d H:i:s', $expirationDate)]]);
 
-        // falso
-        // attach ... aggiungendo dataExpired+= durata
 
         $status = Transaction::sale([
         'amount' => $amount,

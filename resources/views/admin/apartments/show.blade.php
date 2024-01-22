@@ -19,9 +19,58 @@
 
         <h6>{{ $apartment->address }}</h6>
 
-        <div class="image">
+        <style>
+            .tooltip-container {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+            }
+
+            .tooltip-custom {
+                display: inline-block;
+                cursor: pointer;
+                position: relative;
+            }
+
+            .tooltip-text {
+                width: 200px;
+                background-color: #333;
+                color: #fff;
+                text-align: center;
+                border-radius: 4px;
+                padding: 5px;
+                position: absolute;
+                z-index: 1;
+                bottom: 50%;
+                left: 100%;
+                transform: translateY(50%);
+                opacity: 0;
+                transition: opacity 0.3s;
+            }
+
+            .tooltip-custom:hover .tooltip-text {
+                opacity: 1;
+            }
+        </style>
+
+        <div class="image position-relative">
             <img class="img-fluid" src="{{ asset('storage/uploads/' . $apartment->image_path) }}" alt="">
+            @if ($apartment->sponsors->count())
+                <div class="tooltip-container">
+                    <div class="tooltip-custom">
+                        <h4 class="text-bg-danger m-0 py-2 px-3">&dollar;</h4>
+                        <span class="tooltip-text">Sponsorizzato fino al: {{ $apartment->sponsors[0]->pivot->expiration_date }}</span>
+                    </div>
+                </div>
+            @endif
         </div>
+
+        {{-- <div class="image position-relative">
+            <img class="img-fluid" src="{{ asset('storage/uploads/' . $apartment->image_path) }}" alt="">
+            <div class="position-absolute bottom-0 end-0 py-2 px-3 text-bg-danger " data-toggle="tooltip" title="Questo è il mio tooltip su un div">
+                <h4 class="m-0">&dollar;</h4>
+            </div>
+        </div> --}}
 
         <p>&euro;{{ $apartment->price }},00/day</p>
 
@@ -60,17 +109,16 @@
                 </div>
             </div>
         </div>
-
     </div>
+
+    {{-- Modal delete apartment --}}
     @include('admin.partials.delete_apartment')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
     <script src="https://js.braintreegateway.com/web/dropin/1.8.1/js/dropin.min.js"></script>
 
     <script>
         const button = document.querySelector('#submit-button');
-
         braintree.dropin.create({
             authorization: "{{ Braintree\ClientToken::generate(); }}",
             container: '#dropin-container'
@@ -102,6 +150,17 @@
                 });
             });
         });
+    </script>
 
+
+
+    <!-- Includi jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <!-- Inizializza i tooltip utilizzando JavaScript -->
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
     </script>
 @endsection
