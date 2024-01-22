@@ -46,7 +46,7 @@
                                     role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                     v-pre></i>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ url('profile') }}">Area personale</a>
+                                    <a class="dropdown-item" href="{{ route('home') }}">Area personale</a>
 
                                     @if (Route::has('register'))
                                         <a class="dropdown-item" href="{{ route('register') }}">{{ __('Register') }}</a>
@@ -57,7 +57,7 @@
                                 </div>
                             </li>
                         @else
-                            <li class="nav-item dropdown ">
+                            <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle user-name" href="#"
                                     role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                     v-pre>
@@ -65,7 +65,8 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ url('profile') }}">Area personale</a>
+                                    <a class="dropdown-item" href="{{ route('home') }}">Area personale</a>
+                                    <a class="dropdown-item" href="{{ url('profile') }}">Profilo</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
@@ -98,6 +99,7 @@
                         </li>
 
                         <!-- Authentication Links -->
+
                         @guest
 
                             <li class="nav-item dropdown d-flex justify-content-end align-items-center">
@@ -146,6 +148,7 @@
                                         @csrf
                                     </form>
                                 </div>
+
                             </li>
                         @endguest
                     </ul>
