@@ -18,7 +18,7 @@
                                     <div class="visible-badge text-bg-success">
                                         <i class="far {{ $apartment->visible ? 'fa-eye' : 'fa-eye-slash' }} p-1" ></i>
                                     </div>
-                                    @if ($apartment->sponsors->count())
+                                    @if ($apartment->sponsors->count() && strtotime($apartment->sponsors[0]->pivot->expiration_date) >= strtotime(now()))
                                         <div class="sponsor-badge text-bg-warning">
                                             <span>Sponsorizzato</span>
                                         </div>

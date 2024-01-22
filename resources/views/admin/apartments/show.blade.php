@@ -2,148 +2,124 @@
 
 
 @section('content')
-    <div class="show-apartment">
-        <h1 class="text-center">Dettaglio Appartamento</h1>
 
-        <div class="d-flex align-items-center">
-            <h3 class=" d-inline-block">{{ $apartment->title }}</h3>
-            <a class="btn ms-3 border-black py-1" href="{{ route('admin.apartment.edit', $apartment) }}"><i
+    <div class="show-apartment">
+        <h1 class="text-center mb-3">Dettaglio Appartamento</h1>
+        <div class="d-flex align-items-center mb-3">
+            <h3 class=" d-inline-block m-0">{{ $apartment->title }}</h3>
+            <a class="btn border-black rounded rounded-5 mx-2" href="{{ route('admin.apartment.edit', $apartment) }}"><i
                     class="fa-solid fa-pen-to-square"></i></a>
 
             @include('admin.partials.delete_form', [
                 'route' => 'admin.apartment.destroy',
                 'element' => $apartment,
             ])
-
+        </div>
+        <div class="mb-3">
+            <h6>{{ $apartment->address }}</h6>
         </div>
 
-        <h6>{{ $apartment->address }}</h6>
+        <div class="row">
+            {{-- left --}}
+            <div class="col">
+                <div class="position-relative">
+                    <img class="img-fluid" src="{{ asset('storage/uploads/' . $apartment->image_path) }}" alt="">
+                    @if ($apartment->sponsors->count() && strtotime($apartment->sponsors[0]->pivot->expiration_date) >= strtotime(now()))
+                        <div class="popup-container">
+                            <h4 class="text-bg-danger m-0 py-2 px-3">&dollar;</h4>
+                            <span class="popup-text">Sponsorizzato fino al: {{ date('d/m/Y H:i', strtotime($apartment->sponsors[0]->pivot->expiration_date)) }}</span>
+                        </div>
+                    @endif
+                </div>
 
-        <div class="img-messages d-flex ">
-            <style>
-            .tooltip-container {
-                position: absolute;
-                bottom: 0;
-                right: 0;
-            }
+                <p>&euro;{{ $apartment->price }},00/notte</p>
 
-            .tooltip-custom {
-                display: inline-block;
-                cursor: pointer;
-                position: relative;
-            }
+                <p>{{ $apartment->num_of_room }} stanze &middot; {{ $apartment->num_of_bed }} letti &middot;
+                    {{ $apartment->num_of_bathroom }} bagni &middot;
+                    {{ $apartment->square_meters }} mq</p>
 
-            .tooltip-text {
-                width: 200px;
-                background-color: #333;
-                color: #fff;
-                text-align: center;
-                border-radius: 4px;
-                padding: 5px;
-                position: absolute;
-                z-index: 1;
-                bottom: 50%;
-                left: 100%;
-                transform: translateY(50%);
-                opacity: 0;
-                transition: opacity 0.3s;
-            }
+                <p>SERIVIZI</p>
+                @foreach ($apartment->services as $service)
+                    <span class="badge my-2 badge-custom"> {!! $service['name'] !!}</span>
+                @endforeach
 
-            .tooltip-custom:hover .tooltip-text {
-                opacity: 1;
-            }
-        </style>
-
-        <div class="image position-relative">
-                <img class="img-fluid" src="{{ asset('storage/uploads/' . $apartment->image_path) }}" alt="">
+                <p>{{ $apartment->description }}</p>
             </div>
 
-            <div class="card ms-5 w-50">
-                <div class="card-header">
-                    Messaggi in arrivo
-                </div>
-                <div class="card-body overflow-y-scroll">
-                    <ul>
-                        <li class="mb-3">
-                            <h6>TIZIO CAIO</h6>
-                            <p  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                Launch static backdrop modal
-                              </p>
+            {{-- right --}}
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        Messaggi in arrivo
+                    </div>
+                    <div class="card-body list-message">
+                        <ul>
+                            <li class="mb-3">
+                                <h6>TIZIO CAIO</h6>
+                                <p data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    Launch static backdrop modal
+                                </p>
 
-                              <!-- Modal -->
-                              <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                This is some placeholder content to show a vertically centered modal. We've
+                                                added some extra copy here to show how vertically centering the modal works when
+                                                combined with scrollable modals. We also use some repeated line breaks to
+                                                quickly extend the height of the content, thereby triggering the scrolling. When
+                                                content becomes longer than the predefined max-height of modal, content will be
+                                                cropped and scrollable within the modal.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Understood</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="modal-body">
-                                        This is some placeholder content to show a vertically centered modal. We've added some extra copy here to show how vertically centering the modal works when combined with scrollable modals. We also use some repeated line breaks to quickly extend the height of the content, thereby triggering the scrolling. When content becomes longer than the predefined max-height of modal, content will be cropped and scrollable within the modal.
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                      <button type="button" class="btn btn-primary">Understood</button>
-                                    </div>
-                                  </div>
                                 </div>
-                              </div>
-                        </li>
-                        <li class="mb-3">
-                            <h6>TIZIO CAIO</h6>
-                            <p>EMAIL</p>
-                            <p>
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati distinctio, reprehenderit quod ipsa esse doloremque enim, unde dolore ad voluptatum architecto iste at dicta quidem explicabo non quasi autem ipsam!
-                            </p>
-                        </li>
-                        <li class="mb-3">
-                            <h6>TIZIO CAIO</h6>
-                            <p>EMAIL</p>
-                            <p>
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati distinctio, reprehenderit quod ipsa esse doloremque enim, unde dolore ad voluptatum architecto iste at dicta quidem explicabo non quasi autem ipsam!
-                            </p>
-                        </li>
-                        <li class="mb-3">
-                            <h6>TIZIO CAIO</h6>
-                            <p>EMAIL</p>
-                            <p>
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati distinctio, reprehenderit quod ipsa esse doloremque enim, unde dolore ad voluptatum architecto iste at dicta quidem explicabo non quasi autem ipsam!
-                            </p>
-                        </li>
+                            </li>
+                            <li class="mb-3">
+                                <h6>TIZIO CAIO</h6>
+                                <p>EMAIL</p>
+                                <p>
+                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati distinctio,
+                                    reprehenderit quod ipsa esse doloremque enim, unde dolore ad voluptatum architecto iste at
+                                    dicta quidem explicabo non quasi autem ipsam!
+                                </p>
+                            </li>
+                            <li class="mb-3">
+                                <h6>TIZIO CAIO</h6>
+                                <p>EMAIL</p>
+                                <p>
+                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati distinctio,
+                                    reprehenderit quod ipsa esse doloremque enim, unde dolore ad voluptatum architecto iste at
+                                    dicta quidem explicabo non quasi autem ipsam!
+                                </p>
+                            </li>
+                            <li class="mb-3">
+                                <h6>TIZIO CAIO</h6>
+                                <p>EMAIL</p>
+                                <p>
+                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati distinctio,
+                                    reprehenderit quod ipsa esse doloremque enim, unde dolore ad voluptatum architecto iste at
+                                    dicta quidem explicabo non quasi autem ipsam!
+                                </p>
+                            </li>
 
-                    </ul>
-                </div>
-            </div>
-
-            @if ($apartment->sponsors->count())
-                <div class="tooltip-container">
-                    <div class="tooltip-custom">
-                        <h4 class="text-bg-danger m-0 py-2 px-3">&dollar;</h4>
-                        <span class="tooltip-text">Sponsorizzato fino al: {{ $apartment->sponsors[0]->pivot->expiration_date }}</span>
+                        </ul>
                     </div>
                 </div>
-            @endif
-        </div>
-
-        {{-- <div class="image position-relative">
-            <img class="img-fluid" src="{{ asset('storage/uploads/' . $apartment->image_path) }}" alt="">
-            <div class="position-absolute bottom-0 end-0 py-2 px-3 text-bg-danger " data-toggle="tooltip" title="Questo è il mio tooltip su un div">
-                <h4 class="m-0">&dollar;</h4>
             </div>
-        </div> --}}
-
-        <p>&euro;{{ $apartment->price }},00/day</p>
-
-        <p>{{ $apartment->num_of_room }} stanze &middot; {{ $apartment->num_of_bed }} letti &middot;
-            {{ $apartment->num_of_bathroom }} bagni &middot;
-            {{ $apartment->square_meters }} mq</p>
-
-        <p>SERIVIZI</p>
-        @foreach ($apartment->services as $service)
-            <span class="badge my-2 badge-custom"> {!! $service['name'] !!}</span>
-        @endforeach
-
-        <p>{{ $apartment->description }}</p>
+        </div>
 
         {{-- SPONSORIZZAZIONE --}}
         <div class="my-3">
@@ -158,7 +134,7 @@
                     </h2>
                     <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample"
                         style="">
-                        <div class="my-3 d-flex justify-content-evenly">
+                        <div class="container-sponsor d-flex justify-content-evenly">
                             @foreach ($sponsors as $sponsor)
                                 <div>
                                     <input class="form-check-input" @if ($sponsor->id === 1) checked @endif

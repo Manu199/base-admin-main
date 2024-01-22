@@ -1,5 +1,47 @@
 .show-apartment {
-    .image{
-        width: 50%;
+    .popup-container {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        &:hover .popup-text{
+            opacity: 1;
+
+        }
+    }
+
+    .popup-text {
+        opacity: 0;
+        width: 160px;
+        background-color: #555;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 8px 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -80px;
+        transition: 0.7s;
+    }
+
+    .popup-text::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #555 transparent transparent transparent;
+    }
+
+    .list-message{
+        overflow-y: auto;
+        max-height: 600px;
+    }
+
+    .container-sponsor{
+        margin-top: 32px;
     }
 }

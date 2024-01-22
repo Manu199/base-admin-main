@@ -6,7 +6,7 @@
 
     @csrf
     @method('DELETE')
-    <button class="btn btn-custom border-black ms-1 py-1" type="button" onclick="mostrareMessaggio()">
+    <button class="btn btn-custom border-black rounded rounded-5" type="button" onclick="mostrareMessaggio()">
         <i class="fa-solid fa-trash-can"></i>
     </button>
 </form>
