@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+
     <div class="apartment-list">
         <h1 class="text-center">I tuoi Appartamenti</h1>
 
@@ -11,39 +12,17 @@
                         {{-- link alla show dell'appartamento --}}
                         <a class="text-decoration-none" href="{{ route('admin.apartment.show', $apartment) }}">
                             <div class="card">
-
-                                <style lang="scss">
-                                        .visible-badge{
-                                            position: absolute;
-                                            bottom: 10px;
-                                            right: 10px;
-                                            width: 32px;
-                                            height: 32px;
-                                            border-radius: 50%;
-                                            display: flex;
-                                            justify-content: center;
-                                            align-items: center;
-                                        }
-                                        .sponsor-badge{
-                                            position: absolute;
-                                            top: 0;
-                                            left: -50%;
-
-                                            width: 100px;
-                                            height: 32px;
-                                            transform: translate(-50%) rotate(-45deg)
-                                        }
-                                </style>
-
                                 <div class="position-relative">
                                     <img src="{{ asset('storage/uploads/' . $apartment->image_path) }}"
                                         class="card-img-top rounded rounded-4" alt="Appartamento">
                                     <div class="visible-badge text-bg-success">
                                         <i class="far {{ $apartment->visible ? 'fa-eye' : 'fa-eye-slash' }} p-1" ></i>
                                     </div>
-                                    <div class="sponsor-badge text-bg-warning">
-                                        ciao
-                                    </div>
+                                    @if ($apartment->sponsors->count())
+                                        <div class="sponsor-badge text-bg-warning">
+                                            <span>Sponsorizzato</span>
+                                        </div>
+                                    @endif
                                 </div>
 
                                 <div class="card-body">
