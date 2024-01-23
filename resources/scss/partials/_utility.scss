@@ -1,0 +1,22 @@
+// UTILITY
+
+.custom-btn-primary {
+    color: rgba(0, 0, 0, 0.822);
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin: 0 10px;
+    font-size: medium;
+
+    &.active {
+        background-color: transparent;
+        color: black;
+        border-radius: 0;
+        box-shadow: 0 2px 0 0 #17c499;
+    }
+
+    &:hover {
+        color: black;
+        box-shadow: 0 2px 0 0 #17c499;
+        border-radius: 0px;
+    }
+}
