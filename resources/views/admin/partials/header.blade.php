@@ -35,7 +35,7 @@
                                     href="{{ route('admin.apartment.index') }}">Lista Appartamenti</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link btn custom-btn-primary   {{ Route::currentRouteName() === 'admin.apartment.listMessages' ? 'active' : '' }}"
+                                <a class="nav-link btn custom-btn-primary   {{ Route::currentRouteName() === 'admin.apartments.listMessages' ? 'active' : '' }}"
                                     href="{{ route('admin.apartments.listMessages') }}">Lista Messaggi</a>
                             </li>
 
