@@ -1,7 +1,6 @@
 @extends('layouts.admin')
 
 @section('content')
-
     <div class="apartment-list">
         <h1 class="text-center">I tuoi Appartamenti</h1>
 
@@ -15,9 +14,10 @@
                                 <div class="position-relative">
                                     <img src="{{ asset('storage/uploads/' . $apartment->image_path) }}"
                                         class="card-img-top rounded rounded-4" alt="Appartamento">
-                                    <div class="visible-badge text-bg-success">
-                                        <i class="far {{ $apartment->visible ? 'fa-eye' : 'fa-eye-slash' }} p-1" ></i>
-                                    </div>
+                                    <a href="{{ route('admin.apartment.edit-visible', $apartment) }}"
+                                        class="visible-badge text-bg-success text-decoration-none">
+                                        <i class="far {{ $apartment->visible ? 'fa-eye' : 'fa-eye-slash' }} p-1"></i>
+                                    </a>
                                     @if ($apartment->sponsors->count() && strtotime($apartment->sponsors[0]->pivot->expiration_date) >= strtotime(now()))
                                         <div class="sponsor-badge text-bg-warning">
                                             <span>Sponsorizzato</span>

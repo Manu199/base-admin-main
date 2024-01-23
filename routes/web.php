@@ -19,7 +19,7 @@ use App\Models\Apartment;
 |
 */
 
-Route::middleware(['auth','verified'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
 });
 
@@ -34,13 +34,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth','verified'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('apartment', ApartmentController::class);
-    Route::get('/payment-process',[PaymentsController::class, 'process'])->name('payment.process');
+    Route::get('/payment-process', [PaymentsController::class, 'process'])->name('payment.process');
     Route::get('apartment/{apartment}/messages', [ApartmentController::class, 'listMessages'])->name('apartment.listMessages');
+    Route::get('apartment/{apartment}/edit-visible', [ApartmentController::class, 'editVisible'])->name('apartment.edit-visible');
 });
 
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

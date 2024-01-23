@@ -362,4 +362,22 @@ class ApartmentController extends Controller
         $apartment->delete();
         return redirect()->route('admin.apartment.index')->with('success', 'Progetto cancellato definitivamente!');
     }
+
+
+    public function editVisible(Apartment $apartment)
+    {
+        // dump($apartment);
+        if ($apartment->visible) {
+
+            $apartment->visible = 0;
+        } else {
+
+            $apartment->visible = 1;
+        }
+
+        $apartment->save();
+
+        return redirect()->route('admin.apartment.index');
+        // dd($apartment);
+    }
 }
