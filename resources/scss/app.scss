@@ -1,60 +1,58 @@
-@import '~bootstrap/scss/bootstrap';
-@import './partials/show';
-@import './partials/apartmentList';
+@import "~bootstrap/scss/bootstrap";
+@import "./partials/show";
+@import "./partials/apartmentList";
 
 // GENERAL
 
-body{
-    font-family: 'Figtree', sans-serif;
+body {
+    font-family: "Figtree", sans-serif;
     box-sizing: border-box;
     padding: 0;
     margin: 0;
 }
 
-p{
+p {
     font-size: 12px;
     margin: 0;
 }
 
 // LOGIN
-.card-header{
+.card-header {
     background-color: white;
 }
 
-.custom-checkbox{
+.custom-checkbox {
     border: none;
     border-bottom: 1px solid;
     border-radius: 0;
 }
 
-.custom-checkbox:focus{
+.custom-checkbox:focus {
     box-shadow: none;
     border-color: black;
 }
 
-.custom-check:focus{
+.custom-check:focus {
     background-color: black;
 }
 
-.title-login{
+.title-login {
     font-size: 30px;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: "Times New Roman", Times, serif;
 }
 
 // HEADER
 
 nav {
-
-    .logo-header{
+    .logo-header {
         width: 120px;
     }
-
 
     .navbar-nav {
         display: flex;
         flex-direction: row;
 
-        li{
+        li {
             margin: 0;
             padding: 0;
 
@@ -81,15 +79,12 @@ nav {
         }
 
         .dropdown-menu {
-
             margin: 0 10px 0 10px;
             a {
                 box-shadow: none;
                 width: 100%;
                 margin: 0;
                 padding-left: 10px !important;
-
-
             }
             a:hover {
                 box-shadow: none;
@@ -99,34 +94,24 @@ nav {
         }
 
         .dropdown {
-
             a {
                 box-shadow: none;
                 padding-left: 10px !important;
                 padding-right: 10px !important ;
-
             }
             a:hover {
                 box-shadow: none;
                 border-radius: 5px;
             }
         }
-
-
     }
-
 
     .user-name {
         padding: 5px 10px;
         border: 2px solid #17c499;
         border-radius: 5px;
-
-
     }
-
-
-    }
-
+}
 
 // SWITCH VISIBLE NON VISIBLE
 
@@ -138,21 +123,17 @@ nav {
     display: none !important;
 }
 
-
-
-
-
 // LOGIN CARD SIZE
 
-@media screen and (max-width:768px){
-    .card-login{
+@media screen and (max-width: 768px) {
+    .card-login {
         min-width: 400px;
         max-width: 100%;
     }
 }
 
-@media screen and (min-width:768px){
-    .card-login{
+@media screen and (min-width: 768px) {
+    .card-login {
         min-width: 350px;
         max-width: 516px;
     }
@@ -160,39 +141,39 @@ nav {
 
 // UTILITY
 
-.single-line-ellipsis{
+.single-line-ellipsis {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     /* Aggiunge i puntini di sospensione */
 }
 
-.form-floating > .left-initial{
+.form-floating > .left-initial {
     left: initial;
 }
 
-.cursor-pointer{
+.cursor-pointer {
     cursor: pointer;
 }
 
 // APARTMENT LIST
-.apartment-list{
-    .card{
+.apartment-list {
+    .card {
         border-radius: 15px;
         overflow: hidden;
         transition: transform 0.2s;
     }
 
-    .card:hover{
+    .card:hover {
         transform: scale(1.03);
     }
 
-    .card-img-top{
+    .card-img-top {
         height: 200px;
         object-fit: cover;
     }
 
-    .card-body{
+    .card-body {
         border-bottom-left-radius: 15px;
         border-bottom-right-radius: 15px;
     }
@@ -200,54 +181,52 @@ nav {
 
 // SERVIZI
 
-.badge-custom{
-    border:0.5px solid black ;
+.badge-custom {
+    border: 0.5px solid black;
     color: black;
     background-color: transparent;
 }
 
-.badge-custom:hover{
-    border-color: #10D1A0;
-    color: #10D1A0;
+.badge-custom:hover {
+    border-color: #10d1a0;
+    color: #10d1a0;
     background-color: transparent;
 }
 
-.badge-custom:active{
-    border-color: #10D1A0;
-    color: #10D1A0;
+.badge-custom:active {
+    border-color: #10d1a0;
+    color: #10d1a0;
     background-color: transparent;
 }
 
-
-
-.btn-check:checked + .btn{
-    background-color: #10D1A0;
+.btn-check:checked + .btn {
+    background-color: #10d1a0;
     color: white;
 }
 
-.btn-check:active + .btn{
-    background-color: #10D1A0;
+.btn-check:active + .btn {
+    background-color: #10d1a0;
     color: white;
 }
 
-.btn-check:hover + .btn{
+.btn-check:hover + .btn {
     background-color: #0c9a76;
     color: white;
 }
 
-.pageNotFound{
+.pageNotFound {
     a {
-        color: #10D1A0;
-        border-color: #10D1A0;
+        color: #10d1a0;
+        border-color: #10d1a0;
         &:hover {
-            background-color: #10D1A0;
+            background-color: #10d1a0;
             color: white;
             border-color: white;
         }
     }
 }
 // MESSAGGIO ELIMINARE APPARTAMENTO
-.custom-messaggio-delete{
+.custom-messaggio-delete {
     display: none;
     background-color: rgba(0, 0, 0, 0.6);
     position: absolute;
@@ -255,10 +234,9 @@ nav {
     right: 0;
     bottom: 0;
     left: 0;
-
 }
 
-.messaggio-eliminare{
+.messaggio-eliminare {
     padding: 30px 15px;
     text-align: center;
     position: fixed;
@@ -266,27 +244,23 @@ nav {
     left: 50%;
     transform: translate(-50%, -50%);
 
-    .text-messaggio-elimina{
+    .text-messaggio-elimina {
         font-size: 12px;
     }
-
 }
 
-.btn-elimina-appartamento{
-    border:1px solid #0c9a76;
+.btn-elimina-appartamento {
+    border: 1px solid #0c9a76;
     margin: 15px 10px 0 10px;
     padding: 4px 14px;
-
-
 }
 
-.btn-elimina-appartamento:hover{
+.btn-elimina-appartamento:hover {
     background-color: #0c9a76;
     color: white;
-
 }
 
-.create-edit-apartment{
+.create-edit-apartment {
     #list-search {
         position: absolute;
         z-index: 3;
@@ -296,7 +270,6 @@ nav {
         padding-right: 0.7rem;
     }
 }
-
 
 // VISIBLE/NON VISIBLE
 
@@ -309,3 +282,26 @@ nav {
 //     top:55%;
 //     right: 4%;
 // }
+
+.show-apartment {
+    .card-header {
+        i {
+            color: #10d1a0;
+        }
+    }
+
+    .list-message {
+        height: 250px;
+
+        p {
+            cursor: pointer;
+
+        }
+    }
+
+    .title {
+        i {
+            color: #10d1a0;
+        }
+    }
+}

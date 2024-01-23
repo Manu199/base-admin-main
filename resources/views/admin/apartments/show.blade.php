@@ -50,15 +50,18 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        Messaggi in arrivo
+                        <i class="fa-solid fa-paper-plane me-2"></i>
+                        Posta in arrivo
                     </div>
                     <div class="card-body list-message">
-                        <ul>
-                            <li class="mb-3">
-                                <h6>TIZIO CAIO</h6>
-                                <p data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                    Launch static backdrop modal
-                                </p>
+                        <ul class="p-0">
+
+                            {{-- EMAIL IN ARRIVO --}}
+                            <li class="mb-3 list-unstyled ">
+                                <div class="list-group">
+                                    <p class="list-group-item list-group-item-action list-group-item-success"
+                                    data-bs-toggle="modal" data-bs-target="#staticBackdrop">Tizio Caio, admin@admin.com</p>
+                                </div>
 
                                 <!-- Modal -->
                                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -66,7 +69,14 @@
                                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                                                <div class="title">
+                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Tizio Caio</h1>
+                                                <p class=" block">
+                                                    <i class="fa-solid fa-at me-1"> :</i>
+                                                    admin@admin.com
+                                                </p>
+                                                </div>
+
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
@@ -81,39 +91,14 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Understood</button>
+                                                {{-- <button type="button" class="btn btn-primary">Understood</button> --}}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </li>
-                            <li class="mb-3">
-                                <h6>TIZIO CAIO</h6>
-                                <p>EMAIL</p>
-                                <p>
-                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati distinctio,
-                                    reprehenderit quod ipsa esse doloremque enim, unde dolore ad voluptatum architecto iste at
-                                    dicta quidem explicabo non quasi autem ipsam!
-                                </p>
-                            </li>
-                            <li class="mb-3">
-                                <h6>TIZIO CAIO</h6>
-                                <p>EMAIL</p>
-                                <p>
-                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati distinctio,
-                                    reprehenderit quod ipsa esse doloremque enim, unde dolore ad voluptatum architecto iste at
-                                    dicta quidem explicabo non quasi autem ipsam!
-                                </p>
-                            </li>
-                            <li class="mb-3">
-                                <h6>TIZIO CAIO</h6>
-                                <p>EMAIL</p>
-                                <p>
-                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati distinctio,
-                                    reprehenderit quod ipsa esse doloremque enim, unde dolore ad voluptatum architecto iste at
-                                    dicta quidem explicabo non quasi autem ipsam!
-                                </p>
-                            </li>
+
+
 
                         </ul>
                     </div>
