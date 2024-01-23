@@ -201,7 +201,18 @@ class ApartmentController extends Controller
     public function listMessages(Apartment $apartment)
     {
         $messages = Message::where('apartment_id', $apartment->id)->orderBy('date', 'desc')->get();
-        return view('admin.apartments.listMessages', compact('messages', 'apartment'));
+        return view('admin.apartments.listMessages', compact('messages'));
+    }
+
+    public function listMessagesUser(){
+
+        $messages = Message::whereHas('apartment', function ($query) {
+            $query->where('user_id', Auth::id());
+        })
+        ->orderBy('date', 'desc')
+        ->get();
+
+        return view('admin.apartments.listMessages',compact('messages'));
     }
 
     /**

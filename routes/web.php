@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('apartment', ApartmentController::class);
     Route::get('/payment-process', [PaymentsController::class, 'process'])->name('payment.process');
+    Route::get('apartments/messages', [ApartmentController::class, 'listMessagesUser'])->name('apartments.listMessages');
     Route::get('apartment/{apartment}/messages', [ApartmentController::class, 'listMessages'])->name('apartment.listMessages');
     Route::get('apartment/{apartment}/edit-visible', [ApartmentController::class, 'editVisible'])->name('apartment.edit-visible');
 });
