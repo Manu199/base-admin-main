@@ -56,24 +56,25 @@
                     <div class="card-body list-message">
                         <ul class="p-0">
 
-                            {{-- EMAIL IN ARRIVO --}}
+                            @foreach ($messages as $message)
+                                {{-- EMAIL IN ARRIVO --}}
                             <li class="mb-3 list-unstyled ">
                                 <div class="list-group">
                                     <p class="list-group-item list-group-item-action list-group-item-success"
-                                    data-bs-toggle="modal" data-bs-target="#staticBackdrop">Tizio Caio, admin@admin.com</p>
+                                    data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $message->id }}"><i class="fa-solid fa-user me-1"></i>{{ $message->name }}, {{ $message->email_sender }}</p>
                                 </div>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                                <div class="modal fade" id="staticBackdrop{{ $message->id }}" data-bs-backdrop="static" data-bs-keyboard="false"
                                     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <div class="title">
-                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Tizio Caio</h1>
+                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ $message->name }}</h1>
                                                 <p class=" block">
                                                     <i class="fa-solid fa-at me-1"> :</i>
-                                                    admin@admin.com
+                                                    {{ $message->email_sender }}
                                                 </p>
                                                 </div>
 
@@ -81,12 +82,7 @@
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                This is some placeholder content to show a vertically centered modal. We've
-                                                added some extra copy here to show how vertically centering the modal works when
-                                                combined with scrollable modals. We also use some repeated line breaks to
-                                                quickly extend the height of the content, thereby triggering the scrolling. When
-                                                content becomes longer than the predefined max-height of modal, content will be
-                                                cropped and scrollable within the modal.
+                                                {{ $message->text }}
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
@@ -97,6 +93,9 @@
                                     </div>
                                 </div>
                             </li>
+                            @endforeach
+
+
 
 
 

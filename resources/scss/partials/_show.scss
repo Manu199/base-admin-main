@@ -44,4 +44,20 @@
     .container-sponsor{
         margin-top: 32px;
     }
+
+    .card-header, .title {
+        i {
+            color: #10d1a0;
+        }
+    }
+
+    .list-message {
+        height: 150px;
+
+        p {
+            cursor: pointer;
+
+        }
+    }
+
 }
