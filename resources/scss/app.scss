@@ -122,22 +122,6 @@ nav {
     }
 }
 
-// UTILITY
-
-.single-line-ellipsis {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    /* Aggiunge i puntini di sospensione */
-}
-
-.form-floating > .left-initial {
-    left: initial;
-}
-
-.cursor-pointer {
-    cursor: pointer;
-}
 
 // APARTMENT LIST
 .apartment-list {
