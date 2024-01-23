@@ -47,13 +47,13 @@ class ApartmentController extends Controller
         $temp_path = null;
 
         // verifico se non è null tempImagePath se esiste ritorno temp_path aggiornato
-        if ($form_data['tempImagePath']){
+        if ($form_data['tempImagePath']) {
             $temp_path = $form_data['tempImagePath'];
         }
 
         // verifico se non è null l'immagine
         if (array_key_exists('image_path', $form_data)) {
-            if($temp_path){
+            if ($temp_path) {
                 Storage::delete('temp/' . $temp_path);
             }
             $img_path = Storage::put('temp', $form_data['image_path']);
@@ -116,15 +116,15 @@ class ApartmentController extends Controller
         ],);
 
         if ($validator->fails()) {
-            if($temp_path){
+            if ($temp_path) {
                 // se ho un temp_path allora non genero l'errore di image_path
                 $errors = $validator->errors();
                 $errors->forget('image_path');
                 // se è stato inserita un'immagine allora la rinvio indietro con una variabile di sessione
-                if(count($errors)){
+                if (count($errors)) {
                     return redirect()->back()->withErrors($validator)->withInput()->with('tempImagePath', $temp_path);
                 }
-            }else{
+            } else {
                 return redirect()->back()->withErrors($validator)->withInput();
             }
         }
@@ -195,7 +195,12 @@ class ApartmentController extends Controller
 
         $sponsors = Sponsor::all();
         $messages = Message::where('apartment_id', $apartment->id)->orderBy('date', 'desc')->take(5)->get();
-        return view('admin.apartments.show', compact('apartment','sponsors','messages'));
+        return view('admin.apartments.show', compact('apartment', 'sponsors', 'messages'));
+    }
+
+    public function listMessages(Apartment $apartment)
+    {
+        $messages = Message::where('apartment_id', $apartment->id)->orderBy('date', 'desc')->get();
     }
 
     /**
@@ -222,9 +227,9 @@ class ApartmentController extends Controller
     {
         $form_data = $request->all();
 
-        $valImage = Validator::make($request->only('image_path'),[
+        $valImage = Validator::make($request->only('image_path'), [
             'image_path' => 'file|mimes:jpeg,jpg,png,gif|max:65535',
-        ],[
+        ], [
             'image_path.file' => 'Il campo :attribute deve essere un file.',
             'image_path.mimes' => 'L\'immagine deve essere di uno dei seguenti formati: jpeg, jpg, png, gif.',
             'image_path.max' => 'L\'immagine non può superare :max kilobytes.',
@@ -337,7 +342,7 @@ class ApartmentController extends Controller
 
         // Update della tabella pivot
         $apartment->services()->detach();
-        if(array_key_exists('services', $form_data)){
+        if (array_key_exists('services', $form_data)) {
             $apartment->services()->attach($form_data['services']);
         }
 

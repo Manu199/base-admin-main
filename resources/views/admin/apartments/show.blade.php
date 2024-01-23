@@ -101,7 +101,7 @@
 
                         </ul>
                         <p class="text-end">
-                            <a href="#" class=" btn btn">Mostra tutto...</a>
+                            <a href="{{ route('admin.apartment.listMessages', $apartment->id) }}" class="btn rounded-0 custom-btn-primary">Mostra tutto...</a>
                         </p>
 
                     </div>
