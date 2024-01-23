@@ -12,8 +12,19 @@ class ApartmentController extends Controller
 {
     public function index()
     {
+        // $apartments = Apartment::with('services', 'type')
+        //     ->where('visible', 1)
+        //     ->get();
+
         $apartments = Apartment::with('services', 'type')
+            ->select([
+                'apartments.*',
+                DB::raw("(CASE WHEN MAX(apartment_sponsor.expiration_date >= NOW()) THEN 1 ELSE 0 END) AS is_sponsored")
+            ])
+            ->leftJoin('apartment_sponsor', 'apartments.id', '=', 'apartment_sponsor.apartment_id')
             ->where('visible', 1)
+            ->groupBy('apartments.id')
+            ->orderByDesc('is_sponsored')
             ->get();
 
         foreach ($apartments as $apartment) {
@@ -48,15 +59,33 @@ class ApartmentController extends Controller
 
         $circle_radius = 6371;
 
+        // $apartments = Apartment::with('services', 'type')
+        //     ->select(['apartments.*', DB::raw("($circle_radius * ACOS(COS(RADIANS($lat)) * COS(RADIANS(apartments.lat)) * COS(RADIANS(apartments.lon) - RADIANS($lon)) + SIN(RADIANS($lat)) * SIN(RADIANS(apartments.lat)))) AS distance")])
+        //     ->where('visible', 1)
+        //     ->where('num_of_room', '>=', $minRooms)
+        //     ->where('num_of_bed', '>=', $minBeds)
+        //     ->having('distance', '<', $radius)
+        //     ->whereHas('services', function ($query) use ($services) {
+        //         $query->whereIn('service_id', $services);
+        //     }, '=', count($services))
+        //     ->orderBy('distance')
+        //     ->get();
+
         $apartments = Apartment::with('services', 'type')
-            ->select(['apartments.*', DB::raw("($circle_radius * ACOS(COS(RADIANS($lat)) * COS(RADIANS(apartments.lat)) * COS(RADIANS(apartments.lon) - RADIANS($lon)) + SIN(RADIANS($lat)) * SIN(RADIANS(apartments.lat)))) AS distance")])
+            ->select([
+                'apartments.*',
+                DB::raw("($circle_radius * ACOS(COS(RADIANS($lat)) * COS(RADIANS(apartments.lat)) * COS(RADIANS(apartments.lon) - RADIANS($lon)) + SIN(RADIANS($lat)) * SIN(RADIANS(apartments.lat)))) AS distance"),
+                DB::raw("CASE WHEN apartment_sponsor.expiration_date >= NOW() THEN 1 ELSE 0 END AS is_sponsored")
+            ])
+            ->leftJoin('apartment_sponsor', 'apartments.id', '=', 'apartment_sponsor.apartment_id')
             ->where('visible', 1)
             ->where('num_of_room', '>=', $minRooms)
             ->where('num_of_bed', '>=', $minBeds)
-            ->having('distance', '<', $radius)
             ->whereHas('services', function ($query) use ($services) {
                 $query->whereIn('service_id', $services);
             }, '=', count($services))
+            ->having('distance', '<', $radius)
+            ->orderByDesc('is_sponsored') // Ordina in modo decrescente per sponsorizzazione (1 = sponsorizzato, 0 = non sponsorizzato)
             ->orderBy('distance')
             ->get();
 
