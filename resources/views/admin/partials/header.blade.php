@@ -100,7 +100,6 @@
 
 
                         <li class="nav-item">
-                            <a class="nav-link btn custom-btn-primary" href="http://localhost:5000">Home</a>
                         </li>
 
                         <!-- Authentication Links -->
@@ -133,6 +132,9 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="http://localhost:5000">Home</a>
+
                                     <a class="dropdown-item" href="http://localhost:5000/ricerca-avanzata">Ricerca
                                         Avanzata</a>
                                     <a class="dropdown-item" href="{{ route('admin.apartment.index') }}">Lista

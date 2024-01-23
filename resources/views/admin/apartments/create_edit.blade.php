@@ -8,21 +8,20 @@
             @method($method)
 
             <div class="position-relative">
+
                 <h1 class="text-center">{{ $title }} Appartamento</h1>
 
-                {{-- TOOGLE VISIBLE --}}
                 <div class="form-check form-switch position-absolute bottom-0 end-0">
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="visible"
+                    <input class="form-check-input" type="checkbox" role="switch" id="toggle-visible" name="visible"
                         value="1" {{-- create first time --}} @if (!$errors->count() && $apartment === null) checked @endif
                         {{-- no errori, edit --}} @if (!$errors->count() && $apartment?->visible ?? false) checked @endif {{-- errori, old data --}}
                         @if ($errors->count() && old('visible')) checked @endif>
                     <label class="form-check-label" for="flexSwitchCheckDefault">
-                        <i class="far fa-eye"></i>
-                        <i class="far fa-eye-slash"></i>
+                        <i id="eye-visible" class="far fa-eye"></i>
                         Visibile
                     </label>
-
                 </div>
+
             </div>
 
             <div class="row">
@@ -220,23 +219,18 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var switchInput = document.getElementById('flexSwitchCheckDefault');
-            var iconOpen = document.querySelector('.form-check-label .fa-eye');
-            var iconClosed = document.querySelector('.form-check-label .fa-eye-slash');
+            // Ottieni il riferimento all'elemento checkbox e all'elemento icona eye
+            const switchCheckbox = document.getElementById('toggle-visible');
+            const eyeIcon = document.getElementById('eye-visible');
 
-            function updateIconVisibility() {
-                iconOpen.classList.toggle('visible', switchInput.checked);
-                iconOpen.classList.toggle('invisible', !switchInput.checked);
-                iconClosed.classList.toggle('visible', !switchInput.checked);
-                iconClosed.classList.toggle('invisible', switchInput.checked);
-            }
+            // Aggiungi un listener per l'evento change sulla checkbox
+            switchCheckbox.addEventListener('change', function() {
+                // Verifica se la checkbox è selezionata
+                eyeIcon.classList.toggle('fa-eye-slash');
+                eyeIcon.classList.toggle('fa-eye');
 
-            switchInput.addEventListener('change', function() {
-                updateIconVisibility();
             });
 
-            // Inizializza lo stato iniziale
-            updateIconVisibility();
         });
     </script>
 @endsection
