@@ -45,7 +45,7 @@
         margin-top: 32px;
     }
 
-    .card-header {
+    .card-header, .title {
         i {
             color: #10d1a0;
         }
@@ -60,9 +60,4 @@
         }
     }
 
-    .title {
-        i {
-            color: #10d1a0;
-        }
-    }
 }
