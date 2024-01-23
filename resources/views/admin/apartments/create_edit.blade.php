@@ -13,12 +13,15 @@
                 {{-- TOOGLE VISIBLE --}}
                 <div class="form-check form-switch position-absolute bottom-0 end-0">
                     <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="visible"
-                        value="1" @if (old('visible', $apartment->visible ?? false)) checked @endif>
+                        value="1" {{-- create first time --}} @if (!$errors->count() && $apartment === null) checked @endif
+                        {{-- no errori, edit --}} @if (!$errors->count() && $apartment?->visible ?? false) checked @endif {{-- errori, old data --}}
+                        @if ($errors->count() && old('visible')) checked @endif>
                     <label class="form-check-label" for="flexSwitchCheckDefault">
                         <i class="far fa-eye"></i>
                         <i class="far fa-eye-slash"></i>
                         Visibile
                     </label>
+
                 </div>
             </div>
 
