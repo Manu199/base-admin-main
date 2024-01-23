@@ -36,7 +36,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link btn custom-btn-primary   {{ Route::currentRouteName() === 'admin.apartment.listMessages' ? 'active' : '' }}"
-                                    href="{{ route('admin.apartment.listMessages', $apartment->id) }}">Lista Messaggi</a>
+                                    href="{{ route('admin.apartment.listMessages', $apartment) }}">Lista Messaggi</a>
                             </li>
 
                             <li class="nav-item">

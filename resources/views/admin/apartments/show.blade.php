@@ -2,7 +2,6 @@
 
 
 @section('content')
-
     <div class="show-apartment">
         <h1 class="text-center mb-3">Dettaglio Appartamento</h1>
         <div class="d-flex align-items-center mb-3">
@@ -27,7 +26,8 @@
                     @if ($apartment->sponsors->count() && strtotime($apartment->sponsors[0]->pivot->expiration_date) >= strtotime(now()))
                         <div class="popup-container">
                             <h4 class="text-bg-danger m-0 py-2 px-3">&dollar;</h4>
-                            <span class="popup-text">Sponsorizzato fino al: {{ date('d/m/Y H:i', strtotime($apartment->sponsors[0]->pivot->expiration_date)) }}</span>
+                            <span class="popup-text">Sponsorizzato fino al:
+                                {{ date('d/m/Y H:i', strtotime($apartment->sponsors[0]->pivot->expiration_date)) }}</span>
                         </div>
                     @endif
                 </div>
@@ -54,28 +54,42 @@
                         Posta in arrivo
                     </div>
                     <div class="card-body cursor-pointer">
-                        <ul class="p-0">
 
+
+
+
+                        <ul class="list-group list-group-horizontal">
                             @foreach ($messages as $message)
-                                {{-- EMAIL IN ARRIVO --}}
+                                <li class="list-group-item">An item</li>
+                            @endforeach
+                        </ul>
+
+
+
+                        @foreach ($messages as $message)
+                            {{-- EMAIL IN ARRIVO --}}
                             <li class="mb-1 list-unstyled">
                                 <div class="list-group">
                                     <p class="list-group-item list-group-item-action list-group-item-success"
-                                    data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $message->id }}"><i class="fa-solid fa-user me-1"></i>{{ $message->name }}, {{ $message->email_sender }}</p>
+                                        data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $message->id }}"><i
+                                            class="fa-solid fa-user me-1"></i>{{ $message->name }},
+                                        {{ $message->email_sender }}</p>
                                 </div>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="staticBackdrop{{ $message->id }}" data-bs-backdrop="static" data-bs-keyboard="false"
-                                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal fade" id="staticBackdrop{{ $message->id }}" data-bs-backdrop="static"
+                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                    aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <div class="title">
-                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ $message->name }}</h1>
-                                                <p class=" block">
-                                                    <i class="fa-solid fa-at me-1"> :</i>
-                                                    {{ $message->email_sender }}
-                                                </p>
+                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                                                        {{ $message->name }}</h1>
+                                                    <p class=" block">
+                                                        <i class="fa-solid fa-at me-1"> :</i>
+                                                        {{ $message->email_sender }}
+                                                    </p>
                                                 </div>
 
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -93,15 +107,16 @@
                                     </div>
                                 </div>
                             </li>
-                            @endforeach
+                        @endforeach
 
 
 
 
 
-                        </ul>
+
                         <p class="text-end">
-                            <a href="{{ route('admin.apartment.listMessages', $apartment->id) }}" class="btn rounded-0 custom-btn-primary">Mostra tutto...</a>
+                            <a href="{{ route('admin.apartment.listMessages', $apartment->id) }}"
+                                class="btn rounded-0 custom-btn-primary">Mostra tutto...</a>
                         </p>
 
                     </div>
@@ -128,7 +143,8 @@
                                     <input class="form-check-input" @if ($sponsor->id === 1) checked @endif
                                         type="radio" name="radio-sponsor" id="{{ $sponsor->id }}"
                                         value="{{ $sponsor->price }}">
-                                    <label class="form-check-label" for="{{ $sponsor->id }}">{{ $sponsor->duration }} ore
+                                    <label class="form-check-label" for="{{ $sponsor->id }}">{{ $sponsor->duration }}
+                                        ore
                                         / {{ $sponsor->price }} &euro;</label>
                                 </div>
                             @endforeach
