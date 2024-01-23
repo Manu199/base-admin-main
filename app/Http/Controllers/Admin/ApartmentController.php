@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Functions\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
+use App\Models\Message;
 use App\Models\Service;
 use App\Models\Sponsor;
 use Illuminate\Http\Request;
@@ -193,7 +194,8 @@ class ApartmentController extends Controller
         }
 
         $sponsors = Sponsor::all();
-        return view('admin.apartments.show', compact('apartment','sponsors'));
+        $messages = Message::where('apartment_id', $apartment->id)->get();
+        return view('admin.apartments.show', compact('apartment','sponsors','messages'));
     }
 
     /**
