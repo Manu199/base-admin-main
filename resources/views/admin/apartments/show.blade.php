@@ -61,11 +61,11 @@
                             <li class="mb-3 list-unstyled ">
                                 <div class="list-group">
                                     <p class="list-group-item list-group-item-action list-group-item-success"
-                                    data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-user me-1"></i>{{ $message->name }}, {{ $message->email_sender }}</p>
+                                    data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $message->id }}"><i class="fa-solid fa-user me-1"></i>{{ $message->name }}, {{ $message->email_sender }}</p>
                                 </div>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                                <div class="modal fade" id="staticBackdrop{{ $message->id }}" data-bs-backdrop="static" data-bs-keyboard="false"
                                     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                         <div class="modal-content">
