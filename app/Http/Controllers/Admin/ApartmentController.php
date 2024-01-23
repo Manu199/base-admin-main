@@ -194,7 +194,7 @@ class ApartmentController extends Controller
         }
 
         $sponsors = Sponsor::all();
-        $messages = Message::where('apartment_id', $apartment->id)->get();
+        $messages = Message::where('apartment_id', $apartment->id)->orderBy('date', 'desc')->take(5)->get();
         return view('admin.apartments.show', compact('apartment','sponsors','messages'));
     }
 

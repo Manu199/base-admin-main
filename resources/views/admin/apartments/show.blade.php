@@ -53,12 +53,12 @@
                         <i class="fa-solid fa-paper-plane me-2"></i>
                         Posta in arrivo
                     </div>
-                    <div class="card-body list-message">
+                    <div class="card-body cursor-pointer">
                         <ul class="p-0">
 
                             @foreach ($messages as $message)
                                 {{-- EMAIL IN ARRIVO --}}
-                            <li class="mb-3 list-unstyled ">
+                            <li class="mb-1 list-unstyled">
                                 <div class="list-group">
                                     <p class="list-group-item list-group-item-action list-group-item-success"
                                     data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $message->id }}"><i class="fa-solid fa-user me-1"></i>{{ $message->name }}, {{ $message->email_sender }}</p>
@@ -100,6 +100,10 @@
 
 
                         </ul>
+                        <p class="text-end">
+                            <a href="#" class=" btn btn">Mostra tutto...</a>
+                        </p>
+
                     </div>
                 </div>
             </div>
