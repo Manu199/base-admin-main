@@ -22,7 +22,7 @@ class Apartment extends Model
     }
 
     public function views () {
-        return $this->belongsToMany(View::class);
+        return $this->hasMany(View::class);
     }
 
     public function sponsors () {

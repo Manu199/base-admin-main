@@ -13,7 +13,7 @@ class TypesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $data = [
+        $dataArray = [
             ['name' => 'Case', 'description' => 'Case unifamiliari indipendenti, ideali per chi cerca la privacy e uno spazio esterno personale. Ogni casa è autonoma e offre un\'atmosfera accogliente.'],
             ['name' => 'Appartamenti', 'description' => 'Appartamenti moderni e pratici, perfetti per chi desidera un\'abitazione in un contesto più compatto. Ideali per single o coppie che preferiscono un ambiente più gestibile.'],
             ['name' => 'Condomini', 'description' => 'Unità abitative all\'interno di edifici residenziali più grandi. Offrono una comunità di vicinato e spesso includono servizi comuni come palestra, piscina o spazi verdi condivisi.'],
@@ -21,8 +21,8 @@ class TypesTableSeeder extends Seeder
             ['name' => 'Case a schiera', 'description' => 'Case adiacenti tra loro in una fila, condividendo pareti laterali. Offrono un compromesso tra la privacy delle case unifamiliari e la compattezza degli appartamenti, creando un\'atmosfera di vicinato.'],
         ];
 
-        foreach ($data as $typeData) {
-            Type::create($typeData);
+        foreach ($dataArray as $data) {
+            Type::create($data);
         }
     }
 }
