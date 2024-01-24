@@ -18,7 +18,7 @@
             <h6>{{ $apartment->address }}</h6>
         </div>
 
-        <div class="row">
+        <div class="row row-cols-1 row-cols-lg-2">
             {{-- left --}}
             <div class="col">
                 <div class="position-relative">
@@ -168,7 +168,7 @@
                     if (selectedAmount) {
                         const amount = selectedAmount.value;
                         const idSponsor = selectedAmount.id;
-                        const idApartment = @json($apartment->id);
+                        const idApartment = {{ $apartment->id }};
 
 
                         $.get('{{ route('admin.payment.process') }}', {
