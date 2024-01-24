@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\View;
 use Illuminate\Http\Request;
 use App\Models\Apartment;
 use App\Models\Service;
@@ -113,9 +114,26 @@ class ApartmentController extends Controller
         ]);
     }
 
-    public function getApartmentFromSlug($slug)
+    public function getApartmentFromSlug($slug, Request $request)
     {
         $apartment = Apartment::where('slug', $slug)->with('services')->first();
+
+        // controlle se esiste una view, nel giorno corrente, dallo stesso ip
+        $existingView = View::where('apartment_id', $apartment->id)
+        ->where('ip_address', $request->ip())
+        ->whereDate('date', now()->toDateString())
+        ->first();
+
+        // se non esiste questa view, allora la posso aggiungere al mio db
+        if(!$existingView){
+            $view = [
+                'apartment_id' => $apartment->id,
+                'ip_address' => $request->ip(),
+                'date' => now(),
+            ];
+            View::create($view);
+        }
+
         $apartment->user->makeHidden(['date_of_birth', 'phone_number']);
         $apartment['image_path'] = asset('storage/uploads/' . $apartment['image_path']);
         return response()->json($apartment);
