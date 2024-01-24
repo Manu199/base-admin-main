@@ -2,7 +2,7 @@
     <!-- Messaggio -->
     <div class="custom-messaggio-delete" id="mostrareMessaggio">
         <div class="messaggio-eliminare bg-white rounded-2">
-            <p class="text-messaggio-elimina">Vuoi eliminare l'appartamento?</p>
+            <p class="text-messaggio-elimina">{{$messagio}}</p>
             <button id="cancel" class="btn btn-elimina-appartamento">Annulla</button>
             <button id="delete-button" class="btn btn-elimina-appartamento">Conferma</button>
         </div>

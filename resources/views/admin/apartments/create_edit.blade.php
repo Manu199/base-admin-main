@@ -18,6 +18,7 @@
                         role="switch"
                         id="toggle-visible"
                         name="visible"
+
                         {{-- create first time --}}
                         @if (!$errors->count() && $apartment === null) checked @endif
                         {{-- no errori, edit --}}
@@ -29,6 +30,7 @@
                         <i id="eye-visible" class="far fa-eye"></i>
                         Visibile
                     </label>
+
                 </div>
 
             </div>
@@ -232,6 +234,15 @@
     @endpush
 
     @stack('createEditClienValidateAp')
+
+
+     {{-- Modal vissible when have a sponsor --}}
+     @include('admin.partials.form_elimina',
+     [
+         'messagio' => 'Sei sponsorizzato. Vuoi davvero cambiare la visibilità dell\'appartamento?'
+     ])
+
+
 
     <script>
 
