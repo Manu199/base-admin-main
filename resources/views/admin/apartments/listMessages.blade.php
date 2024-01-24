@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="messagesApartment">
-        @dump($messages)
-        <h1>dadasdasd</h1>
+        {{-- Card List Messages --}}
+        @include('admin.partials.card_list_messages')
     </div>
 @endsection

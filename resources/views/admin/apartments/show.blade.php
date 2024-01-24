@@ -22,11 +22,16 @@
             {{-- Dati appartamento --}}
             <div class="col mb-4">
                 <div class="position-relative overflow-hidden rounded rounded-4">
-                    <img class="img-fluid" src="{{ asset('storage/uploads/' . $apartment->image_path) }}" alt="">
+                    <img
+                        onerror="this.src ='{{ asset('img/placeholder.png') }}'"
+                        class="img-fluid"
+                        src="{{ asset('storage/uploads/' . $apartment->image_path) }}"
+                        alt="">
                     @if ($apartment->sponsors->count() && strtotime($apartment->sponsors[0]->pivot->expiration_date) >= strtotime(now()))
                         <div class="badge-sponsor-bottom-big">
                             <h6 class="text-bg-warning text-center m-0 py-1">
-                                Sponsorizzato fino al: {{ date('d/m/Y H:i', strtotime($apartment->sponsors[0]->pivot->expiration_date)) }}
+                                Sponsorizzato fino al:
+                                {{ date('d/m/Y H:i', strtotime($apartment->sponsors[0]->pivot->expiration_date)) }}
                             </h6>
                         </div>
                     @endif
@@ -47,71 +52,83 @@
             </div>
 
             {{-- Message --}}
-            <div class="col mb-4">
-                <div class="card">
-                    <div class="card-header">
-                        <i class="fa-solid fa-paper-plane me-2"></i>
-                        Posta in arrivo
-                    </div>
-                    <div class="card-body cursor-pointer">
-                        <style>
-                            /* DA SISTEMARE */
-                            .list-group-item {
-                                width: calc(100% / 3);
-                            }
-                        </style>
-                        @foreach ($messages as $message)
-                            <ul class="list-group list-group-horizontal mb-1 " data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop{{ $message->id }}">
-                                <li class="list-group-item list-group-item-success single-line-ellipsis">{{ $message->name }}</li>
-                                <li class="list-group-item single-line-ellipsis list-group-item-success">{{ $message->email_sender }}</li>
-                                <li class="list-group-item single-line-ellipsis list-group-item-success">
-                                    {{ date('d/m/Y - H:i', strtotime($message->date)) }}</li>
-                            </ul>
-                            <!-- Modal -->
-                            <div class="modal fade" id="staticBackdrop{{ $message->id }}" data-bs-backdrop="static"
-                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <div class="title">
-                                                <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                                                    {{ $message->name }}
-                                                </h1>
-                                                <div class="address_date d-flex justify-content-between ">
-                                                    <p class="me-5">
-                                                        <i class="fa-solid fa-at me-1"> :</i>
-                                                        {{ $message->email_sender }}
-                                                    </p>
-                                                    <p>{{ date('d/m/Y - H:i', strtotime($message->date)) }}</p>
+            @if ($messages->count())
+                <div class="col mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa-solid fa-paper-plane me-2"></i>
+                            Posta in arrivo
+                        </div>
+                        <div class="card-body cursor-pointer">
+                            <style>
+                                /* DA SISTEMARE */
+                                .list-group-item {
+                                    width: calc(100% / 3);
+                                }
+                            </style>
+                            @foreach ($messages as $message)
+                                <ul class="list-group list-group-horizontal mb-1 " data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop{{ $message->id }}">
+                                    <li class="list-group-item list-group-item-success single-line-ellipsis">
+                                        {{ $message->name }}</li>
+                                    <li class="list-group-item single-line-ellipsis list-group-item-success">
+                                        {{ $message->email_sender }}</li>
+                                    <li class="list-group-item single-line-ellipsis list-group-item-success">
+                                        {{ date('d/m/Y - H:i', strtotime($message->date)) }}</li>
+                                </ul>
+                                <!-- Modal -->
+                                <div class="modal fade" id="staticBackdrop{{ $message->id }}" data-bs-backdrop="static"
+                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <div class="title">
+                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                                                        {{ $message->name }}
+                                                    </h1>
+                                                    <div class="address_date d-flex justify-content-between ">
+                                                        <p class="me-5">
+                                                            <i class="fa-solid fa-at me-1"> :</i>
+                                                            {{ $message->email_sender }}
+                                                        </p>
+                                                        <p>{{ date('d/m/Y - H:i', strtotime($message->date)) }}</p>
+                                                    </div>
+
                                                 </div>
 
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
                                             </div>
-
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            {{ $message->text }}
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Close</button>
-                                            {{-- <button type="button" class="btn btn-primary">Understood</button> --}}
+                                            <div class="modal-body">
+                                                {{ $message->text }}
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                {{-- <button type="button" class="btn btn-primary">Understood</button> --}}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
 
-                        <p class="text-end">
-                            <a href="{{ route('admin.apartment.listMessages', $apartment->id) }}"
-                                class="btn rounded-0 custom-btn-primary">Mostra tutto...</a>
-                        </p>
+                            <p class="text-end">
+                                <a href="{{ route('admin.apartment.listMessages', $apartment->id) }}"
+                                    class="btn rounded-0 custom-btn-primary">Mostra tutto...</a>
+                            </p>
 
+                        </div>
                     </div>
                 </div>
+            @endif
+        </div>
+
+        {{-- GRAFICO VIEWS --}}
+        <div class="mb-4">
+            <h3>GRAFICO</h3>
+            <div>
+                <canvas id="myChart"></canvas>
             </div>
         </div>
 
@@ -134,9 +151,7 @@
                                     <input class="form-check-input" @if ($sponsor->id === 1) checked @endif
                                         type="radio" name="radio-sponsor" id="{{ $sponsor->id }}"
                                         value="{{ $sponsor->price }}">
-                                    <label class="form-check-label" for="{{ $sponsor->id }}">{{ $sponsor->duration }}
-                                        ore
-                                        / {{ $sponsor->price }} &euro;</label>
+                                    <label class="form-check-label" for="{{ $sponsor->id }}">{{ $sponsor->duration }} ore / {{ $sponsor->price }} &euro;</label>
                                 </div>
                             @endforeach
                         </div>
@@ -149,10 +164,11 @@
     </div>
 
     {{-- Modal delete apartment --}}
-    @include('admin.partials.form_elimina',
-    [
-        'messagio' => 'Vuoi eliminare questo appartamento?'
+    @include('admin.partials.form_elimina', [
+        'messagio' => 'Vuoi eliminare questo appartamento?',
     ])
+
+    {{-- BRAINTREE  --}}
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://js.braintreegateway.com/web/dropin/1.8.1/js/dropin.min.js"></script>
@@ -168,9 +184,10 @@
                 // devo controllare se l'appartamento è visibile o meno
                 const visible = {{ $apartment?->visible }};
 
-                if(!visible){
-                    const confirmation = confirm('L\'appartamento non è visibile, sei sicuro di volerlo sponsorizzare?');
-                    if (!confirmation){
+                if (!visible) {
+                    const confirmation = confirm(
+                        'L\'appartamento non è visibile, sei sicuro di volerlo sponsorizzare?');
+                    if (!confirmation) {
                         return
                     }
                 }
@@ -203,6 +220,50 @@
                     }
                 });
             });
+        });
+    </script>
+
+    {{-- Chart.js  --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+
+        const arrayViews = @json($views);
+        const labelsName = [];
+        const dataArray = [];
+
+        arrayViews.slice(1).forEach(monthViews => {
+            const date = new Date(monthViews['month'] + '-01') ;
+
+            // nome del mese abbreviato
+            const nameMonth = date.toLocaleString('default', { month: 'short' });
+
+            // Ottieni l'anno
+            var year = date.getFullYear();
+
+            labelsName.push(nameMonth + ' ' + year);
+            dataArray.push(monthViews['total']);
+        });
+
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labelsName,
+                datasets: [{
+                    label: 'Views per mese',
+                    data: dataArray,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
         });
     </script>
 @endsection

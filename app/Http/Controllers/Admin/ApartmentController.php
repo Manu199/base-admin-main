@@ -8,6 +8,7 @@ use App\Models\Apartment;
 use App\Models\Message;
 use App\Models\Service;
 use App\Models\Sponsor;
+use App\Models\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -195,7 +196,20 @@ class ApartmentController extends Controller
 
         $sponsors = Sponsor::all();
         $messages = Message::where('apartment_id', $apartment->id)->orderBy('date', 'desc')->take(5)->get();
-        return view('admin.apartments.show', compact('apartment', 'sponsors', 'messages'));
+
+        // Ottenere la data di 12 mesi fa
+        $startDate = now()->subMonths(12);
+
+        // Ottenere le view raggruppate per mese
+        $views = View::selectRaw('DATE_FORMAT(date, "%Y-%m") as month')
+            ->selectRaw('COUNT(*) as total')
+            ->where('apartment_id', $apartment->id)
+            ->where('date', '>=', $startDate)
+            ->groupBy('month')
+            ->orderBy('month', 'asc')
+            ->get();
+
+        return view('admin.apartments.show', compact('apartment', 'sponsors', 'messages','views'));
     }
 
     public function listMessages(Apartment $apartment)
@@ -204,7 +218,8 @@ class ApartmentController extends Controller
         return view('admin.apartments.listMessages', compact('messages'));
     }
 
-    public function listMessagesUser(){
+    public function listMessagesUser()
+    {
 
         $messages = Message::whereHas('apartment', function ($query) {
             $query->where('user_id', Auth::id());
