@@ -18,16 +18,16 @@
             <h6>{{ $apartment->address }}</h6>
         </div>
 
-        <div class="row row-cols-1 row-cols-lg-2">
-            {{-- left --}}
-            <div class="col">
-                <div class="position-relative">
+        <div class="row row-cols-1 row-cols-lg-2 ">
+            {{-- Dati appartamento --}}
+            <div class="col mb-4">
+                <div class="position-relative overflow-hidden">
                     <img class="img-fluid" src="{{ asset('storage/uploads/' . $apartment->image_path) }}" alt="">
                     @if ($apartment->sponsors->count() && strtotime($apartment->sponsors[0]->pivot->expiration_date) >= strtotime(now()))
-                        <div class="popup-container">
-                            <h4 class="text-bg-danger m-0 py-2 px-3">&dollar;</h4>
-                            <span class="popup-text">Sponsorizzato fino al:
-                                {{ date('d/m/Y H:i', strtotime($apartment->sponsors[0]->pivot->expiration_date)) }}</span>
+                        <div class="badge-sponsor-bottom-big">
+                            <h6 class="text-bg-warning text-center m-0">
+                                Sponsorizzato fino al: {{ date('d/m/Y H:i', strtotime($apartment->sponsors[0]->pivot->expiration_date)) }}
+                            </h6>
                         </div>
                     @endif
                 </div>
@@ -46,8 +46,8 @@
                 <p>{{ $apartment->description }}</p>
             </div>
 
-            {{-- right --}}
-            <div class="col">
+            {{-- Message --}}
+            <div class="col mb-4">
                 <div class="card">
                     <div class="card-header">
                         <i class="fa-solid fa-paper-plane me-2"></i>
