@@ -161,6 +161,17 @@
             container: '#dropin-container'
         }, function(createErr, instance) {
             button.addEventListener('click', function() {
+                // all click del bottone di conferma pagamento
+                // devo controllare se l'appartamento è visibile o meno
+                const visible = {{ $apartment?->visible }};
+
+                if(!visible){
+                    const confirmation = confirm('L\'appartamento non è visibile, sei sicuro di volerlo sponsorizzare?');
+                    if (!confirmation){
+                        return
+                    }
+                }
+
                 instance.requestPaymentMethod(function(err, payload) {
 
                     const selectedAmount = document.querySelector(

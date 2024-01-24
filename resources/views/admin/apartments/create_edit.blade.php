@@ -236,7 +236,7 @@
     <script>
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Ottieni il riferimento all'elemento checkbox e all'elemento icona eye
+
             const switchCheckbox = document.getElementById('toggle-visible');
             const eyeIcon = document.getElementById('eye-visible');
 
@@ -245,17 +245,23 @@
                 // Verifica se la checkbox è selezionata
                 eyeIcon.classList.toggle('fa-eye-slash');
                 eyeIcon.classList.toggle('fa-eye');
-
-
             });
 
             switchCheckbox.addEventListener('click', function(event) {
                 // controllo se è sponsorizzato o meno
                 const expiration_date = {{ strtotime($apartment?->sponsors[0]->pivot->expiration_date) }};
                 const now = Math.floor(Date.now() / 1000);
-                if(expiration_date > now){
-                    console.log('Sei sponsorizzato');
-                    event.preventDefault();
+                if(!switchCheckbox.checked){
+                    if(expiration_date > now){
+                        console.log('Sei sponsorizzato');
+                        // Se sponsorizzato, chiedi conferma prima di impedire il cambio di stato della checkbox
+                        const confirmation = confirm('Sei sponsorizzato. Vuoi davvero cambiare la visibilità dell\'appartamento?');
+
+                        // Se l'utente conferma, permetti il cambio di stato, altrimenti previeniDefault
+                        if (!confirmation) {
+                            event.preventDefault();
+                        }
+                    }
                 }
             });
 
