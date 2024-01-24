@@ -247,6 +247,10 @@ class ApartmentController extends Controller
             'image_path.max' => 'L\'immagine non può superare :max kilobytes.',
         ]);
 
+        if ($valImage->fails()) {
+            return redirect()->back()->withErrors($valImage)->withInput();
+        }
+
         // controllo che nei miei dati ricevuti dal form sia stata aggiunta un'immagine
         if (array_key_exists('image_path', $form_data)) {
             if ($apartment->image_path) {
@@ -344,13 +348,14 @@ class ApartmentController extends Controller
         // visible
         if (!array_key_exists('visible', $form_data)) {
             $form_data['visible'] = 0;
+            // controllo se è sponsorizzato e in caso lo avverto
         } else {
             $form_data['visible'] = 1;
         }
 
 
-
         $apartment->update($form_data);
+
 
         // Update della tabella pivot
         $apartment->services()->detach();

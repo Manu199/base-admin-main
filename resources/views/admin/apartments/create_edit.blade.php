@@ -12,10 +12,19 @@
                 <h1 class="text-center">{{ $title }} Appartamento</h1>
 
                 <div class="form-check form-switch position-absolute bottom-0 end-0">
-                    <input class="form-check-input" type="checkbox" role="switch" id="toggle-visible" name="visible"
-                        value="1" {{-- create first time --}} @if (!$errors->count() && $apartment === null) checked @endif
-                        {{-- no errori, edit --}} @if (!$errors->count() && $apartment?->visible ?? false) checked @endif {{-- errori, old data --}}
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        role="switch"
+                        id="toggle-visible"
+                        name="visible"
+                        {{-- create first time --}}
+                        @if (!$errors->count() && $apartment === null) checked @endif
+                        {{-- no errori, edit --}}
+                        @if (!$errors->count() && $apartment?->visible ?? false) checked @endif
+                        {{-- errori, old data --}}
                         @if ($errors->count() && old('visible')) checked @endif>
+
                     <label class="form-check-label" for="flexSwitchCheckDefault">
                         <i id="eye-visible" class="far fa-eye"></i>
                         Visibile
@@ -160,6 +169,13 @@
                                         onerror="this.src ='{{ asset('img/placeholder.png') }}'"
                                         src="{{ $tempPath ? asset('storage/temp/' . $tempPath) : asset('storage/uploads/' . $apartment?->image_path) }}"
                                         alt="image">
+                                    @if ($apartment->sponsors->count() && strtotime($apartment->sponsors[0]->pivot->expiration_date) >= strtotime(now()))
+                                        <div class="badge-sponsor-bottom-big">
+                                            <h6 class="text-bg-warning text-center m-0 py-1">
+                                                Sponsorizzato fino al: {{ date('d/m/Y H:i', strtotime($apartment->sponsors[0]->pivot->expiration_date)) }}
+                                            </h6>
+                                        </div>
+                                    @endif
                                 </div>
 
                                 <!-- Input  nascosto per memorizzare il percorso del file -->
@@ -218,6 +234,7 @@
     @stack('createEditClienValidateAp')
 
     <script>
+
         document.addEventListener('DOMContentLoaded', function() {
             // Ottieni il riferimento all'elemento checkbox e all'elemento icona eye
             const switchCheckbox = document.getElementById('toggle-visible');
@@ -229,6 +246,17 @@
                 eyeIcon.classList.toggle('fa-eye-slash');
                 eyeIcon.classList.toggle('fa-eye');
 
+
+            });
+
+            switchCheckbox.addEventListener('click', function(event) {
+                // controllo se è sponsorizzato o meno
+                const expiration_date = {{ strtotime($apartment?->sponsors[0]->pivot->expiration_date) }};
+                const now = Math.floor(Date.now() / 1000);
+                if(expiration_date > now){
+                    console.log('Sei sponsorizzato');
+                    event.preventDefault();
+                }
             });
 
         });

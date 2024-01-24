@@ -21,11 +21,11 @@
         <div class="row row-cols-1 row-cols-lg-2 ">
             {{-- Dati appartamento --}}
             <div class="col mb-4">
-                <div class="position-relative overflow-hidden">
+                <div class="position-relative overflow-hidden rounded rounded-4">
                     <img class="img-fluid" src="{{ asset('storage/uploads/' . $apartment->image_path) }}" alt="">
                     @if ($apartment->sponsors->count() && strtotime($apartment->sponsors[0]->pivot->expiration_date) >= strtotime(now()))
                         <div class="badge-sponsor-bottom-big">
-                            <h6 class="text-bg-warning text-center m-0">
+                            <h6 class="text-bg-warning text-center m-0 py-1">
                                 Sponsorizzato fino al: {{ date('d/m/Y H:i', strtotime($apartment->sponsors[0]->pivot->expiration_date)) }}
                             </h6>
                         </div>
