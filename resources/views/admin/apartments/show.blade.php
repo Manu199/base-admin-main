@@ -158,11 +158,29 @@
                         </div>
                         <div id="dropin-container"></div>
                         <button class="btn btn-success" id="submit-button">Conferma</button>
+                        <button class="btn d-none" id="loading-button" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                          </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    {{-- BUTTON LOADING --}}
+    <script>
+        document.getElementById('submit-button').addEventListener('click', function() {
+          document.getElementById('submit-button').classList.add('d-none');
+          document.getElementById('loading-button').classList.remove('d-none');
+
+          setTimeout(function() {
+            document.getElementById('loading-button').classList.add('d-none');
+            document.getElementById('submit-button').classList.remove('d-none');
+          }, 3000);
+        });
+    </script>
+
 
     {{-- Modal delete apartment --}}
     @include('admin.partials.form_elimina', [
