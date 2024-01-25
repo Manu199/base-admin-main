@@ -32,21 +32,21 @@
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <div class="title">
-                                <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                                    {{ $message->name }}
-                                </h1>
-                                <div class="address_date d-flex justify-content-between ">
-                                    <p class="me-5">
-                                        <i class="fa-solid fa-at me-1"> :</i>
+                            <div class="title d-sm-flex">
+                                <div class="d-flex flex-column">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                                        {{ $message->name }}
+                                    </h1>
+                                    <p class="me-5 pb-0 inline-block">
+                                        <i class="fa-solid fa-at me-1" style="color: #0c9a76;"> :</i>
                                         {{ $message->email_sender }}
                                     </p>
-                                    <p>{{ date('d/m/Y - H:i', strtotime($message->date)) }}</p>
                                 </div>
-
+                                <div class="address_date d-flex align-items-center mt-3">
+                                    <p class="m-0 p-0">{{ date('d/m/Y - H:i', strtotime($message->date)) }}</p>
+                                </div>
                             </div>
-
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            <button type="button" class="btn-close m-0" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">

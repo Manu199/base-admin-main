@@ -63,14 +63,12 @@
                             <style>
                                 /* DA SISTEMARE */
                                 .list-group-item {
-                                    width: calc(100% / 3);
+                                    width: 50%;
                                 }
                             </style>
                             @foreach ($messages as $message)
                                 <ul class="list-group list-group-horizontal mb-1 " data-bs-toggle="modal"
                                     data-bs-target="#staticBackdrop{{ $message->id }}">
-                                    <li class="list-group-item list-group-item-success single-line-ellipsis">
-                                        {{ $message->name }}</li>
                                     <li class="list-group-item single-line-ellipsis list-group-item-success">
                                         {{ $message->email_sender }}</li>
                                     <li class="list-group-item single-line-ellipsis list-group-item-success">
