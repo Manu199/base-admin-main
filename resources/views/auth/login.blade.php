@@ -74,7 +74,7 @@
                                                 </svg>
                                             </div>
                                             <label class="form-check-label text-center ms-2 cursor-pointer" for="remember">
-                                                {{ __('Remember Me') }}
+                                                {{ __('Ricordami') }}
                                             </label>
                                         </div>
                                     </div>
@@ -90,7 +90,7 @@
                                         </p>
                                         <a href="{{ route('register') }}" id="button-register" type="submit"
                                             class="btn btn-custom-log w-100">
-                                            {{ __('Register') }}
+                                            {{ __('Registrati') }}
                                         </a>
                                     </div>
                                 </div>
@@ -99,7 +99,7 @@
 
                                         @if (Route::has('password.request'))
                                             <a class="btn btn-link text-black" href="{{ route('password.request') }}">
-                                                {{ __('Forgot Your Password?') }}
+                                                {{ __('Password dimenticata?') }}
                                             </a>
                                         @endif
                                     </div>

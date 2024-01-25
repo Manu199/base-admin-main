@@ -8,7 +8,7 @@
                     {{-- <div class="title-login my-5 text-center">BRAND</div> --}}
                     <div class="card">
                         <div class="card-header text-center bg-white border-0 my-3 text-bold fs-3 text-body-secondary">
-                            {{ __('Register') }}</div>
+                            {{ __('Registrazione') }}</div>
 
                         <div class="card-body">
                             <form method="POST" action="{{ route('register') }}" onsubmit="return validateForm()">
@@ -116,7 +116,7 @@
                                     <div class="col">
                                         <button id="button-register" type="submit"
                                             class="btn btn-dark w-100 btn-custom-log">
-                                            {{ __('Register') }}
+                                            {{ __('Registrati') }}
                                         </button>
                                         <p class="line-bar-text d-flex align-items-center my-2">
                                             o

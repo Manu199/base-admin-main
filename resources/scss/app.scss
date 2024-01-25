@@ -122,19 +122,18 @@ nav {
 
 // SWITCH VISIBLE NON VISIBLE
 
-.visible {
-    display: inline !important;
+.form-check-input:checked{
+    border-color: $primaryColor;
+    background-color: $primaryColor;
 }
-
-.invisible {
-    display: none !important;
+.form-check-input:focus{
+    border-color:  $primaryColor;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba($primaryColor, 0.25);
 }
-
-#toggle-visible:checked{
-    background-color:#0c9a76
-
-}
-
+// .form-switch .form-check-input:focus {
+//    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='%38761dfe'/></svg>");
+// }
 // LOGIN CARD SIZE
 
 @media screen and (max-width: 576px) {
@@ -295,7 +294,7 @@ nav {
 // PAGAMENTI BUTTON LOADING
 
 #loading-button{
-    background-color: #0c9a76;
+    background-color: $primaryColor;
 
 }
 

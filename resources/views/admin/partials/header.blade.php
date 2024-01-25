@@ -14,33 +14,33 @@
 
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link btn custom-btn-primary" href="http://localhost:5000">Home</a>
+                                <a class="nav-link custom-btn-primary" href="http://localhost:5000">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link btn custom-btn-primary "
+                                <a class="nav-link custom-btn-primary "
                                     href="http://localhost:5000/ricerca-avanzata">Ricerca
                                     Avanzata</a>
                             </li>
                         @else
                             <li class="nav-item">
-                                <a class="nav-link btn custom-btn-primary" href="http://localhost:5000">Home</a>
+                                <a class="nav-link custom-btn-primary" href="http://localhost:5000">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link btn custom-btn-primary   "
+                                <a class="nav-link custom-btn-primary   "
                                     href="http://localhost:5000/ricerca-avanzata">Ricerca
                                     Avanzata</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link btn custom-btn-primary   {{ Route::currentRouteName() === 'admin.apartment.index' ? 'active' : '' }}"
+                                <a class="nav-link custom-btn-primary   {{ Route::currentRouteName() === 'admin.apartment.index' ? 'active' : '' }}"
                                     href="{{ route('admin.apartment.index') }}">Lista Appartamenti</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link btn custom-btn-primary   {{ Route::currentRouteName() === 'admin.apartments.listMessages' ? 'active' : '' }}"
+                                <a class="nav-link custom-btn-primary   {{ Route::currentRouteName() === 'admin.apartments.listMessages' ? 'active' : '' }}"
                                     href="{{ route('admin.apartments.listMessages') }}">Lista Messaggi</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link btn custom-btn-primary  {{ Route::currentRouteName() === 'admin.apartment.create' ? 'active' : '' }}"
+                                <a class="nav-link custom-btn-primary  {{ Route::currentRouteName() === 'admin.apartment.create' ? 'active' : '' }}"
                                     href="{{ route('admin.apartment.create') }}"><i class="fa-solid fa-plus"></i>
                                     Nuovo
                                     Appartamento</a>
