@@ -127,7 +127,7 @@
         {{-- GRAFICO VIEWS --}}
         <div class="mb-4">
             <h6 class="mt-5">GRAFICO</h6>
-            <div>
+            <div class="w-50">
                 <canvas id="myChart"></canvas>
             </div>
         </div>
