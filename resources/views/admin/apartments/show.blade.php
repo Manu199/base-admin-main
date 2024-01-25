@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="show-apartment">
-        <h1 class="text-center mb-3">Dettaglio Appartamento</h1>
+        <h1 class="text-center mb-5">Dettaglio Appartamento</h1>
         <div class="d-flex align-items-center mb-3">
             <h3 class=" d-inline-block m-0">{{ $apartment->title }}</h3>
             <a class="btn border-black rounded rounded-5 mx-2" href="{{ route('admin.apartment.edit', $apartment) }}"><i
@@ -37,18 +37,18 @@
                     @endif
                 </div>
 
-                <p>&euro;{{ $apartment->price }},00/notte</p>
+                <p class=" mt-2 fs-6">&euro;{{ $apartment->price }},00/notte</p>
 
                 <p>{{ $apartment->num_of_room }} stanze &middot; {{ $apartment->num_of_bed }} letti &middot;
                     {{ $apartment->num_of_bathroom }} bagni &middot;
                     {{ $apartment->square_meters }} mq</p>
 
-                <p>SERIVIZI</p>
+                <h6 class="mt-4">SERIVIZI</h6>
                 @foreach ($apartment->services as $service)
                     <span class="badge my-2 badge-custom"> {!! $service['name'] !!}</span>
                 @endforeach
 
-                <p>{{ $apartment->description }}</p>
+                <p class="mt-3 fs-6">{{ $apartment->description }}</p>
             </div>
 
             {{-- Message --}}
@@ -126,7 +126,7 @@
 
         {{-- GRAFICO VIEWS --}}
         <div class="mb-4">
-            <h3>GRAFICO</h3>
+            <h6 class="mt-5">GRAFICO</h6>
             <div>
                 <canvas id="myChart"></canvas>
             </div>
