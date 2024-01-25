@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="show-apartment">
-        <h1 class="text-center mb-3">Dettaglio Appartamento</h1>
+        <h1 class="text-center mb-5">Dettaglio Appartamento</h1>
         <div class="d-flex align-items-center mb-3">
             <h3 class=" d-inline-block m-0">{{ $apartment->title }}</h3>
             <a class="btn border-black rounded rounded-5 mx-2" href="{{ route('admin.apartment.edit', $apartment) }}"><i
@@ -37,18 +37,18 @@
                     @endif
                 </div>
 
-                <p>&euro;{{ $apartment->price }},00/notte</p>
+                <p class=" mt-2 fs-6">&euro;{{ $apartment->price }},00/notte</p>
 
                 <p>{{ $apartment->num_of_room }} stanze &middot; {{ $apartment->num_of_bed }} letti &middot;
                     {{ $apartment->num_of_bathroom }} bagni &middot;
                     {{ $apartment->square_meters }} mq</p>
 
-                <p>SERIVIZI</p>
+                <h6 class="mt-4">SERIVIZI</h6>
                 @foreach ($apartment->services as $service)
                     <span class="badge my-2 badge-custom"> {!! $service['name'] !!}</span>
                 @endforeach
 
-                <p>{{ $apartment->description }}</p>
+                <p class="mt-3 fs-6">{{ $apartment->description }}</p>
             </div>
 
             {{-- Message --}}
@@ -63,14 +63,12 @@
                             <style>
                                 /* DA SISTEMARE */
                                 .list-group-item {
-                                    width: calc(100% / 3);
+                                    width: 50%;
                                 }
                             </style>
                             @foreach ($messages as $message)
                                 <ul class="list-group list-group-horizontal mb-1 " data-bs-toggle="modal"
                                     data-bs-target="#staticBackdrop{{ $message->id }}">
-                                    <li class="list-group-item list-group-item-success single-line-ellipsis">
-                                        {{ $message->name }}</li>
                                     <li class="list-group-item single-line-ellipsis list-group-item-success">
                                         {{ $message->email_sender }}</li>
                                     <li class="list-group-item single-line-ellipsis list-group-item-success">
@@ -126,8 +124,8 @@
 
         {{-- GRAFICO VIEWS --}}
         <div class="mb-4">
-            <h3>GRAFICO</h3>
-            <div>
+            <h6 class="mt-5">GRAFICO</h6>
+            <div class="w-50">
                 <canvas id="myChart"></canvas>
             </div>
         </div>
@@ -145,23 +143,44 @@
                     </h2>
                     <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample"
                         style="">
-                        <div class="container-sponsor d-flex justify-content-evenly">
+                        <div class="container-sponsor d-md-flex justify-content-evenly">
                             @foreach ($sponsors as $sponsor)
-                                <div>
+
+                                <div class="mt-2 text-center">
                                     <input class="form-check-input" @if ($sponsor->id === 1) checked @endif
-                                        type="radio" name="radio-sponsor" id="{{ $sponsor->id }}"
-                                        value="{{ $sponsor->price }}">
-                                    <label class="form-check-label" for="{{ $sponsor->id }}">{{ $sponsor->duration }} ore / {{ $sponsor->price }} &euro;</label>
+                                        type="radio" name="radio-sponsor" id="{{ $sponsor->id }}" value="{{ $sponsor->price }}">
+                                    <label class="form-check-label" for="{{ $sponsor->id }}">
+                                        {{ $sponsor->duration }} ore / {{ $sponsor->price }} &euro;
+                                    </label>
                                 </div>
+
                             @endforeach
                         </div>
                         <div id="dropin-container"></div>
                         <button class="btn btn-success" id="submit-button">Conferma</button>
+                        <button class="btn d-none" id="loading-button" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                          </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    {{-- BUTTON LOADING --}}
+    <script>
+        document.getElementById('submit-button').addEventListener('click', function() {
+          document.getElementById('submit-button').classList.add('d-none');
+          document.getElementById('loading-button').classList.remove('d-none');
+
+          setTimeout(function() {
+            document.getElementById('loading-button').classList.add('d-none');
+            document.getElementById('submit-button').classList.remove('d-none');
+          }, 3000);
+        });
+    </script>
+
 
     {{-- Modal delete apartment --}}
     @include('admin.partials.form_elimina', [

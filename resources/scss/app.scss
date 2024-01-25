@@ -130,6 +130,11 @@ nav {
     display: none !important;
 }
 
+#toggle-visible:checked{
+    background-color:#0c9a76
+
+}
+
 // LOGIN CARD SIZE
 
 @media screen and (max-width: 576px) {
@@ -286,5 +291,13 @@ nav {
         }
     }
 }
+
+// PAGAMENTI BUTTON LOADING
+
+#loading-button{
+    background-color: #0c9a76;
+
+}
+
 
 
