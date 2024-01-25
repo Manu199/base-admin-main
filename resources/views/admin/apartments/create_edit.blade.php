@@ -12,18 +12,9 @@
                 <h1 class="text-center">{{ $title }} Appartamento</h1>
 
                 <div class="form-check form-switch position-absolute bottom-0 end-0">
-                    <input
-                        class="form-check-input"
-                        type="checkbox"
-                        role="switch"
-                        id="toggle-visible"
-                        name="visible"
-
-                        {{-- create first time --}}
-                        @if (!$errors->count() && $apartment === null) checked @endif
-                        {{-- no errori, edit --}}
-                        @if (!$errors->count() && $apartment?->visible ?? false) checked @endif
-                        {{-- errori, old data --}}
+                    <input class="form-check-input" type="checkbox" role="switch" id="toggle-visible" name="visible"
+                        {{-- create first time --}} @if (!$errors->count() && $apartment === null) checked @endif {{-- no errori, edit --}}
+                        @if (!$errors->count() && $apartment?->visible ?? false) checked @endif {{-- errori, old data --}}
                         @if ($errors->count() && old('visible')) checked @endif>
 
                     <label class="form-check-label" for="flexSwitchCheckDefault">
@@ -174,7 +165,8 @@
                                     @if ($apartment?->sponsors->count() && strtotime($apartment?->sponsors[0]->pivot->expiration_date) >= strtotime(now()))
                                         <div class="badge-sponsor-bottom-big">
                                             <h6 class="text-bg-warning text-center m-0 py-1">
-                                                Sponsorizzato fino al: {{ date('d/m/Y H:i', strtotime($apartment->sponsors[0]->pivot->expiration_date)) }}
+                                                Sponsorizzato fino al:
+                                                {{ date('d/m/Y H:i', strtotime($apartment->sponsors[0]->pivot->expiration_date)) }}
                                             </h6>
                                         </div>
                                     @endif
@@ -236,16 +228,14 @@
     @stack('createEditClienValidateAp')
 
 
-     {{-- Modal vissible when have a sponsor --}}
-     @include('admin.partials.form_elimina',
-     [
-         'messagio' => 'Sei sponsorizzato. Vuoi davvero cambiare la visibilità dell\'appartamento?'
-     ])
+    {{-- Modal vissible when have a sponsor --}}
+    @include('admin.partials.form_elimina', [
+        'messagio' => 'Sei sponsorizzato. Vuoi davvero cambiare la visibilità dell\'appartamento?',
+    ])
 
 
 
     <script>
-
         document.addEventListener('DOMContentLoaded', function() {
 
             const switchCheckbox = document.getElementById('toggle-visible');
@@ -260,13 +250,15 @@
 
             switchCheckbox.addEventListener('click', function(event) {
                 // controllo se è sponsorizzato o meno
-                const expiration_date = {{ strtotime($apartment?->sponsors[0]->pivot->expiration_date) }};
+                const expiration_date = @json(strtotime($apartment?->sponsors[0]->pivot->expiration_date ?? null));
                 const now = Math.floor(Date.now() / 1000);
-                if(!switchCheckbox.checked){
-                    if(expiration_date > now){
+                if (!switchCheckbox.checked) {
+                    if (expiration_date > now) {
                         console.log('Sei sponsorizzato');
                         // Se sponsorizzato, chiedi conferma prima di impedire il cambio di stato della checkbox
-                        const confirmation = confirm('Sei sponsorizzato. Vuoi davvero cambiare la visibilità dell\'appartamento?');
+                        const confirmation = confirm(
+                            'Sei sponsorizzato. Vuoi davvero cambiare la visibilità dell\'appartamento?'
+                        );
 
                         // Se l'utente conferma, permetti il cambio di stato, altrimenti previeniDefault
                         if (!confirmation) {
