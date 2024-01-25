@@ -131,9 +131,24 @@ nav {
     outline: 0;
     box-shadow: 0 0 0 0.25rem rgba($primaryColor, 0.25);
 }
-// .form-switch .form-check-input:focus {
-//    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='%38761dfe'/></svg>");
-// }
+
+//
+$primary-color-rgba-25: rgba($primaryColor,0.25);
+
+.form-switch .form-check-input:focus {
+    --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='#{$primary-color-rgba-25}'/%3e%3c/svg%3e");
+}
+
+.form-switch .form-check-input:checked {
+    --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+}
+
+
+/* Sovrascrivi il colore del pallino al momento del focus */
+.form-switch .form-check-input:focus circle {
+    fill: rgba(0, 0, 0, 0.25); /* Cambia il colore del pallino durante il focus */
+}
+
 // LOGIN CARD SIZE
 
 @media screen and (max-width: 576px) {
