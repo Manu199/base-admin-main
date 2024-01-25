@@ -171,7 +171,7 @@
                                         onerror="this.src ='{{ asset('img/placeholder.png') }}'"
                                         src="{{ $tempPath ? asset('storage/temp/' . $tempPath) : asset('storage/uploads/' . $apartment?->image_path) }}"
                                         alt="image">
-                                    @if ($apartment->sponsors->count() && strtotime($apartment->sponsors[0]->pivot->expiration_date) >= strtotime(now()))
+                                    @if ($apartment?->sponsors->count() && strtotime($apartment?->sponsors[0]->pivot->expiration_date) >= strtotime(now()))
                                         <div class="badge-sponsor-bottom-big">
                                             <h6 class="text-bg-warning text-center m-0 py-1">
                                                 Sponsorizzato fino al: {{ date('d/m/Y H:i', strtotime($apartment->sponsors[0]->pivot->expiration_date)) }}
