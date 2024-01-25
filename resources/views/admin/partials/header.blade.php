@@ -51,11 +51,12 @@
                         @guest
 
                             <li class="nav-item dropdown d-flex justify-content-end align-items-center">
-                                <i id="navbarDropdown" class="fa-regular fa-user dropdown-toggle ms-2" href="#"
-                                    role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                    v-pre></i>
+                                <i id="navbarDropdown" class="fa-regular fa-user dropdown-toggle ms-2 user-guest"
+                                    href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false" v-pre></i>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('home') }}">Area personale</a>
+                                    <a class="dropdown-item" href="{{ route('login') }}">{{ __('Login') }}</a>
 
                                     @if (Route::has('register'))
                                         <a class="dropdown-item" href="{{ route('register') }}">{{ __('Register') }}</a>
@@ -111,9 +112,9 @@
                         @guest
 
                             <li class="nav-item dropdown d-flex justify-content-end align-items-center">
-                                <i id="navbarDropdown" class="fa-regular fa-user dropdown-toggle ms-2" href="#"
-                                    role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                    v-pre></i>
+                                <i id="navbarDropdown" class="fa-regular fa-user dropdown-toggle ms-2 user-guest"
+                                    href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false" v-pre></i>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="http://localhost:5000/ricerca-avanzata">Ricerca
                                         Avanzata</a>

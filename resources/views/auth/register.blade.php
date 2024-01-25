@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="container register-blade my-5">
         <div class="card-login m-auto">
             <div class="row justify-content-center">
                 <div class="col">
                     {{-- <div class="title-login my-5 text-center">BRAND</div> --}}
                     <div class="card">
-                        <div class="card-header text-center bg-white border-0 my-3">{{ __('Register') }}</div>
+                        <div class="card-header text-center bg-white border-0 my-3 text-bold fs-3 text-body-secondary">
+                            {{ __('Register') }}</div>
 
                         <div class="card-body">
                             <form method="POST" action="{{ route('register') }}" onsubmit="return validateForm()">
@@ -16,15 +16,9 @@
 
                                 <div class="mb-4 row justify-content-center">
                                     <div class="col position-relative">
-                                        <input
-                                            id="name"
-                                            type="text"
-                                            placeholder="Name"
+                                        <input id="name" type="text" placeholder="Name"
                                             class="form-control custom-checkbox pe-5 @error('name') is-invalid @enderror"
-                                            name="name"
-                                            value="{{ old('name') }}"
-                                            required
-                                            autocomplete="name"
+                                            name="name" value="{{ old('name') }}" required autocomplete="name"
                                             autofocus>
 
                                         @error('name')
@@ -120,9 +114,17 @@
 
                                 <div class="mb-4 row mb-0 justify-content-center">
                                     <div class="col">
-                                        <button id="button-register" type="submit" class="btn btn-dark w-100">
+                                        <button id="button-register" type="submit"
+                                            class="btn btn-dark w-100 btn-custom-log">
                                             {{ __('Register') }}
                                         </button>
+                                        <p class="line-bar-text d-flex align-items-center my-2">
+                                            o
+                                        </p>
+                                        <a href="{{ route('login') }}" id="button-register" type="submit"
+                                            class="btn btn-custom-log w-100">
+                                            {{ __('Login') }}
+                                        </a>
                                     </div>
                                 </div>
                             </form>
@@ -134,7 +136,6 @@
     </div>
 
     <script>
-
         // Name
         const name = document.getElementById('name');
         name.addEventListener('input', function() {

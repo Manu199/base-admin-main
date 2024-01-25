@@ -215,7 +215,7 @@
 
             {{-- BUTTON SUBMIT --}}
             <div class="d-flex justify-content-center mb-3">
-                <button class="btn w-100 fs-4 btn-header-2" type="submit">Salva</button>
+                <button class="btn w-100 fs-4 btn-custom-log" type="submit">Salva</button>
             </div>
         </form>
     </div>

@@ -1,8 +1,9 @@
 @import "~bootstrap/scss/bootstrap";
-@import "./partials/show";
-@import "./partials/apartmentList";
+@import "./partials/variables";
 @import "./partials/utility";
-
+@import "./partials/checkbox";
+@import "./partials/apartmentList";
+@import "./partials/show";
 // GENERAL
 
 body {
@@ -13,7 +14,6 @@ body {
 }
 
 p {
-    font-size: 12px;
     margin: 0;
 }
 
@@ -30,16 +30,22 @@ p {
 
 .custom-checkbox:focus {
     box-shadow: none;
-    border-color: black;
+    border-color: $secondaryColor;
 }
 
 .custom-check:focus {
-    background-color: black;
+    background-color: $secondaryColor;
+    border: 1px solid $secondaryColor;
 }
 
-.title-login {
-    font-size: 30px;
-    font-family: "Times New Roman", Times, serif;
+.btn-custom-log {
+    background-color: $primaryColor;
+    color: white;
+    border: 0;
+    &:hover{
+        background-color: rgba($color: $secondaryColor, $alpha: 0.9);
+        color: white;
+    }
 }
 
 // HEADER
@@ -81,17 +87,35 @@ nav {
                 border-radius: 5px;
             }
         }
+
+        .dropdown-item:active {
+            color: var(--bs-dropdown-link-active-color);
+            text-decoration: none;
+            background-color:  $primaryColor;
+          }
     }
+
 
     .user-name {
         padding: 5px 10px;
         border-radius: 5px;
-        background-color: #17c499;
+        background-color: $primaryColor;
         color: white !important;
 
         &:hover, &.show {
             color: white !important;
 
+        }
+    }
+
+    .user-guest {
+        padding: 9px 13px 9px 10px;
+        background-color: $primaryColor;
+        border-radius: 5px;
+        color: white !important;
+
+        &:hover{
+          color: white !important;
         }
     }
 }
@@ -108,17 +132,18 @@ nav {
 
 // LOGIN CARD SIZE
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 576px) {
     .card-login {
-        min-width: 400px;
+        width: 100%;
         max-width: 100%;
     }
 }
 
-@media screen and (min-width: 768px) {
+
+@media screen and (min-width: 576px) {
     .card-login {
         min-width: 350px;
-        max-width: 516px;
+        max-width: 551px;
     }
 }
 
@@ -155,38 +180,38 @@ nav {
 }
 
 .badge-custom:hover {
-    border-color: #10d1a0;
-    color: #10d1a0;
+    border-color: $primaryColor;
+    color: $primaryColor;
     background-color: transparent;
 }
 
 .badge-custom:active {
-    border-color: #10d1a0;
-    color: #10d1a0;
+    border-color: $primaryColor;
+    color: $primaryColor;
     background-color: transparent;
 }
 
 .btn-check:checked + .btn {
-    background-color: #10d1a0;
+    background-color: $primaryColor;
     color: white;
 }
 
 .btn-check:active + .btn {
-    background-color: #10d1a0;
+    background-color: $primaryColor;
     color: white;
 }
 
 .btn-check:hover + .btn {
-    background-color: #0c9a76;
+    background-color: $primaryColor;
     color: white;
 }
 
 .pageNotFound {
     a {
-        color: #10d1a0;
-        border-color: #10d1a0;
+        color: $primaryColor;
+        border-color: $primaryColor;
         &:hover {
-            background-color: #10d1a0;
+            background-color: $primaryColor;
             color: white;
             border-color: white;
         }
@@ -217,13 +242,13 @@ nav {
 }
 
 .btn-elimina-appartamento {
-    border: 1px solid #0c9a76;
+    border: 1px solid $primaryColor;
     margin: 15px 10px 0 10px;
     padding: 4px 14px;
 }
 
 .btn-elimina-appartamento:hover {
-    background-color: #0c9a76;
+    background-color: $primaryColor;
     color: white;
 }
 
@@ -238,22 +263,11 @@ nav {
     }
 }
 
-// VISIBLE/NON VISIBLE
-
-// .fa-eye{
-//     top:55%;
-//     right: 4%;
-// }
-
-// .fa-eye-slash{
-//     top:55%;
-//     right: 4%;
-// }
 
 .show-apartment {
     .card-header {
         i {
-            color: #10d1a0;
+            color: $primaryColor;
         }
     }
 
@@ -268,7 +282,9 @@ nav {
 
     .title {
         i {
-            color: #10d1a0;
+            color: $primaryColor;
         }
     }
 }
+
+
