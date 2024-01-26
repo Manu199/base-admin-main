@@ -46,6 +46,10 @@ p {
         background-color: rgba($color: $secondaryColor, $alpha: 0.9);
         color: white;
     }
+    &:active {
+        background-color: $secondaryColor !important;
+        color: white !important;
+    }
 }
 
 // HEADER
