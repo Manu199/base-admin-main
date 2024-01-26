@@ -5,7 +5,7 @@
             <nav class="navbar navbar-expand w-100 justify-content-between">
 
                 <a class="" href="http://localhost:5000/">
-                    <img class="logo-header" src="/logo (1).png" alt="logo (1).png" />
+                    <img class="logo-header" src="{{ asset('img/logo.png') }}" alt="logo (1).png" />
                 </a>
 
                 <div class="d-flex d-none d-lg-block    ">
