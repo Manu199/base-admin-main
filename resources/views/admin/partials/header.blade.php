@@ -76,6 +76,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('home') }}">Area personale</a>
+                                    <a class="dropdown-item" href="{{ route('admin.apartments.listMessages') }}">Lista messagi</a>
                                     <a class="dropdown-item" href="{{ url('profile') }}">Profilo</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
