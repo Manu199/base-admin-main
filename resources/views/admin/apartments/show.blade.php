@@ -22,11 +22,8 @@
             {{-- Dati appartamento --}}
             <div class="col mb-4">
                 <div class="position-relative overflow-hidden rounded rounded-4">
-                    <img
-                        onerror="this.src ='{{ asset('img/placeholder.png') }}'"
-                        class="img-fluid"
-                        src="{{ asset('storage/uploads/' . $apartment->image_path) }}"
-                        alt="">
+                    <img onerror="this.src ='{{ asset('img/placeholder.png') }}'" class="img-fluid"
+                        src="{{ asset('storage/uploads/' . $apartment->image_path) }}" alt="">
                     @if ($apartment->sponsors->count() && strtotime($apartment->sponsors[0]->pivot->expiration_date) >= strtotime(now()))
                         <div class="badge-sponsor-bottom-big">
                             <h6 class="text-bg-warning text-center m-0 py-1">
@@ -145,15 +142,14 @@
                         style="">
                         <div class="container-sponsor d-md-flex justify-content-evenly">
                             @foreach ($sponsors as $sponsor)
-
                                 <div class="mt-2 text-center">
                                     <input class="form-check-input" @if ($sponsor->id === 1) checked @endif
-                                        type="radio" name="radio-sponsor" id="{{ $sponsor->id }}" value="{{ $sponsor->price }}">
+                                        type="radio" name="radio-sponsor" id="{{ $sponsor->id }}"
+                                        value="{{ $sponsor->price }}">
                                     <label class="form-check-label" for="{{ $sponsor->id }}">
                                         {{ $sponsor->duration }} ore / {{ $sponsor->price }} &euro;
                                     </label>
                                 </div>
-
                             @endforeach
                         </div>
                         <div id="dropin-container"></div>
@@ -161,7 +157,7 @@
                         <button class="btn d-none" id="loading-button" type="button" disabled>
                             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             Loading...
-                          </button>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -171,19 +167,19 @@
     {{-- BUTTON LOADING --}}
     <script>
         document.getElementById('submit-button').addEventListener('click', function() {
-          document.getElementById('submit-button').classList.add('d-none');
-          document.getElementById('loading-button').classList.remove('d-none');
+            document.getElementById('submit-button').classList.add('d-none');
+            document.getElementById('loading-button').classList.remove('d-none');
 
-          setTimeout(function() {
-            document.getElementById('loading-button').classList.add('d-none');
-            document.getElementById('submit-button').classList.remove('d-none');
-          }, 3000);
+            setTimeout(function() {
+                document.getElementById('loading-button').classList.add('d-none');
+                document.getElementById('submit-button').classList.remove('d-none');
+            }, 3000);
         });
     </script>
 
 
     {{-- Modal delete apartment --}}
-    @include('admin.partials.form_elimina', [
+    @include('admin.partials.confirm_custom', [
         'messagio' => 'Vuoi eliminare questo appartamento?',
     ])
 
@@ -246,16 +242,17 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
-
         const arrayViews = @json($views);
         const labelsName = [];
         const dataArray = [];
 
         arrayViews.slice(1).forEach(monthViews => {
-            const date = new Date(monthViews['month'] + '-01') ;
+            const date = new Date(monthViews['month'] + '-01');
 
             // nome del mese abbreviato
-            const nameMonth = date.toLocaleString('default', { month: 'short' });
+            const nameMonth = date.toLocaleString('default', {
+                month: 'short'
+            });
 
             // Ottieni l'anno
             var year = date.getFullYear();

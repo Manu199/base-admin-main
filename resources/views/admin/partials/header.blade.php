@@ -147,7 +147,9 @@
                                     <a class="dropdown-item" href="{{ route('admin.apartment.create') }}"><i
                                             class="fa-solid fa-plus"></i>
                                         Nuovo
-                                        Appartamento</a>
+                                        Appartamento
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('admin.apartments.listMessages') }}">Lista messagi</a>
 
                                     <a class="dropdown-item" href="{{ route('home') }}">Area personale</a>
                                     <a class="dropdown-item" href="{{ url('profile') }}">Profilo</a>
