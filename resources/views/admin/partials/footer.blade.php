@@ -4,7 +4,7 @@
 
             <!-- LOGO -->
             <div class="col-12 col-sm-4 mb-3 mb-sm-0 d-flex justify-content-center justify-content-sm-start logo-footer">
-                <img class="img-fluid" src="../../public/logo (1).png" alt="" />
+                <img class="img-fluid" src="{{ asset('img/logo.png') }}" alt="" />
             </div>
 
             <!-- PRIVACY -->
