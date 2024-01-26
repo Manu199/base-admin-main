@@ -4,7 +4,7 @@
 
             <nav class="navbar navbar-expand w-100 justify-content-between">
 
-                <a class="navbar-brand" href="http://localhost:5000/">
+                <a class="" href="http://localhost:5000/">
                     <img class="logo-header" src="/logo (1).png" alt="logo (1).png" />
                 </a>
 
@@ -149,7 +149,8 @@
                                         Nuovo
                                         Appartamento
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('admin.apartments.listMessages') }}">Lista messagi</a>
+                                    <a class="dropdown-item" href="{{ route('admin.apartments.listMessages') }}">Lista
+                                        messagi</a>
 
                                     <a class="dropdown-item" href="{{ route('home') }}">Area personale</a>
                                     <a class="dropdown-item" href="{{ url('profile') }}">Profilo</a>
