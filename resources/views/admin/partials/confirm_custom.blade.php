@@ -1,5 +1,5 @@
 <!-- Messaggio -->
-<div id="modal-confirm">
+<div style="display:none" id="modal-confirm">
     <div class="messaggio-eliminare bg-white rounded-2">
         <p id="modal-text-message" class="text-messaggio-elimina">{{ $messagio }}</p>
         <button id="cancel" class="btn btn-elimina-appartamento">Annulla</button>

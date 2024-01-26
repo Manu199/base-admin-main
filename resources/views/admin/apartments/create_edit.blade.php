@@ -229,9 +229,9 @@
 
 
     {{-- Modal vissible when have a sponsor --}}
-    @include('admin.partials.form_elimina', [
+    {{-- @include('admin.partials.form_elimina', [
         'messagio' => 'Sei sponsorizzato. Vuoi davvero cambiare la visibilità dell\'appartamento?',
-    ])
+    ]) --}}
 
 
 
