@@ -1,11 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container register-blade my-5">
+    <div class="container my-5">
         <div class="card-login m-auto">
             <div class="row justify-content-center">
                 <div class="col">
-                    {{-- <div class="title-login my-5 text-center">BRAND</div> --}}
                     <div class="card">
                         <div class="card-header text-center bg-white border-0 my-3 text-bold fs-3 text-body-secondary">
                             {{ __('Registrazione') }}</div>
