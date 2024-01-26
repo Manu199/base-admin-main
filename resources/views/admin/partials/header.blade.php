@@ -1,4 +1,4 @@
-<header>
+<header class="header-fix">
     <nav class="navbar">
         <div class="container">
 
