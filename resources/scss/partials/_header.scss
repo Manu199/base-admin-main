@@ -1,0 +1,82 @@
+// HEADER
+
+nav {
+    .logo-header {
+        width: 120px;
+    }
+
+    .navbar-nav {
+        display: flex;
+        flex-direction: row;
+
+        li {
+            margin: 0;
+            padding: 0;
+
+
+        }
+
+        .dropdown-menu {
+            a {
+                width: 100%;
+                margin: 0;
+                padding-left: 10px !important;
+            }
+            a:hover {
+                border-radius: 3px;
+                border: 0;
+            }
+        }
+
+        .dropdown {
+            a {
+                padding-left: 10px !important;
+                padding-right: 10px !important ;
+            }
+            a:hover {
+                border-radius: 5px;
+            }
+        }
+
+        .dropdown-item:active {
+            color: var(--bs-dropdown-link-active-color);
+            text-decoration: none;
+            background-color:  $primaryColor;
+          }
+    }
+
+
+
+    .user-name {
+        padding: 5px 10px;
+        border-radius: 5px;
+        background-color: $primaryColor;
+        color: white !important;
+
+        &:hover, &.show {
+            color: white !important;
+
+        }
+    }
+
+    .user-guest {
+        padding: 9px 13px 9px 10px;
+        background-color: $primaryColor;
+        border-radius: 5px;
+        color: white !important;
+
+        &:hover{
+          color: white !important;
+        }
+    }
+}
+
+.header-fix {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
