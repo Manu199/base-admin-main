@@ -1,18 +1,21 @@
-.logo-footer {
-  img {
-    width: 150px;
-  }
-}
-
-ul {
-  li {
-    margin-left: 10px;
-
-    a {
-      text-decoration: none;
-      color: gray;
+footer {
+    .logo-footer {
+        img {
+            width: 120px;
+            height: 45px;
+          }
     }
-  }
+
+    ul {
+        li {
+            margin-left: 10px;
+
+            a {
+                text-decoration: none;
+                color: gray;
+            }
+        }
+    }
 }
 
 html {
@@ -61,8 +64,8 @@ html {
 }
 
 .share {
-    width: 3rem;
-    height: 3rem;
+    width: 2rem;
+    height: 2rem;
     float: left;
     margin: 0.5rem 1rem 0.5rem 0;
     color: #353c4a;
