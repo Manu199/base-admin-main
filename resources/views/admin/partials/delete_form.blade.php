@@ -1,5 +1,5 @@
 <form class="d-inline-block" action="{{ route($route, $element) }}" method="POST" id="elimina"
-    onsubmit="return confermaModale(this)">
+    onsubmit="return confirmCustom(this)">
 
     @csrf
     @method('DELETE')
