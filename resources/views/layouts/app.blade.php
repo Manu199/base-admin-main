@@ -26,12 +26,13 @@
 
 <body>
     <div id="app">
-
-
-        <main class="">
-            @include('admin.partials.header')
-            @yield('content')
+        @include('admin.partials.header')
+        <main>
+            <div class="container">
+                @yield('content')
+            </div>
         </main>
+        @include('admin.partials.footer')
     </div>
 </body>
 

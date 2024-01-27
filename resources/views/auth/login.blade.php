@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container my-5">
+
         <div class="card-login m-auto">
             <div class="row justify-content-center">
                 <div class="col">
                     <div class="card">
-                        <div class="card-header text-center border-0 my-3 text-bold fs-3 text-body-secondary">
+                        <div class="card-header text-center border-0 mt-3 text-bold fs-3 text-body-secondary">
                             {{ __('Login') }}</div>
 
                         <div class="card-body justify-content-center">
@@ -94,7 +94,7 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="mb-4 row mb-0">
+                                <div class="row">
                                     <div class="col text-center">
 
                                         @if (Route::has('password.request'))
@@ -110,5 +110,5 @@
                 </div>
             </div>
         </div>
-    </div>
+
 @endsection

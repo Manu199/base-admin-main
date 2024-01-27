@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container my-5">
+
         <div class="card-login m-auto">
             <div class="row justify-content-center">
                 <div class="col">
                     <div class="card">
-                        <div class="card-header text-center bg-white border-0 my-3 text-bold fs-3 text-body-secondary">
+                        <div class="card-header text-center bg-white border-0 mt-3 text-bold fs-3 text-body-secondary">
                             {{ __('Registrazione') }}</div>
 
                         <div class="card-body">
@@ -111,7 +111,7 @@
                                     </div>
                                 </div>
 
-                                <div class="mb-4 row mb-0 justify-content-center">
+                                <div class="row justify-content-center">
                                     <div class="col">
                                         <button id="button-register" type="submit"
                                             class="btn btn-dark w-100 btn-custom-log">
@@ -132,7 +132,6 @@
                 </div>
             </div>
         </div>
-    </div>
 
     <script>
         // Name
