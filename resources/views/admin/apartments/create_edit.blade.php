@@ -3,18 +3,21 @@
 @section('content')
     <div class="create-edit-apartment">
 
+        <h1 class="text-center mb-3">{{ $title }} Appartamento</h1>
         <form action="{{ $route }}" method="POST" id="form-create-edit" enctype="multipart/form-data">
             @csrf
             @method($method)
 
-            <div class="position-relative">
 
-                <h1 class="text-center">{{ $title }} Appartamento</h1>
 
-                <div class="form-check form-switch position-absolute bottom-0 end-0">
+            <div class="d-flex justify-content-end">
+                <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" role="switch" id="toggle-visible" name="visible"
-                        {{-- create first time --}} @if (!$errors->count() && $apartment === null) checked @endif {{-- no errori, edit --}}
-                        @if (!$errors->count() && $apartment?->visible ?? false) checked @endif {{-- errori, old data --}}
+                        {{-- create first time --}}
+                        @if (!$errors->count() && $apartment === null) checked @endif
+                        {{-- no errori, edit --}}
+                        @if (!$errors->count() && $apartment?->visible ?? false) checked @endif
+                        {{-- errori, old data --}}
                         @if ($errors->count() && old('visible')) checked @endif>
 
                     <label class="form-check-label" for="flexSwitchCheckDefault">
@@ -23,11 +26,12 @@
                     </label>
 
                 </div>
-
             </div>
 
-            <div class="row">
-                <div class="col-6">
+
+
+            <div class="row row-cols-1 row-cols-md-2">
+                <div class="col mb-3">
                     <div class="p-2 border rounded mb-3">
                         {{-- TITLE --}}
                         <div class="row">
@@ -88,10 +92,10 @@
 
                     </div>
                     {{-- sezione numerica --}}
-                    <div class="p-2 border rounded mb-3">
-                        <div class="row">
+                    <div class="p-2 pb-0 border rounded">
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4">
                             {{-- SQUARE METERS --}}
-                            <div class="col">
+                            <div class="col mb-2">
                                 <div class="form-floating">
                                     <input required type="number"
                                         class="form-control @error('square_meters') is-invalid @enderror" id="square_meters"
@@ -105,7 +109,7 @@
                             </div>
 
                             {{-- NUM of ROOM --}}
-                            <div class="col">
+                            <div class="col mb-2">
                                 <div class="form-floating">
                                     <input required type="number"
                                         class="form-control @error('num_of_room') is-invalid @enderror" id="num_of_room"
@@ -119,7 +123,7 @@
                             </div>
 
                             {{-- NUM of BED --}}
-                            <div class="col">
+                            <div class="col mb-2">
                                 <div class="form-floating">
                                     <input required type="number"
                                         class="form-control @error('num_of_bed') is-invalid @enderror" id="num_of_bed"
@@ -133,7 +137,7 @@
                             </div>
 
                             {{-- NUM of BATHROOM --}}
-                            <div class="col">
+                            <div class="col mb-2">
                                 <div class="form-floating">
                                     <input required type="number"
                                         class="form-control @error('num_of_bathroom') is-invalid @enderror"
@@ -149,7 +153,7 @@
                     </div>
                 </div>
 
-                <div class="col-6">
+                <div class="col mb-3">
                     <div class="p-2 border rounded mb-3">
                         @php
                             $tempPath = session('tempImagePath');
@@ -188,26 +192,58 @@
 
                     <div class="p-2 border rounded mb-3">
                         {{-- SERVICES --}}
-                        <div class="row">
-                            <div id="services-container" role="group" aria-label="Basic checkbox toggle button group">
-
+                        <div class="position-relative" id="services-container">
+                            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 row-cols-lg-2">
                                 @foreach ($services as $service)
-                                    <input type="checkbox" class="btn-check btn-check-custom"
-                                        id="btncheck{{ $service->id }}" value="{{ $service->id }}" name="services[]"
-                                        {{-- $errors->count() mi restituisce quanti errori ci sono stati --}} {{-- se non ci sono errori, devo checkare solo se mi trovo nell'edit --}}
-                                        @if (!$errors->count() && $apartment?->services->contains($service->id)) checked @endif {{-- se ci sono errori, devo checkare i vecchi elementi passati dall'old --}}
-                                        @if ($errors->count() && in_array($service->id, old('services', []))) checked @endif>
+                                    <div class="col my-1">
+                                        <div class="d-flex align-items-center">
+                                            <div class="checkbox-wrapper-12">
+                                                <div class="cbx">
+                                                    <input
+                                                        type="checkbox"
+                                                        id="btncheck{{ $service->id }}"
+                                                        value="{{ $service->id }}"
+                                                        name="services[]"
+                                                        {{-- $errors->count() mi restituisce quanti errori ci sono stati --}}
+                                                        {{-- se non ci sono errori, devo checkare solo se mi trovo nell'edit --}}
+                                                        @if (!$errors->count() && $apartment?->services->contains($service->id)) checked @endif
+                                                        {{-- se ci sono errori, devo checkare i vecchi elementi passati dall'old --}}
+                                                        @if ($errors->count() && in_array($service->id, old('services', []))) checked @endif>
 
-                                    <label class="badge btn badge-custom px-3 py-1 m-1"
-                                        for="{{ 'btncheck' . $service->id }}">
-                                        {!! $service['name'] !!}
-                                    </label>
+                                                    <label class="form-check-label" for="{{ 'btncheck' . $service->id }}"></label>
+                                                    <svg width="15" height="14" viewbox="0 0 15 14" fill="none">
+                                                        <path d="M2 8.36364L6.23077 12L13 2"></path>
+                                                    </svg>
+                                                </div>
+                                                <!-- Gooey-->
+                                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                                                    <defs>
+                                                        <filter id="goo-12">
+                                                            <fegaussianblur in="SourceGraphic" stddeviation="4"
+                                                                result="blur"></fegaussianblur>
+                                                            <fecolormatrix in="blur" mode="matrix"
+                                                                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -7"
+                                                                result="goo-12"></fecolormatrix>
+                                                            <feblend in="SourceGraphic" in2="goo-12"></feblend>
+                                                        </filter>
+                                                    </defs>
+                                                </svg>
+                                            </div>
+
+                                            <label class="cursor-pointer ps-2"
+                                                for="{{ 'btncheck' . $service->id }}">
+                                                {!! $service['name'] !!}
+                                            </label>
+                                        </div>
+
+                                    </div>
                                 @endforeach
-                                <p id="services-error" class="text-danger"></p>
-                                @error('services')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
                             </div>
+                            <p class="alert alert-danger position-absolute bottom-0 end-0 m-0" id="services-error"></p>
+                            {{-- <p class="text-danger  font-small-csm" id="services-error"></p> --}}
+                            @error('services')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
                 </div>
