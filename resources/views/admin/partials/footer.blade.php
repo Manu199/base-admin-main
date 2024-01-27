@@ -1,5 +1,5 @@
 <footer>
-    <div class="container mt-5 mb-3">
+    <div class="container mt-4">
         <div class="row">
 
             <!-- LOGO -->
