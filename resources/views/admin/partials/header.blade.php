@@ -8,7 +8,7 @@
                     <img class="logo-header" src="{{ asset('img/logo.png') }}" alt="logo (1).png" />
                 </a>
 
-                <div class="d-flex d-none d-lg-block    ">
+                <div class="d-flex d-none d-lg-block">
 
                     <ul class="navbar-nav ">
 
@@ -51,9 +51,11 @@
                         @guest
 
                             <li class="nav-item dropdown d-flex justify-content-end align-items-center">
-                                <i id="navbarDropdown" class="fa-regular fa-user dropdown-toggle ms-2 user-guest"
-                                    href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false" v-pre></i>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle user-name" href="#"
+                                    role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    v-pre>
+                                    <i class="fa-regular fa-user"></i>
+                                </a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('home') }}">Area personale</a>
                                     <a class="dropdown-item" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -112,9 +114,11 @@
                         @guest
 
                             <li class="nav-item dropdown d-flex justify-content-end align-items-center">
-                                <i id="navbarDropdown" class="fa-regular fa-user dropdown-toggle ms-2 user-guest"
-                                    href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false" v-pre></i>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle user-name" href="#"
+                                    role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    v-pre>
+                                    <i class="fa-regular fa-user"></i>
+                                </a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="http://localhost:5000/ricerca-avanzata">Ricerca
                                         Avanzata</a>
