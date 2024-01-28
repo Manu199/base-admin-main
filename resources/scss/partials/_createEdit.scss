@@ -1,0 +1,13 @@
+.create-edit-apartment{
+    #services-container{
+        max-height: 160px;
+        overflow: hidden;
+        transition: max-height 1s ease-in-out;
+
+        &.reset-max-height {
+            max-height: 1000px;
+        }
+    }
+
+
+}

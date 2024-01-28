@@ -192,8 +192,12 @@
 
                     <div class="p-2 border rounded mb-3">
                         {{-- SERVICES --}}
-                        <div class="position-relative" id="services-container">
-                            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 row-cols-lg-2">
+                        <div class="d-flex align-items-center justify-content-between w-100 border-bottom mb-2">
+                            <h5 class="m-0 p-2">Servizi</h5>
+                            <span class="d-none alert alert-danger m-0 p-1" id="services-error">Seleziona almeno un servizio</span>
+                        </div>
+                        <div class="position-relative" >
+                            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-1 row-cols-lg-2 " id="services-container">
                                 @foreach ($services as $service)
                                     <div class="col my-1">
                                         <div class="d-flex align-items-center">
@@ -239,8 +243,9 @@
                                     </div>
                                 @endforeach
                             </div>
-                            <p class="alert alert-danger position-absolute bottom-0 end-0 m-0" id="services-error"></p>
-                            {{-- <p class="text-danger  font-small-csm" id="services-error"></p> --}}
+                            <div class="position-absolute bottom-0 end-0 cursor-pointer" id="btn-chevron">
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
                             @error('services')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
@@ -256,21 +261,29 @@
         </form>
     </div>
 
-    {{-- import js --}}
+    {{-- Modal confirm delete apartment --}}
+    @include('admin.partials.confirm_custom', [
+        'messagio' => 'Sei sponsorizzato. Vuoi davvero cambiare la visibilità dell\'appartamento?',
+    ])
+
+    {{-- Validate ClienSide --}}
     @push('createEditClienValidateAp')
         <script src="{{ asset('js/createEditClienValidateAp.js') }}"></script>
     @endpush
 
     @stack('createEditClienValidateAp')
 
+    {{-- Open box service --}}
+    <script>
+        const btnChevron = document.getElementById('btn-chevron');
+        const servicesContainer = document.getElementById('services-container');
+        btnChevron.addEventListener('click', function(){
+            servicesContainer.classList.toggle('reset-max-height');
+            btnChevron.classList.toggle('rotate-180');
+        });
+    </script>
 
-    {{-- Modal vissible when have a sponsor --}}
-    {{-- @include('admin.partials.form_elimina', [
-        'messagio' => 'Sei sponsorizzato. Vuoi davvero cambiare la visibilità dell\'appartamento?',
-    ]) --}}
-
-
-
+    {{-- Toggle Visible --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
@@ -292,9 +305,8 @@
                     if (expiration_date > now) {
                         console.log('Sei sponsorizzato');
                         // Se sponsorizzato, chiedi conferma prima di impedire il cambio di stato della checkbox
-                        const confirmation = confirm(
-                            'Sei sponsorizzato. Vuoi davvero cambiare la visibilità dell\'appartamento?'
-                        );
+                        const confirmation = confirmCustom();
+                        // const confirmation = confirm('Sei sponsorizzato. Vuoi davvero cambiare la visibilità dell\'appartamento?');
 
                         // Se l'utente conferma, permetti il cambio di stato, altrimenti previeniDefault
                         if (!confirmation) {

@@ -178,69 +178,10 @@
     </script>
 
 
-    {{-- Modal delete apartment --}}
-    @include('admin.partials.confirm_custom', [
-        'messagio' => 'Vuoi eliminare questo appartamento?',
-    ])
 
-    {{-- BRAINTREE  --}}
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://js.braintreegateway.com/web/dropin/1.8.1/js/dropin.min.js"></script>
-
-    <script>
-        const button = document.querySelector('#submit-button');
-        braintree.dropin.create({
-            authorization: "{{ Braintree\ClientToken::generate() }}",
-            container: '#dropin-container'
-        }, function(createErr, instance) {
-            button.addEventListener('click', function() {
-                // all click del bottone di conferma pagamento
-                // devo controllare se l'appartamento è visibile o meno
-                const visible = {{ $apartment?->visible }};
-
-                if (!visible) {
-                    const confirmation = confirm(
-                        'L\'appartamento non è visibile, sei sicuro di volerlo sponsorizzare?');
-                    if (!confirmation) {
-                        return
-                    }
-                }
-
-                instance.requestPaymentMethod(function(err, payload) {
-
-                    const selectedAmount = document.querySelector(
-                        'input[name="radio-sponsor"]:checked');
-                    if (selectedAmount) {
-                        const amount = selectedAmount.value;
-                        const idSponsor = selectedAmount.id;
-                        const idApartment = {{ $apartment->id }};
-
-
-                        $.get('{{ route('admin.payment.process') }}', {
-                            payload: payload,
-                            amount: amount, // Aggiungi l'importo alla richiesta
-                            idSponsor: idSponsor,
-                            /* mi passo idSponsor */
-                            idApartment: idApartment /* mi passo idApartment */
-                        }, function(response) {
-                            console.log(response);
-                            if (response.success) {
-                                alert('Payment successfull!');
-                                location.reload();
-                            } else {
-                                alert('Payment failed');
-                            }
-                        }, 'json');
-                    }
-                });
-            });
-        });
-    </script>
 
     {{-- Chart.js  --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <script>
         const arrayViews = @json($views);
         const labelsName = [];
@@ -280,6 +221,64 @@
                     }
                 }
             }
+        });
+    </script>
+
+    {{-- BRAINTREE  --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://js.braintreegateway.com/web/dropin/1.8.1/js/dropin.min.js"></script>
+
+    <script>
+        const apartment = @json($apartment);
+        const paymentProcessRoute = @json(route('admin.payment.process'));
+
+        const button = document.querySelector('#submit-button');
+        braintree.dropin.create({
+            authorization: "{{ Braintree\ClientToken::generate() }}",
+            container: '#dropin-container'
+        }, function(createErr, instance) {
+            button.addEventListener('click', function() {
+                // all click del bottone di conferma pagamento
+                // devo controllare se l'appartamento è visibile o meno
+                const visible = apartment['visible'];
+
+                if (!visible) {
+                    const confirmation = confirm(
+                        'L\'appartamento non è visibile, sei sicuro di volerlo sponsorizzare?');
+                    if (!confirmation) {
+                        return
+                    }
+                }
+
+                instance.requestPaymentMethod(function(err, payload) {
+
+                    const selectedAmount = document.querySelector(
+                        'input[name="radio-sponsor"]:checked');
+                    if (selectedAmount) {
+                        const amount = selectedAmount.value;
+                        const idSponsor = selectedAmount.id;
+                        const idApartment = apartment['id'];
+
+
+                        $.get(paymentProcessRoute, {
+                            payload: payload,
+                            amount: amount, // Aggiungi l'importo alla richiesta
+                            idSponsor: idSponsor,
+                            /* mi passo idSponsor */
+                            idApartment: idApartment,
+                            /* mi passo idApartment */
+                        }, function(response) {
+                            console.log(response);
+                            if (response.success) {
+                                alert('Payment successfull!');
+                                location.reload();
+                            } else {
+                                alert('Payment failed');
+                            }
+                        }, 'json');
+                    };
+                });
+            });
         });
     </script>
 @endsection

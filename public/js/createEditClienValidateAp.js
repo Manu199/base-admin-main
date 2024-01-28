@@ -211,10 +211,11 @@ function serviceControllerSuccess() {
 
     // Verifico se almeno una checkbox è stata selezionata
     if (selectedCount < 1) {
-        serviceError.textContent = 'Seleziona almeno un servizio';
+        serviceError.classList.remove('d-none');
+
         return false;
     } else {
-        serviceError.textContent = '';
+        serviceError.classList.add('d-none');
         return true;
     }
 }

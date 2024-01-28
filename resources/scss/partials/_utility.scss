@@ -35,6 +35,10 @@
     cursor: pointer;
 }
 
+.rotate-180 {
+    transform: rotate(180deg);
+}
+
 .badge-sponsor-bottom-big{
     position: absolute;
     bottom: 10px;
@@ -65,3 +69,5 @@
 .font-small-csm{
     font-size: 10px;
 }
+
+
