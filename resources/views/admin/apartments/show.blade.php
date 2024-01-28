@@ -164,21 +164,10 @@
         </div>
     </div>
 
-    {{-- BUTTON LOADING --}}
-    <script>
-        document.getElementById('submit-button').addEventListener('click', function() {
-            document.getElementById('submit-button').classList.add('d-none');
-            document.getElementById('loading-button').classList.remove('d-none');
-
-            setTimeout(function() {
-                document.getElementById('loading-button').classList.add('d-none');
-                document.getElementById('submit-button').classList.remove('d-none');
-            }, 3000);
-        });
-    </script>
-
-
-
+    {{-- Modal delete apartment --}}
+    @include('admin.partials.confirm_custom', [
+        'messagio' => 'Vuoi eliminare questo appartamento?',
+    ])
 
     {{-- Chart.js  --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -232,12 +221,14 @@
         const apartment = @json($apartment);
         const paymentProcessRoute = @json(route('admin.payment.process'));
 
-        const button = document.querySelector('#submit-button');
+        const submitButton = document.getElementById('submit-button');
+        const loadingButton = document.getElementById('loading-button');
         braintree.dropin.create({
             authorization: "{{ Braintree\ClientToken::generate() }}",
             container: '#dropin-container'
         }, function(createErr, instance) {
-            button.addEventListener('click', function() {
+            submitButton.addEventListener('click', function() {
+
                 // all click del bottone di conferma pagamento
                 // devo controllare se l'appartamento è visibile o meno
                 const visible = apartment['visible'];
@@ -249,11 +240,10 @@
                         return
                     }
                 }
-
+                submitButton.classList.toggle('d-none');
+                loadingButton.classList.toggle('d-none');
                 instance.requestPaymentMethod(function(err, payload) {
-
-                    const selectedAmount = document.querySelector(
-                        'input[name="radio-sponsor"]:checked');
+                    const selectedAmount = document.querySelector('input[name="radio-sponsor"]:checked');
                     if (selectedAmount) {
                         const amount = selectedAmount.value;
                         const idSponsor = selectedAmount.id;
@@ -263,19 +253,25 @@
                         $.get(paymentProcessRoute, {
                             payload: payload,
                             amount: amount, // Aggiungi l'importo alla richiesta
-                            idSponsor: idSponsor,
-                            /* mi passo idSponsor */
-                            idApartment: idApartment,
-                            /* mi passo idApartment */
+                            idSponsor: idSponsor,/* mi passo idSponsor */
+                            idApartment: idApartment,/* mi passo idApartment */
                         }, function(response) {
+                            submitButton.classList.toggle('d-none');
+                            loadingButton.classList.toggle('d-none');
                             console.log(response);
                             if (response.success) {
                                 alert('Payment successfull!');
+
                                 location.reload();
                             } else {
                                 alert('Payment failed');
                             }
-                        }, 'json');
+                        }, 'json')
+                        .fail(function() {
+                            // Questo blocco di codice verrà eseguito in caso di errore
+                            submitButton.classList.toggle('d-none');
+                            loadingButton.classList.toggle('d-none');
+                        })
                     };
                 });
             });
