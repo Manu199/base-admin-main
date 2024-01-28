@@ -261,11 +261,11 @@
         </form>
     </div>
 
-    {{-- Modal custom --}}
+    {{-- Modal custom toggle visible --}}
     @include('admin.partials.modal_custom', [
         'id' => 'modal-toggle-visible',
         'title' => 'Attenzione &middot; Sei sponsorizzato',
-        'message' => 'Vuoi davvero cambiare la visibilità dell\'appartamento?',
+        'message' => '<p class="text-center">Vuoi davvero cambiare la visibilità dell\'appartamento?</p>',
     ])
 
     {{-- Validate ClienSide --}}
@@ -286,7 +286,6 @@
     </script>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     {{-- Toggle Visible --}}
     <script>
 

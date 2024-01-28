@@ -180,30 +180,8 @@ $primary-color-rgba-25: rgba($primaryColor,0.25);
         }
     }
 }
-// MESSAGGIO ELIMINARE APPARTAMENTO
-.custom-messaggio-delete {
-    display: none;
-    background-color: rgba(0, 0, 0, 0.6);
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-}
-
-.messaggio-eliminare {
-    padding: 30px 15px;
-    text-align: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-}
-.text-messaggio-elimina {
-    font-size: 12px;
-}
-
+// Modal confirm
+// --------------------------------------
 .btn-modal {
     border: 1px solid $primaryColor;
     margin: 15px 10px 0 10px;
@@ -214,6 +192,7 @@ $primary-color-rgba-25: rgba($primaryColor,0.25);
     background-color: $primaryColor;
     color: white;
 }
+// --------------------------------------
 
 .create-edit-apartment {
     #list-search {

@@ -19,6 +19,10 @@
     <!-- Styles -->
     @vite('resources/js/app.js')
 
+    {{-- Bootstrap js --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {{-- stranamente se inserisco qui questo link, il dropdown nn funziona ma funzionano le modal --}}
+
     <title>{{ config('app.name', 'BnBool') }} &middot; @auth {{ Auth::user()->name }} @endauth</title>
 
 </head>

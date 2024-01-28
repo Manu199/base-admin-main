@@ -7,11 +7,15 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p class="text-center">{{ $message }}</p>
+                {!! $message !!}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-modal" data-bs-dismiss="modal">Annulla</button>
+                <button type="button" class="btn btn-modal" id="btn-delete" data-bs-dismiss="modal">Annulla</button>
                 <button type="button" class="btn btn-modal" id="btn-confirm">Conferma</button>
+                <button class="btn btn-modal d-none" id="btn-spinner">
+                    <span class="spinner-border spinner-border-sm"></span>
+                    <span>Loading...</span>
+                </button>
             </div>
         </div>
     </div>

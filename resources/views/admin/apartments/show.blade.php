@@ -6,13 +6,17 @@
         <h1 class="text-center mb-5">Dettaglio Appartamento</h1>
         <div class="d-flex align-items-center mb-3">
             <h3 class=" d-inline-block m-0">{{ $apartment->title }}</h3>
-            <a class="btn border-black rounded rounded-5 mx-2" href="{{ route('admin.apartment.edit', $apartment) }}"><i
-                    class="fa-solid fa-pen-to-square"></i></a>
+            <a class="btn border-black rounded rounded-5 mx-2" href="{{ route('admin.apartment.edit', $apartment) }}">
+                <i class="fa-solid fa-pen-to-square"></i>
+            </a>
 
             @include('admin.partials.delete_form', [
                 'route' => 'admin.apartment.destroy',
                 'element' => $apartment,
             ])
+            <button class="btn border-black rounded rounded-5 mx-2" id="btn-pay-sponsor">
+                <i class="far fa-credit-card"></i>
+            </button>
         </div>
         <div class="mb-3">
             <h6>{{ $apartment->address }}</h6>
@@ -127,47 +131,42 @@
             </div>
         </div>
 
-        {{-- SPONSORIZZAZIONE --}}
-        <div class="my-3">
-            <div class="accordion accordion-flush" id="accordionFlushExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed text-bg-success rounded" type="button"
-                            data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
-                            aria-controls="flush-collapseOne">
-                            Sponsorizza
-                        </button>
-                    </h2>
-                    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample"
-                        style="">
-                        <div class="container-sponsor d-md-flex justify-content-evenly">
-                            @foreach ($sponsors as $sponsor)
-                                <div class="mt-2 text-center">
-                                    <input class="form-check-input" @if ($sponsor->id === 1) checked @endif
-                                        type="radio" name="radio-sponsor" id="{{ $sponsor->id }}"
-                                        value="{{ $sponsor->price }}">
-                                    <label class="form-check-label" for="{{ $sponsor->id }}">
-                                        {{ $sponsor->duration }} ore / {{ $sponsor->price }} &euro;
-                                    </label>
-                                </div>
-                            @endforeach
-                        </div>
-                        <div id="dropin-container"></div>
-                        <button class="btn btn-success" id="submit-button">Conferma</button>
-                        <button class="btn d-none" id="loading-button" type="button" disabled>
-                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                            Loading...
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {{-- Modal custom delete apartment --}}
+        @include('admin.partials.modal_custom', [
+            'id' => 'modal-delete-apartment',
+            'title' => 'Attenzione',
+            'message' => '<p class="text-center">Vuoi eliminare questo appartamento?</p>',
+        ])
+
+        {{-- Modal custom sponsor --}}
+        @include('admin.partials.modal_custom', [
+            'id' => 'modal-sponsor',
+            'title' => 'Sponsorizzazione',
+            'message' => view('admin.partials.sponsor', ['sponsors' => $sponsors])->render(),
+        ])
+
+        {{-- Modal custom sponsor-invisible --}}
+        @include('admin.partials.modal_custom', [
+            'id' => 'modal-sponsor-invisible',
+            'title' => 'Attenzione &middot; Appartamento non visibile',
+            'message' => '<p class="text-center">Vuoi davvero sponsorizzare l\'appartamento?</p>',
+        ])
+
+        {{-- Modal custom sponsor-success --}}
+        @include('admin.partials.modal_custom', [
+            'id' => 'modal-result-sponsor-success',
+            'title' => 'Sponsorizzazione',
+            'message' => '<p class="text-center">Pagamento effettuato con successo!</p>',
+        ])
+        {{-- Modal custom sponsor-failed --}}
+        @include('admin.partials.modal_custom', [
+            'id' => 'modal-result-sponsor-failed',
+            'title' => 'Sponsorizzazione',
+            'message' => '<p class="text-center">Pagamento fallito!</p>',
+        ])
+
     </div>
 
-    {{-- Modal delete apartment --}}
-    @include('admin.partials.confirm_custom', [
-        'messagio' => 'Vuoi eliminare questo appartamento?',
-    ])
 
     {{-- Chart.js  --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -218,30 +217,49 @@
     <script src="https://js.braintreegateway.com/web/dropin/1.8.1/js/dropin.min.js"></script>
 
     <script>
+        // Data for sponsor
         const apartment = @json($apartment);
         const paymentProcessRoute = @json(route('admin.payment.process'));
 
-        const submitButton = document.getElementById('submit-button');
-        const loadingButton = document.getElementById('loading-button');
+        const btnPaySponsor = document.getElementById('btn-pay-sponsor');
+        // Target modal sponsor
+        const modalSponsor = new bootstrap.Modal('#modal-sponsor', {});
+
+        btnPaySponsor.addEventListener('click', function(){
+            // devo controllare se l'appartamento è visibile o meno
+            const visible = apartment['visible'];
+
+            // Target modal sponsor invisible
+            const modalSponsorInvisible = new bootstrap.Modal('#modal-sponsor-invisible', {});
+            if (!visible) {
+                modalSponsorInvisible.show();
+                // Confirm modal sponsor invisible
+                const btnConfirmSponsorInvisible = document.querySelector('#modal-sponsor-invisible #btn-confirm');
+                btnConfirmSponsorInvisible.addEventListener('click',function(){
+                    modalSponsorInvisible.hide();
+                    modalSponsor.show();
+                })
+            }else{
+                modalSponsor.show();
+            }
+        })
+
+        // Confirm modal sponsor
+        const btnConfirmSponsor = document.querySelector('#modal-sponsor #btn-confirm');
+
         braintree.dropin.create({
             authorization: "{{ Braintree\ClientToken::generate() }}",
             container: '#dropin-container'
         }, function(createErr, instance) {
-            submitButton.addEventListener('click', function() {
+            btnConfirmSponsor.addEventListener('click', function() {
+                // al click del pulsante di conferma, faccio visualizzare lo spinner
+                const btnDeleteSponsor = document.querySelector('#modal-sponsor #btn-delete');
+                const btnSpinnerSponsor = document.querySelector('#modal-sponsor #btn-spinner');
 
-                // all click del bottone di conferma pagamento
-                // devo controllare se l'appartamento è visibile o meno
-                const visible = apartment['visible'];
+                btnConfirmSponsor.classList.toggle('d-none');
+                btnDeleteSponsor.classList.toggle('d-none');
+                btnSpinnerSponsor.classList.toggle('d-none');
 
-                if (!visible) {
-                    const confirmation = confirm(
-                        'L\'appartamento non è visibile, sei sicuro di volerlo sponsorizzare?');
-                    if (!confirmation) {
-                        return
-                    }
-                }
-                submitButton.classList.toggle('d-none');
-                loadingButton.classList.toggle('d-none');
                 instance.requestPaymentMethod(function(err, payload) {
                     const selectedAmount = document.querySelector('input[name="radio-sponsor"]:checked');
                     if (selectedAmount) {
@@ -249,28 +267,50 @@
                         const idSponsor = selectedAmount.id;
                         const idApartment = apartment['id'];
 
-
                         $.get(paymentProcessRoute, {
                             payload: payload,
                             amount: amount, // Aggiungi l'importo alla richiesta
                             idSponsor: idSponsor,/* mi passo idSponsor */
                             idApartment: idApartment,/* mi passo idApartment */
                         }, function(response) {
-                            submitButton.classList.toggle('d-none');
-                            loadingButton.classList.toggle('d-none');
-                            console.log(response);
-                            if (response.success) {
-                                alert('Payment successfull!');
+                            btnConfirmSponsor.classList.toggle('d-none');
+                            btnDeleteSponsor.classList.toggle('d-none');
+                            btnSpinnerSponsor.classList.toggle('d-none');
 
-                                location.reload();
+                            console.log(response);
+
+                            modalSponsor.hide();
+                            if (response.success) {
+                                // Target modal sponsor-success
+                                const modalResultSuccess = new bootstrap.Modal('#modal-result-sponsor-success', {});
+                                modalResultSuccess.show();
+                                const btnDeleteResultSuccess = document.querySelector('#modal-result-sponsor-success #btn-delete');
+                                btnDeleteResultSuccess.classList.add('d-none');
+                                const btnConfirmResultSuccess = document.querySelector('#modal-result-sponsor-success #btn-confirm');
+                                btnConfirmResultSuccess.textContent = "Ok";
+
+                                btnConfirmResultSuccess.addEventListener('click',function(){
+                                    location.reload();
+                                })
                             } else {
-                                alert('Payment failed');
+                                const modalResultFailed = new bootstrap.Modal('#modal-result-sponsor-failed', {});
+                                modalResultFailed.show();
+                                const btnDeleteResultFailed = document.querySelector('#modal-result-sponsor-failed #btn-delete');
+                                btnDeleteResultFailed.classList.add('d-none');
+                                const btnConfirmResultFailed = document.querySelector('#modal-result-sponsor-failed #btn-confirm');
+                                btnConfirmResultFailed.textContent = "Ok";
+
+                                btnConfirmResultFailed.addEventListener('click',function(){
+                                    location.reload();
+                                })
+
                             }
                         }, 'json')
                         .fail(function() {
                             // Questo blocco di codice verrà eseguito in caso di errore
-                            submitButton.classList.toggle('d-none');
-                            loadingButton.classList.toggle('d-none');
+                            btnConfirmSponsor.classList.toggle('d-none');
+                            btnDeleteSponsor.classList.toggle('d-none');
+                            btnSpinnerSponsor.classList.toggle('d-none');
                         })
                     };
                 });
