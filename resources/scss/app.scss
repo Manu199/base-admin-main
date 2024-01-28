@@ -194,23 +194,23 @@ $primary-color-rgba-25: rgba($primaryColor,0.25);
 .messaggio-eliminare {
     padding: 30px 15px;
     text-align: center;
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 
-    .text-messaggio-elimina {
-        font-size: 12px;
-    }
+}
+.text-messaggio-elimina {
+    font-size: 12px;
 }
 
-.btn-elimina-appartamento {
+.btn-modal {
     border: 1px solid $primaryColor;
     margin: 15px 10px 0 10px;
     padding: 4px 14px;
 }
 
-.btn-elimina-appartamento:hover {
+.btn-modal:hover {
     background-color: $primaryColor;
     color: white;
 }

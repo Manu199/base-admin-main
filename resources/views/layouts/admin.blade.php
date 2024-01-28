@@ -19,8 +19,7 @@
     <!-- Styles -->
     @vite('resources/js/app.js')
 
-    <title>Admin</title>
-
+    <title>{{ config('app.name', 'BnBool') }} &middot; @auth {{ Auth::user()->name }} @endauth</title>
 
 </head>
 

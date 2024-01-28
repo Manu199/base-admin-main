@@ -261,9 +261,11 @@
         </form>
     </div>
 
-    {{-- Modal confirm delete apartment --}}
-    @include('admin.partials.confirm_custom', [
-        'messagio' => 'Sei sponsorizzato. Vuoi davvero cambiare la visibilità dell\'appartamento?',
+    {{-- Modal custom --}}
+    @include('admin.partials.modal_custom', [
+        'id' => 'modal-toggle-visible',
+        'title' => 'Attenzione &middot; Sei sponsorizzato',
+        'message' => 'Vuoi davvero cambiare la visibilità dell\'appartamento?',
     ])
 
     {{-- Validate ClienSide --}}
@@ -283,9 +285,16 @@
         });
     </script>
 
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     {{-- Toggle Visible --}}
     <script>
+
         document.addEventListener('DOMContentLoaded', function() {
+            // Importa Bootstrap
+
+            // new modal bootstrap target
+            const myModalCSM = new bootstrap.Modal('#modal-toggle-visible', {});
 
             const switchCheckbox = document.getElementById('toggle-visible');
             const eyeIcon = document.getElementById('eye-visible');
@@ -304,17 +313,19 @@
                 if (!switchCheckbox.checked) {
                     if (expiration_date > now) {
                         console.log('Sei sponsorizzato');
-                        // Se sponsorizzato, chiedi conferma prima di impedire il cambio di stato della checkbox
-                        const confirmation = confirmCustom();
-                        // const confirmation = confirm('Sei sponsorizzato. Vuoi davvero cambiare la visibilità dell\'appartamento?');
-
-                        // Se l'utente conferma, permetti il cambio di stato, altrimenti previeniDefault
-                        if (!confirmation) {
-                            event.preventDefault();
-                        }
+                        event.preventDefault();
+                        myModalCSM.show();
                     }
                 }
             });
+
+            const btnConfirm = document.getElementById('btn-confirm');
+            btnConfirm.addEventListener('click', function(){
+                switchCheckbox.checked = false;
+                myModalCSM.hide();
+            })
+
+
 
         });
     </script>

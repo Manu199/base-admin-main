@@ -2,8 +2,8 @@
 <div class="d-none" id="modal-confirm">
     <div class="messaggio-eliminare bg-white rounded-2">
         <p id="modal-text-message" class="text-messaggio-elimina">{{ $messagio }}</p>
-        <button id="cancel" class="btn btn-elimina-appartamento">Annulla</button>
-        <button id="confirm" class="btn btn-elimina-appartamento">Conferma</button>
+        <button id="cancel" class="btn btn-modal">Annulla</button>
+        <button id="confirm" class="btn btn-modal">Conferma</button>
     </div>
 </div>
 
