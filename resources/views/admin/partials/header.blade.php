@@ -17,33 +17,30 @@
                                 <a class="nav-link custom-btn-primary" href="http://localhost:5000">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link custom-btn-primary "
-                                    href="http://localhost:5000/ricerca-avanzata">Ricerca
-                                    Avanzata</a>
+                                <a class="nav-link custom-btn-primary" href="http://localhost:5000/ricerca-avanzata">Ricerca Avanzata</a>
                             </li>
                         @else
                             <li class="nav-item">
                                 <a class="nav-link custom-btn-primary" href="http://localhost:5000">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link custom-btn-primary   "
-                                    href="http://localhost:5000/ricerca-avanzata">Ricerca
-                                    Avanzata</a>
+                                <a class="nav-link custom-btn-primary" href="http://localhost:5000/ricerca-avanzata">Ricerca Avanzata</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link custom-btn-primary   {{ Route::currentRouteName() === 'admin.apartment.index' ? 'active' : '' }}"
+                                <a class="nav-link custom-btn-primary {{ Route::currentRouteName() === 'admin.apartment.index' ? 'active' : '' }}"
                                     href="{{ route('admin.apartment.index') }}">Lista Appartamenti</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link custom-btn-primary   {{ Route::currentRouteName() === 'admin.apartments.listMessages' ? 'active' : '' }}"
+                                <a class="nav-link custom-btn-primary {{ Route::currentRouteName() === 'admin.apartments.listMessages' ? 'active' : '' }}"
                                     href="{{ route('admin.apartments.listMessages') }}">Lista Messaggi</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link custom-btn-primary  {{ Route::currentRouteName() === 'admin.apartment.create' ? 'active' : '' }}"
-                                    href="{{ route('admin.apartment.create') }}"><i class="fa-solid fa-plus"></i>
-                                    Nuovo
-                                    Appartamento</a>
+                                <a
+                                    class="nav-link custom-btn-primary {{ Route::currentRouteName() === 'admin.apartment.create' ? 'active' : '' }}"
+                                    href="{{ route('admin.apartment.create') }}">
+                                    Nuovo Appartamento
+                                </a>
                             </li>
                         @endguest
 
@@ -145,25 +142,17 @@
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
                                     <a class="dropdown-item" href="http://localhost:5000">Home</a>
-
-                                    <a class="dropdown-item" href="http://localhost:5000/ricerca-avanzata">Ricerca
-                                        Avanzata</a>
-                                    <a class="dropdown-item" href="{{ route('admin.apartment.index') }}">Lista
-                                        Appartamenti</a>
-                                    <a class="dropdown-item" href="{{ route('admin.apartment.create') }}"><i
-                                            class="fa-solid fa-plus"></i>
-                                        Nuovo
-                                        Appartamento
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('admin.apartments.listMessages') }}">Lista
-                                        messagi</a>
-
+                                    <a class="dropdown-item" href="http://localhost:5000/ricerca-avanzata">Ricerca Avanzata</a>
+                                    <a class="dropdown-item" href="{{ route('admin.apartment.index') }}">Lista Appartamenti</a>
+                                    <a class="dropdown-item" href="{{ route('admin.apartment.create') }}"> Nuovo Appartamento </a>
+                                    <a class="dropdown-item" href="{{ route('admin.apartments.listMessages') }}">Lista messagi</a>
                                     <a class="dropdown-item" href="{{ route('home') }}">Area personale</a>
                                     <a class="dropdown-item" href="{{ url('profile') }}">Profilo</a>
 
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                         document.getElementById('logout-form').submit();">
+                                    <a
+                                        class="dropdown-item"
+                                        href="{{ route('logout') }}"
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 

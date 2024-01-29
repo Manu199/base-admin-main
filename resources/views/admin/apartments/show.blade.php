@@ -87,7 +87,7 @@
                 </div>
 
 
-                @if ($messages->count())
+
                     {{-- messages --}}
                     <div class="card">
                         <div class="card-header">
@@ -111,27 +111,24 @@
                                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <div class="title d-sm-flex">
-                                                    <div class="d-flex flex-column align-items-center">
-                                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                                                            {{ $message->name }}
-                                                        </h1>
-                                                        <p class="pb-0 inline-block">
-                                                            <i class="fa-solid fa-at"> :</i>
+                                                <div class="title">
+                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                                                        {{ $message->name }}
+                                                    </h1>
+                                                    <div class="address_date d-flex justify-content-between ">
+                                                        <p class="me-5">
+                                                            <i class="fa-solid fa-at me-1"> :</i>
                                                             {{ $message->email_sender }}
                                                         </p>
-                                                    </div>
-                                                    <div class="address_date d-flex align-items-end mt-3 ms-4">
-                                                        <p class="m-0 p-0">
-                                                            {{ date('d/m/Y - H:i', strtotime($message->date)) }}</p>
+                                                        <p>{{ date('d/m/Y - H:i', strtotime($message->date)) }}</p>
                                                     </div>
 
-                                                </div>
+                                                    </div>
 
-                                                <button type="button" class="btn-close m-0" data-bs-dismiss="modal"
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body mx-4">
+                                            <div class="modal-body">
                                                 {{ $message->text }}
                                             </div>
                                             <div class="modal-footer">
@@ -152,7 +149,7 @@
                         </div>
                     </div>
             </div>
-            @endif
+
         </div>
 
 
@@ -161,7 +158,7 @@
         <script>
             const btnChevron = document.getElementById('btn-chevron');
             const servicesContainer = document.getElementById('services-container');
-            btnChevron.addEventListener('click', function() {
+            btnChevron.addEventListener('click', function(){
                 servicesContainer.classList.toggle('reset-max-height');
                 btnChevron.classList.toggle('rotate-180');
             });
@@ -202,6 +199,17 @@
         ])
 
     </div>
+
+    {{-- Open box service --}}
+    <script>
+        const btnChevron = document.getElementById('btn-chevron');
+        const servicesContainer = document.getElementById('services-container');
+        btnChevron.addEventListener('click', function() {
+            servicesContainer.classList.toggle('reset-max-height');
+            btnChevron.classList.toggle('rotate-180');
+        });
+    </script>
+
 
     {{-- Chart.js  --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
