@@ -178,23 +178,24 @@
     {{-- Chart.js  --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        const arrayViews = @json($views);
+        const arrayStatistic = @json($statistic);
         const labelsName = [];
-        const dataArray = [];
+        const viewsArray = [];
+        const counterMessageArray = [];
 
-        arrayViews.slice(1).forEach(monthViews => {
-            const date = new Date(monthViews['month'] + '-01');
-
+        arrayStatistic.forEach(statistic => {
+            const date = new Date(statistic['month'] + '-01');
             // nome del mese abbreviato
             const nameMonth = date.toLocaleString('default', {
                 month: 'short'
             });
 
             // Ottieni l'anno
-            var year = date.getFullYear();
+            const year = date.getFullYear();
 
             labelsName.push(nameMonth + ' ' + year);
-            dataArray.push(monthViews['total']);
+            viewsArray.push(statistic['views']);
+            counterMessageArray.push(statistic['messages']);
         });
 
         const ctx = document.getElementById('myChart');
@@ -203,11 +204,18 @@
             type: 'bar',
             data: {
                 labels: labelsName,
-                datasets: [{
-                    label: 'Views per mese',
-                    data: dataArray,
-                    borderWidth: 1
-                }]
+                datasets: [
+                    {
+                        label: 'Views per mese',
+                        data: viewsArray,
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Messaggi per mese',
+                        data: counterMessageArray,
+                        borderWidth: 1
+                    },
+                ]
             },
             options: {
                 scales: {
