@@ -171,6 +171,7 @@ $primary-color-rgba-25: rgba($primaryColor,0.25);
 }
 
 .pageNotFound {
+    height: calc(100vh - 250px);
     a {
         color: $primaryColor;
         border-color: $primaryColor;
