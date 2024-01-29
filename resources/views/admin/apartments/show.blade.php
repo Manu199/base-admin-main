@@ -111,24 +111,25 @@
                                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <div class="title">
-                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                                                        {{ $message->name }}
-                                                    </h1>
-                                                    <div class="address_date d-flex justify-content-between ">
-                                                        <p class="me-5">
-                                                            <i class="fa-solid fa-at me-1"> :</i>
+                                                <div class="title d-sm-flex">
+                                                    <div class="d-flex flex-column align-items-center">
+                                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                                                            {{ $message->name }}
+                                                        </h1>
+                                                        <p class="pb-0 inline-block">
+                                                            <i class="fa-solid fa-at"
+                                                            style="color: #047458"> :</i>
                                                             {{ $message->email_sender }}
                                                         </p>
-                                                        <p>{{ date('d/m/Y - H:i', strtotime($message->date)) }}</p>
                                                     </div>
-
+                                                    <div class="address_date d-flex align-items-end mt-3 ms-4">
+                                                        <p class="m-0 p-0">{{ date('d/m/Y - H:i', strtotime($message->date)) }}</p>
                                                     </div>
-
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                </div>
+                                                <button type="button" class="btn-close m-0" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body">
+                                            <div class="modal-body mx-4">
                                                 {{ $message->text }}
                                             </div>
                                             <div class="modal-footer">
