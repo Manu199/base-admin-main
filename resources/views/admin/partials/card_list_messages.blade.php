@@ -28,7 +28,7 @@
                         <div class="modal-header">
                             <div class="title d-sm-flex">
                                 <div class="d-flex flex-column align-items-center">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                                    <h1 class="modal-title fs-5 fw-bold" id="staticBackdropLabel">
                                         {{ $message->name }}
                                     </h1>
                                     <p class="pb-0 inline-block">
