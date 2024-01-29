@@ -61,12 +61,7 @@
                             Posta in arrivo
                         </div>
                         <div class="card-body cursor-pointer">
-                            <style>
-                                /* DA SISTEMARE */
-                                .list-group-item {
-                                    width: 50%;
-                                }
-                            </style>
+
                             @foreach ($messages as $message)
                                 <ul class="list-group list-group-horizontal mb-1 " data-bs-toggle="modal"
                                     data-bs-target="#staticBackdrop{{ $message->id }}">
