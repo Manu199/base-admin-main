@@ -3,8 +3,8 @@
 
     @csrf
     @method('DELETE')
-    <button class="btn btn-custom border-black rounded rounded-5" type="submit">
-        <i class="fa-solid fa-trash-can"></i>
+    <button class="btn btn-custom-show-apartment" type="submit">
+        <i class="fa-solid fa-trash-can fs-5"></i>
     </button>
 </form>
 

@@ -4,19 +4,22 @@
 @section('content')
     <div class="show-apartment">
         <h1 class="text-center mb-5">Dettaglio Appartamento</h1>
-        <div class="d-flex align-items-center mb-3">
-            <h3 class=" d-inline-block m-0">{{ $apartment->title }}</h3>
-            <a class="btn border-black rounded rounded-5 mx-2" href="{{ route('admin.apartment.edit', $apartment) }}">
-                <i class="fa-solid fa-pen-to-square"></i>
-            </a>
+        <div class="d-flex align-items-center justify-content-center mb-3 flex-column text-center flex-lg-row">
+            <h3>{{ $apartment->title }}</h3>
+            <div class=" d-flex ms-2">
+                <a class="btn btn-custom-show-apartment" href="{{ route('admin.apartment.edit', $apartment) }}">
+                    <i class="fa-solid fa-pen-to-square fs-5"></i>
+                </a>
 
-            @include('admin.partials.delete_form', [
-                'route' => 'admin.apartment.destroy',
-                'element' => $apartment,
-            ])
-            <button class="btn border-black rounded rounded-5 mx-2" id="btn-pay-sponsor">
-                <i class="far fa-credit-card"></i>
-            </button>
+                @include('admin.partials.delete_form', [
+                    'route' => 'admin.apartment.destroy',
+                    'element' => $apartment,
+                ])
+                <button class=" btn-custom-show-apartment" id="btn-pay-sponsor">
+                    <i class="far fa-credit-card fs-5"></i>
+                </button>
+            </div>
+
         </div>
         <div class="mb-3">
             <h6>{{ $apartment->address }}</h6>
@@ -88,67 +91,67 @@
 
 
 
-                    {{-- messages --}}
-                    <div class="card">
-                        <div class="card-header">
-                            <i class="fa-solid fa-paper-plane me-2"></i>
-                            Posta in arrivo
-                        </div>
-                        <div class="card-body cursor-pointer">
+                {{-- messages --}}
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fa-solid fa-paper-plane me-2"></i>
+                        Posta in arrivo
+                    </div>
+                    <div class="card-body cursor-pointer">
 
-                            @foreach ($messages as $message)
-                                <ul class="list-group list-group-horizontal mb-1 " data-bs-toggle="modal"
-                                    data-bs-target="#staticBackdrop{{ $message->id }}">
-                                    <li class="list-group-item single-line-ellipsis list-group-item-success">
-                                        {{ $message->email_sender }}</li>
-                                    <li class="list-group-item single-line-ellipsis list-group-item-success">
-                                        {{ date('d/m/Y - H:i', strtotime($message->date)) }}</li>
-                                </ul>
-                                <!-- Modal -->
-                                <div class="modal fade" id="staticBackdrop{{ $message->id }}" data-bs-backdrop="static"
-                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <div class="title d-sm-flex">
-                                                    <div class="d-flex flex-column align-items-center">
-                                                        <h1 class="modal-title fs-5 fw-bold" id="staticBackdropLabel">
-                                                            {{ $message->name }}
-                                                        </h1>
-                                                        <p class="pb-0 inline-block">
-                                                            <i class="fa-solid fa-at"
-                                                            style="color: #047458"> :</i>
-                                                            {{ $message->email_sender }}
-                                                        </p>
-                                                    </div>
-                                                    <div class="address_date d-flex align-items-end mt-3 ms-4">
-                                                        <p class="m-0 p-0">{{ date('d/m/Y - H:i', strtotime($message->date)) }}</p>
-                                                    </div>
+                        @foreach ($messages as $message)
+                            <ul class="list-group list-group-horizontal mb-1 " data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop{{ $message->id }}">
+                                <li class="list-group-item single-line-ellipsis list-group-item-success">
+                                    {{ $message->email_sender }}</li>
+                                <li class="list-group-item single-line-ellipsis list-group-item-success">
+                                    {{ date('d/m/Y - H:i', strtotime($message->date)) }}</li>
+                            </ul>
+                            <!-- Modal -->
+                            <div class="modal fade" id="staticBackdrop{{ $message->id }}" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="title d-sm-flex">
+                                                <div class="d-flex flex-column align-items-center">
+                                                    <h1 class="modal-title fs-5 fw-bold" id="staticBackdropLabel">
+                                                        {{ $message->name }}
+                                                    </h1>
+                                                    <p class="pb-0 inline-block">
+                                                        <i class="fa-solid fa-at" style="color: #047458"> :</i>
+                                                        {{ $message->email_sender }}
+                                                    </p>
                                                 </div>
-                                                <button type="button" class="btn-close m-0" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                                                <div class="address_date d-flex align-items-end mt-3 ms-4">
+                                                    <p class="m-0 p-0">{{ date('d/m/Y - H:i', strtotime($message->date)) }}
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <div class="modal-body mx-4">
-                                                {{ $message->text }}
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close</button>
-                                                {{-- <button type="button" class="btn btn-primary">Understood</button> --}}
-                                            </div>
+                                            <button type="button" class="btn-close m-0" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body mx-4">
+                                            {{ $message->text }}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            {{-- <button type="button" class="btn btn-primary">Understood</button> --}}
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
+                            </div>
+                        @endforeach
 
-                            <p class="text-end">
-                                <a href="{{ route('admin.apartment.listMessages', $apartment->id) }}"
-                                    class="btn rounded-0 custom-btn-primary">Mostra tutto...</a>
-                            </p>
+                        <p class="text-end">
+                            <a href="{{ route('admin.apartment.listMessages', $apartment->id) }}"
+                                class="btn rounded-0 custom-btn-primary">Mostra tutto...</a>
+                        </p>
 
-                        </div>
                     </div>
+                </div>
             </div>
 
         </div>
@@ -159,7 +162,7 @@
         <script>
             const btnChevron = document.getElementById('btn-chevron');
             const servicesContainer = document.getElementById('services-container');
-            btnChevron.addEventListener('click', function(){
+            btnChevron.addEventListener('click', function() {
                 servicesContainer.classList.toggle('reset-max-height');
                 btnChevron.classList.toggle('rotate-180');
             });
