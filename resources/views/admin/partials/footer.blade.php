@@ -84,11 +84,11 @@
                     <div class="wrapper">
                         <div class="connect m-0">
 
-                            <a href="" class="share X">
+                            <a href="https://twitter.com/?lang=it" target="_blanck" class="share X">
                                 <svg role="presentation" class="svg--icon">
                                     <use xlink:href="#svg--X" />
                                 </svg>
-                                <span class="clip">TWITTER</span>
+                                <span class="clip">X</span>
                             </a>
 
                             {{-- <a href="" rel="author" class="share google">
@@ -98,14 +98,14 @@
                           </svg>
                             </a> --}}
 
-                            <a href="" rel="author" class="share facebook">
+                            <a href="https://www.facebook.com/" target="_blanck" rel="author" class="share facebook">
                                 <svg role="presentation" class="svg--icon">
                                     <use xlink:href="#svg--facebook" />
                                     <span class="clip">FACEBOOK</span>
                                 </svg>
                             </a>
 
-                            <a href="" rel="author" class="share instagram">
+                            <a href="https://www.instagram.com/" target="_blanck" rel="author" class="share instagram">
                                 <svg role="presentation" class="svg--icon">
                                     <use xlink:href="#svg--instagram" />
                                     <span class="clip">INSTAGRAM</span>
@@ -126,7 +126,7 @@
                                 </svg>
                             </a> --}}
 
-                            <a href="" class="share  youtube">
+                            <a href="https://www.youtube.com/" target="_blanck" class="share  youtube">
                                 <svg role="presentation" class="svg--icon">
                                     <use xlink:href="#svg--youtube" />
                                     <span class="clip">YOU-TUBE</span>
