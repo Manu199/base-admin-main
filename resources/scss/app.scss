@@ -171,10 +171,11 @@ $primary-color-rgba-25: rgba($primaryColor,0.25);
 }
 
 .pageNotFound {
-    height: calc(100vh - 250px);
+    height: calc(100vh - 305px);
     a {
         color: $primaryColor;
         border-color: $primaryColor;
+        margin-top: 33px;
         &:hover {
             background-color: $primaryColor;
             color: white;
