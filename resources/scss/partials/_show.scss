@@ -11,4 +11,25 @@
         }
     }
 
+    #services-container{
+        max-height: 160px;
+        overflow: hidden;
+        transition: max-height 1s ease-in-out;
+
+        #btn-chevron{
+            width: 25px;
+
+        }
+
+        &.reset-max-height {
+            max-height: 1000px;
+
+        }
+
+
+
+
+
+    }
+
 }
