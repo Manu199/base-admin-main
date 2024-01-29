@@ -288,12 +288,9 @@
 
     {{-- Toggle Visible --}}
     <script>
-
         document.addEventListener('DOMContentLoaded', function() {
-            // Importa Bootstrap
-
             // new modal bootstrap target
-            const myModalCSM = new bootstrap.Modal('#modal-toggle-visible', {});
+            const modalToggleVisible = new bootstrap.Modal('#modal-toggle-visible', {});
 
             const switchCheckbox = document.getElementById('toggle-visible');
             const eyeIcon = document.getElementById('eye-visible');
@@ -313,7 +310,7 @@
                     if (expiration_date > now) {
                         console.log('Sei sponsorizzato');
                         event.preventDefault();
-                        myModalCSM.show();
+                        modalToggleVisible.show();
                     }
                 }
             });
@@ -321,11 +318,8 @@
             const btnConfirm = document.getElementById('btn-confirm');
             btnConfirm.addEventListener('click', function(){
                 switchCheckbox.checked = false;
-                myModalCSM.hide();
+                modalToggleVisible.hide();
             })
-
-
-
         });
     </script>
 @endsection

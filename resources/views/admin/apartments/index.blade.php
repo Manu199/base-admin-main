@@ -18,8 +18,12 @@
                                         class="card-img-top rounded rounded-4"
                                         alt="Appartamento">
                                 </a>
-                                <a href="{{ route('admin.apartment.edit-visible', $apartment) }}"
-                                    class="visible-badge text-bg-success text-decoration-none">
+                                <a
+                                    href="{{ route('admin.apartment.edit-visible', $apartment) }}"
+                                    class="visible-badge text-bg-success text-decoration-none"
+                                    id="toggle-icon-{{ $apartment->id }}"
+                                    data-visible="{{ $apartment->visible }}"
+                                    data-sponsor="{{ $apartment->sponsors[0]->pivot->expiration_date ?? null }}">
                                     <i class="far {{ $apartment->visible ? 'fa-eye' : 'fa-eye-slash' }} p-1"></i>
                                 </a>
                                 @if ($apartment->sponsors->count() && strtotime($apartment->sponsors[0]->pivot->expiration_date) >= strtotime(now()))
@@ -43,5 +47,62 @@
                 </div>
             @endforeach
         </div>
+
+        {{-- Modal custom toggle visible --}}
+        @include('admin.partials.modal_custom', [
+            'id' => 'modal-toggle-visible',
+            'title' => 'Attenzione &middot; Sei sponsorizzato',
+            'message' => '<p class="text-center">Vuoi davvero cambiare la visibilità dell\'appartamento?</p>',
+        ])
     </div>
+
+    <script>
+        // new modal bootstrap target
+        const modalToggleVisible = new bootstrap.Modal('#modal-toggle-visible', {});
+
+        const toggleIconArray = document.querySelectorAll('[id^="toggle-icon-"]');
+
+        toggleIconArray.forEach(toggleIcon => {
+            toggleIcon.addEventListener('click', clickHandler);
+
+            function clickHandler(event){
+                event.preventDefault();
+
+                const apartmentSponsor = toggleIcon.getAttribute('data-sponsor');
+                const apartmentVisible = toggleIcon.getAttribute('data-visible');
+                console.log(apartmentVisible);
+
+                const expirationDate = new Date(apartmentSponsor);
+                const now = new Date();
+                console.log(expirationDate);
+                console.log(now);
+
+                if(apartmentVisible == 1 && expirationDate >= now){
+                    console.log('modal avvio');
+                    modalToggleVisible.show();
+
+                    const btnConfirm = document.getElementById('btn-confirm');
+                    btnConfirm.addEventListener('click', function(){
+                        modalToggleVisible.hide();
+                        changeVisibility();
+                    })
+                }else{
+                    changeVisibility();
+                }
+            }
+
+            function changeVisibility(){
+                // Rimuovi temporaneamente l'ascoltatore click
+                toggleIcon.removeEventListener('click', clickHandler);
+
+                // Richiama manualmente l'azione predefinita del link
+                toggleIcon.click();
+
+                // Ripristina l'ascoltatore click dopo un breve ritardo
+                setTimeout(function() {
+                    toggleIcon.addEventListener('click', clickHandler);
+                }, 100);
+            }
+        });
+    </script>
 @endsection
