@@ -5,7 +5,7 @@
 
     </div>
     <div class="card-body cursor-pointer">
-
+    @if ($messages->count())
         @foreach ($messages as $message)
             <ul class="list-group list-group-horizontal mb-1 " data-bs-toggle="modal"
                 data-bs-target="#staticBackdrop{{ $message->id }}">
@@ -54,5 +54,8 @@
                 </div>
             </div>
         @endforeach
+    @else
+        <p>Nessun messaggio...</p>
+    @endif
     </div>
 </div>
