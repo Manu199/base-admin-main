@@ -56,10 +56,12 @@
                     </div>
 
                     {{-- services --}}
-                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-2 position-relative" id="services-container">
-                        @foreach ($apartment->services as $service)
-                            <span class="my-2"> {!! $service['name'] !!}</span>
-                        @endforeach
+                    <div class="position-relative" id="services-container">
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-2">
+                            @foreach ($apartment->services as $service)
+                                <span class="col my-2"> {!! $service['name'] !!}</span>
+                            @endforeach
+                        </div>
                         <div class="position-absolute bottom-0 end-0 cursor-pointer p-0" id="btn-chevron">
                             <i class="fa-solid fa-chevron-down"></i>
                         </div>
@@ -131,7 +133,19 @@
             @endif
         </div>
 
-         {{-- Open box service --}}
+        {{-- GRAFICO VIEWS --}}
+        <div class="mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title m-0">Interazioni con il tuo appartamento: </h4>
+                </div>
+                <div class="card-body">
+                    <canvas id="myChart" class="w-100 h-100"></canvas>
+                </div>
+            </div>
+        </div>
+
+        {{-- Open box service --}}
         <script>
             const btnChevron = document.getElementById('btn-chevron');
             const servicesContainer = document.getElementById('services-container');
@@ -140,15 +154,6 @@
                 btnChevron.classList.toggle('rotate-180');
             });
         </script>
-
-
-        {{-- GRAFICO VIEWS --}}
-        <div class="mb-4">
-            <h4 class="my-5">Interazioni con il tuo appartamento:</h5>
-                <div class="w-50">
-                    <canvas id="myChart"></canvas>
-                </div>
-        </div>
 
         {{-- Modal custom delete apartment --}}
         @include('admin.partials.modal_custom', [
