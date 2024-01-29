@@ -48,7 +48,7 @@
                 <div class="div border rounded p-3 my-3 bg-white">
                     <div class="w-100 border-bottom mb-2">
                         <h6 class="m-0">
-                            <p class="mb-2">&euro;{{ $apartment->price }},00/notte</p>
+                            <p class="mb-2"><span class="fw-bold">&euro; {{ number_format($apartment->price, 2) }}</span>/notte</p>
                             <p class="mb-2">{{ $apartment->num_of_room }} stanze &middot;
                                 {{ $apartment->num_of_bed }} letti
                                 &middot;
