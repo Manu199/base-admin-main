@@ -37,24 +37,34 @@
                         </div>
                     @endif
                 </div>
-
-                <p class=" mt-2 fs-6">&euro;{{ $apartment->price }},00/notte</p>
-
-                <p>{{ $apartment->num_of_room }} stanze &middot; {{ $apartment->num_of_bed }} letti &middot;
-                    {{ $apartment->num_of_bathroom }} bagni &middot;
-                    {{ $apartment->square_meters }} mq</p>
-
-                <h6 class="mt-4">SERIVIZI</h6>
-                @foreach ($apartment->services as $service)
-                    <span class="badge my-2 badge-custom"> {!! $service['name'] !!}</span>
-                @endforeach
-
-                <p class="mt-3 fs-6">{{ $apartment->description }}</p>
             </div>
 
-            {{-- Message --}}
-            @if ($messages->count())
-                <div class="col mb-4">
+            {{-- right col --}}
+            <div class="col mb-4">
+                {{-- info apartment --}}
+                <div class="div border rounded p-3 mb-3 bg-white">
+                    <div class="w-100 border-bottom mb-2">
+                        <h6 class="m-0">
+                            <p class="mb-2">&euro;{{ $apartment->price }},00/notte</p>
+                            <p class="mb-2">{{ $apartment->num_of_room }} stanze &middot;
+                                {{ $apartment->num_of_bed }} letti
+                                &middot;
+                                {{ $apartment->num_of_bathroom }} bagni &middot;
+                                {{ $apartment->square_meters }} mq</p>
+                        </h6>
+                        <p class="mb-2 fs-6">{{ $apartment->description }}</p>
+                    </div>
+
+                    {{-- services --}}
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-2">
+                        @foreach ($apartment->services as $service)
+                            <span class="my-2"> {!! $service['name'] !!}</span>
+                        @endforeach
+                    </div>
+                </div>
+
+                @if ($messages->count())
+                    {{-- messages --}}
                     <div class="card">
                         <div class="card-header">
                             <i class="fa-solid fa-paper-plane me-2"></i>
@@ -114,16 +124,16 @@
 
                         </div>
                     </div>
-                </div>
+            </div>
             @endif
         </div>
 
         {{-- GRAFICO VIEWS --}}
         <div class="mb-4">
-            <h6 class="mt-5">GRAFICO</h6>
-            <div class="w-50">
-                <canvas id="myChart"></canvas>
-            </div>
+            <h4 class="my-5">Interazioni con il tuo appartamento:</h5>
+                <div class="w-50">
+                    <canvas id="myChart"></canvas>
+                </div>
         </div>
 
         {{-- Modal custom delete apartment --}}
@@ -165,23 +175,24 @@
     {{-- Chart.js  --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        const arrayViews = @json($views);
+        const arrayStatistic = @json($statistic);
         const labelsName = [];
-        const dataArray = [];
+        const viewsArray = [];
+        const counterMessageArray = [];
 
-        arrayViews.slice(1).forEach(monthViews => {
-            const date = new Date(monthViews['month'] + '-01');
-
+        arrayStatistic.forEach(statistic => {
+            const date = new Date(statistic['month'] + '-01');
             // nome del mese abbreviato
             const nameMonth = date.toLocaleString('default', {
                 month: 'short'
             });
 
             // Ottieni l'anno
-            var year = date.getFullYear();
+            const year = date.getFullYear();
 
             labelsName.push(nameMonth + ' ' + year);
-            dataArray.push(monthViews['total']);
+            viewsArray.push(statistic['views']);
+            counterMessageArray.push(statistic['messages']);
         });
 
         const ctx = document.getElementById('myChart');
@@ -191,10 +202,16 @@
             data: {
                 labels: labelsName,
                 datasets: [{
-                    label: 'Views per mese',
-                    data: dataArray,
-                    borderWidth: 1
-                }]
+                        label: 'Views per mese',
+                        data: viewsArray,
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Messaggi per mese',
+                        data: counterMessageArray,
+                        borderWidth: 1
+                    },
+                ]
             },
             options: {
                 scales: {
@@ -219,7 +236,7 @@
         // Target modal sponsor
         const modalSponsor = new bootstrap.Modal('#modal-sponsor', {});
 
-        btnPaySponsor.addEventListener('click', function(){
+        btnPaySponsor.addEventListener('click', function() {
             // devo controllare se l'appartamento è visibile o meno
             const visible = apartment['visible'];
 
@@ -229,11 +246,11 @@
                 modalSponsorInvisible.show();
                 // Confirm modal sponsor invisible
                 const btnConfirmSponsorInvisible = document.querySelector('#modal-sponsor-invisible #btn-confirm');
-                btnConfirmSponsorInvisible.addEventListener('click',function(){
+                btnConfirmSponsorInvisible.addEventListener('click', function() {
                     modalSponsorInvisible.hide();
                     modalSponsor.show();
                 })
-            }else{
+            } else {
                 modalSponsor.show();
             }
         })
@@ -255,57 +272,68 @@
                 btnSpinnerSponsor.classList.toggle('d-none');
 
                 instance.requestPaymentMethod(function(err, payload) {
-                    const selectedAmount = document.querySelector('input[name="radio-sponsor"]:checked');
+                    const selectedAmount = document.querySelector(
+                        'input[name="radio-sponsor"]:checked');
                     if (selectedAmount) {
                         const amount = selectedAmount.value;
                         const idSponsor = selectedAmount.id;
                         const idApartment = apartment['id'];
 
                         $.get(paymentProcessRoute, {
-                            payload: payload,
-                            amount: amount, // Aggiungi l'importo alla richiesta
-                            idSponsor: idSponsor,/* mi passo idSponsor */
-                            idApartment: idApartment,/* mi passo idApartment */
-                        }, function(response) {
-                            btnConfirmSponsor.classList.toggle('d-none');
-                            btnDeleteSponsor.classList.toggle('d-none');
-                            btnSpinnerSponsor.classList.toggle('d-none');
+                                payload: payload,
+                                amount: amount, // Aggiungi l'importo alla richiesta
+                                idSponsor: idSponsor,
+                                /* mi passo idSponsor */
+                                idApartment: idApartment,
+                                /* mi passo idApartment */
+                            }, function(response) {
+                                btnConfirmSponsor.classList.toggle('d-none');
+                                btnDeleteSponsor.classList.toggle('d-none');
+                                btnSpinnerSponsor.classList.toggle('d-none');
 
-                            console.log(response);
+                                console.log(response);
 
-                            modalSponsor.hide();
-                            if (response.success) {
-                                // Target modal sponsor-success
-                                const modalResultSuccess = new bootstrap.Modal('#modal-result-sponsor-success', {});
-                                modalResultSuccess.show();
-                                const btnDeleteResultSuccess = document.querySelector('#modal-result-sponsor-success #btn-delete');
-                                btnDeleteResultSuccess.classList.add('d-none');
-                                const btnConfirmResultSuccess = document.querySelector('#modal-result-sponsor-success #btn-confirm');
-                                btnConfirmResultSuccess.textContent = "Ok";
+                                modalSponsor.hide();
+                                if (response.success) {
+                                    // Target modal sponsor-success
+                                    const modalResultSuccess = new bootstrap.Modal(
+                                        '#modal-result-sponsor-success', {});
+                                    modalResultSuccess.show();
+                                    const btnDeleteResultSuccess = document.querySelector(
+                                        '#modal-result-sponsor-success #btn-delete');
+                                    btnDeleteResultSuccess.classList.add('d-none');
+                                    const btnConfirmResultSuccess = document.querySelector(
+                                        '#modal-result-sponsor-success #btn-confirm');
+                                    btnConfirmResultSuccess.textContent = "Ok";
 
-                                btnConfirmResultSuccess.addEventListener('click',function(){
-                                    location.reload();
-                                })
-                            } else {
-                                const modalResultFailed = new bootstrap.Modal('#modal-result-sponsor-failed', {});
-                                modalResultFailed.show();
-                                const btnDeleteResultFailed = document.querySelector('#modal-result-sponsor-failed #btn-delete');
-                                btnDeleteResultFailed.classList.add('d-none');
-                                const btnConfirmResultFailed = document.querySelector('#modal-result-sponsor-failed #btn-confirm');
-                                btnConfirmResultFailed.textContent = "Ok";
+                                    btnConfirmResultSuccess.addEventListener('click',
+                                        function() {
+                                            location.reload();
+                                        })
+                                } else {
+                                    const modalResultFailed = new bootstrap.Modal(
+                                        '#modal-result-sponsor-failed', {});
+                                    modalResultFailed.show();
+                                    const btnDeleteResultFailed = document.querySelector(
+                                        '#modal-result-sponsor-failed #btn-delete');
+                                    btnDeleteResultFailed.classList.add('d-none');
+                                    const btnConfirmResultFailed = document.querySelector(
+                                        '#modal-result-sponsor-failed #btn-confirm');
+                                    btnConfirmResultFailed.textContent = "Ok";
 
-                                btnConfirmResultFailed.addEventListener('click',function(){
-                                    location.reload();
-                                })
+                                    btnConfirmResultFailed.addEventListener('click',
+                                        function() {
+                                            location.reload();
+                                        })
 
-                            }
-                        }, 'json')
-                        .fail(function() {
-                            // Questo blocco di codice verrà eseguito in caso di errore
-                            btnConfirmSponsor.classList.toggle('d-none');
-                            btnDeleteSponsor.classList.toggle('d-none');
-                            btnSpinnerSponsor.classList.toggle('d-none');
-                        })
+                                }
+                            }, 'json')
+                            .fail(function() {
+                                // Questo blocco di codice verrà eseguito in caso di errore
+                                btnConfirmSponsor.classList.toggle('d-none');
+                                btnDeleteSponsor.classList.toggle('d-none');
+                                btnSpinnerSponsor.classList.toggle('d-none');
+                            })
                     };
                 });
             });

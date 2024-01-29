@@ -198,18 +198,38 @@ class ApartmentController extends Controller
         $messages = Message::where('apartment_id', $apartment->id)->orderBy('date', 'desc')->take(5)->get();
 
         // Ottenere la data di 12 mesi fa
-        $startDate = now()->subMonths(12);
+        $startDate = now()->firstOfMonth()->subMonths(11); // Modifica il numero di mesi a 11 per ottenere gli ultimi 12 mesi
 
-        // Ottenere le view raggruppate per mese
-        $views = View::selectRaw('DATE_FORMAT(date, "%Y-%m") as month')
-            ->selectRaw('COUNT(*) as total')
-            ->where('apartment_id', $apartment->id)
-            ->where('date', '>=', $startDate)
-            ->groupBy('month')
-            ->orderBy('month', 'asc')
-            ->get();
+        // Creare un array vuoto per memorizzare i dati del risultato
+        $statistic = [];
 
-        return view('admin.apartments.show', compact('apartment', 'sponsors', 'messages','views'));
+        // Iterare attraverso gli ultimi 12 mesi
+        for ($i = 0; $i < 12; $i++) {
+            // Ottenere le view raggruppate per mese
+            $views = View::selectRaw('COUNT(*) as total')
+                ->where('apartment_id', $apartment->id)
+                ->whereYear('date', $startDate->year)
+                ->whereMonth('date', $startDate->month)
+                ->first();
+
+            // Ottenere i message raggruppate per mese
+            $numMessages = Message::selectRaw('COUNT(*) as total')
+                ->where('apartment_id', $apartment->id)
+                ->whereYear('date', $startDate->year)
+                ->whereMonth('date', $startDate->month)
+                ->first();
+
+            // Aggiungere i dati al risultato
+            $statistic[] = [
+                'month' => $startDate->format('Y-m'),
+                'views' => $views ? $views->total : 0,
+                'messages' => $numMessages ? $numMessages->total : 0,
+            ];
+
+            // Aggiungere un mese a $startDate per il prossimo ciclo
+            $startDate = $startDate->addMonth();
+        }
+        return view('admin.apartments.show', compact('apartment', 'sponsors', 'messages', 'statistic'));
     }
 
     public function listMessages(Apartment $apartment)
