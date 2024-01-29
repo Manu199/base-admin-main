@@ -27,23 +27,24 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <div class="title d-sm-flex">
-                                <div class="d-flex flex-column">
+                                <div class="d-flex flex-column align-items-center">
                                     <h1 class="modal-title fs-5" id="staticBackdropLabel">
                                         {{ $message->name }}
                                     </h1>
-                                    <p class="me-5 pb-0 inline-block">
-                                        <i class="fa-solid fa-at me-1" style="color: #0c9a76;"> :</i>
+                                    <p class="pb-0 inline-block">
+                                        <i class="fa-solid fa-at"
+                                        style="color: #047458"> :</i>
                                         {{ $message->email_sender }}
                                     </p>
                                 </div>
-                                <div class="address_date d-flex align-items-center mt-3">
+                                <div class="address_date d-flex align-items-end mt-3 ms-4">
                                     <p class="m-0 p-0">{{ date('d/m/Y - H:i', strtotime($message->date)) }}</p>
                                 </div>
                             </div>
                             <button type="button" class="btn-close m-0" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body mx-4">
                             {{ $message->text }}
                         </div>
                         <div class="modal-footer">

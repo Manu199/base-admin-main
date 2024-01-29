@@ -41,7 +41,7 @@
 
                 </div>
 
-                   {{-- info apartment --}}
+                {{-- info apartment --}}
                 <div class="div border rounded p-3 my-3 bg-white">
                     <div class="w-100 border-bottom mb-2">
                         <h6 class="m-0">
@@ -73,12 +73,12 @@
             {{-- right col --}}
             <div class="col mb-4">
 
-                 {{-- GRAFICO VIEWS --}}
+                {{-- GRAFICO VIEWS --}}
                 <div class="mb-4">
                     <div class="card">
                         <div class="card-header">
                             <i class="fa-solid fa-chart-simple  me-2"></i>
-                            Stadistiche:
+                            Statistiche:
                         </div>
                         <div class="card-body">
                             <canvas id="myChart" class="w-100 h-100"></canvas>
@@ -111,24 +111,27 @@
                                     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <div class="title">
-                                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                                                        {{ $message->name }}
-                                                    </h1>
-                                                    <div class="address_date d-flex justify-content-between ">
-                                                        <p class="me-5">
-                                                            <i class="fa-solid fa-at me-1"> :</i>
+                                                <div class="title d-sm-flex">
+                                                    <div class="d-flex flex-column align-items-center">
+                                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                                                            {{ $message->name }}
+                                                        </h1>
+                                                        <p class="pb-0 inline-block">
+                                                            <i class="fa-solid fa-at"> :</i>
                                                             {{ $message->email_sender }}
                                                         </p>
-                                                        <p>{{ date('d/m/Y - H:i', strtotime($message->date)) }}</p>
+                                                    </div>
+                                                    <div class="address_date d-flex align-items-end mt-3 ms-4">
+                                                        <p class="m-0 p-0">
+                                                            {{ date('d/m/Y - H:i', strtotime($message->date)) }}</p>
                                                     </div>
 
                                                 </div>
 
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                <button type="button" class="btn-close m-0" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body">
+                                            <div class="modal-body mx-4">
                                                 {{ $message->text }}
                                             </div>
                                             <div class="modal-footer">
@@ -158,7 +161,7 @@
         <script>
             const btnChevron = document.getElementById('btn-chevron');
             const servicesContainer = document.getElementById('services-container');
-            btnChevron.addEventListener('click', function(){
+            btnChevron.addEventListener('click', function() {
                 servicesContainer.classList.toggle('reset-max-height');
                 btnChevron.classList.toggle('rotate-180');
             });
