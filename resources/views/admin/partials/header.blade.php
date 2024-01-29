@@ -123,6 +123,8 @@
                                     <a class="dropdown-item" href="http://localhost:5000/ricerca-avanzata">Ricerca
                                         Avanzata</a>
                                     <a class="dropdown-item" href="{{ url('profile') }}">Area personale</a>
+                                    <a class="dropdown-item" href="{{ route('login') }}">{{ __('Login') }}</a>
+
 
                                     @if (Route::has('register'))
                                         <a class="dropdown-item" href="{{ route('register') }}">{{ __('Register') }}</a>
