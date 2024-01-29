@@ -5,10 +5,10 @@
     <div class="show-apartment">
         <h1 class="text-center mb-5">Dettaglio Appartamento</h1>
         <div class="d-flex align-items-center justify-content-center mb-3 flex-column text-center flex-lg-row">
-            <h3>{{ $apartment->title }}</h3>
+            <h3 class="m-0">{{ $apartment->title }}</h3>
             <div class=" d-flex ms-2">
                 <a class="btn btn-custom-show-apartment" href="{{ route('admin.apartment.edit', $apartment) }}">
-                    <i class="fa-solid fa-pen-to-square fs-5"></i>
+                    <i class="fa-solid fa-pen-to-square"></i>
                 </a>
 
                 @include('admin.partials.delete_form', [
@@ -16,7 +16,7 @@
                     'element' => $apartment,
                 ])
                 <button class=" btn-custom-show-apartment" id="btn-pay-sponsor">
-                    <i class="far fa-credit-card fs-5"></i>
+                    <i class="far fa-credit-card"></i>
                 </button>
             </div>
 

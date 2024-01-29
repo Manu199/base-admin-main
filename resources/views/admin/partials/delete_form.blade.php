@@ -4,7 +4,7 @@
     @csrf
     @method('DELETE')
     <button class="btn btn-custom-show-apartment" type="submit">
-        <i class="fa-solid fa-trash-can fs-5"></i>
+        <i class="fa-solid fa-trash-can"></i>
     </button>
 </form>
 
