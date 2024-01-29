@@ -22,6 +22,8 @@
             <h6>{{ $apartment->address }}</h6>
         </div>
 
+        {{-- left col --}}
+
         <div class="row row-cols-1 row-cols-lg-2 ">
             {{-- Dati appartamento --}}
             <div class="col mb-4">
@@ -36,13 +38,11 @@
                             </h6>
                         </div>
                     @endif
-                </div>
-            </div>
 
-            {{-- right col --}}
-            <div class="col mb-4">
-                {{-- info apartment --}}
-                <div class="div border rounded p-3 mb-3 bg-white">
+                </div>
+
+                   {{-- info apartment --}}
+                <div class="div border rounded p-3 my-3 bg-white">
                     <div class="w-100 border-bottom mb-2">
                         <h6 class="m-0">
                             <p class="mb-2">&euro;{{ $apartment->price }},00/notte</p>
@@ -67,6 +67,25 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+
+            {{-- right col --}}
+            <div class="col mb-4">
+
+                 {{-- GRAFICO VIEWS --}}
+                <div class="mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa-solid fa-chart-simple  me-2"></i>
+                            Stadistiche:
+                        </div>
+                        <div class="card-body">
+                            <canvas id="myChart" class="w-100 h-100"></canvas>
+                        </div>
+                    </div>
+                </div>
+
 
                 @if ($messages->count())
                     {{-- messages --}}
@@ -133,17 +152,7 @@
             @endif
         </div>
 
-        {{-- GRAFICO VIEWS --}}
-        <div class="mb-4">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title m-0">Interazioni con il tuo appartamento: </h4>
-                </div>
-                <div class="card-body">
-                    <canvas id="myChart" class="w-100 h-100"></canvas>
-                </div>
-            </div>
-        </div>
+
 
         {{-- Open box service --}}
         <script>
