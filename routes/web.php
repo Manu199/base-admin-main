@@ -19,9 +19,9 @@ use App\Models\Apartment;
 |
 */
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('home');
-});
+// Route::middleware(['auth', 'verified'])->group(function () {
+//     Route::get('/', [DashboardController::class, 'index'])->name('home');
+// });
 
 
 // Route::get('/dashboard', function () {
