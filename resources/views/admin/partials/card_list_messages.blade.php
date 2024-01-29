@@ -5,12 +5,7 @@
 
     </div>
     <div class="card-body cursor-pointer">
-        <style>
-            /* DA SISTEMARE */
-            .list-group-item {
-                width: calc(100% / 3);
-            }
-        </style>
+
         @foreach ($messages as $message)
             <ul class="list-group list-group-horizontal mb-1 " data-bs-toggle="modal"
                 data-bs-target="#staticBackdrop{{ $message->id }}">
@@ -21,14 +16,13 @@
                 <li class="list-group-item single-line-ellipsis list-group-item-success">
                     {{ date('d/m/Y - H:i', strtotime($message->date)) }}</li>
                 @if (Route::currentRouteName() === 'admin.apartments.listMessages')
-                <li class="list-group-item single-line-ellipsis list-group-item-success">
-                    {{ $message->apartment->title }}</li>
+                    <li class="list-group-item single-line-ellipsis list-group-item-success" style="width: {{ 100 / 2 }}%;">
+                        {{ $message->apartment->title }}</li>
                 @endif
             </ul>
             <!-- Modal -->
             <div class="modal fade" id="staticBackdrop{{ $message->id }}" data-bs-backdrop="static"
-                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                aria-hidden="true">
+                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -53,8 +47,7 @@
                             {{ $message->text }}
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary"
-                                data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             {{-- <button type="button" class="btn btn-primary">Understood</button> --}}
                         </div>
                     </div>
