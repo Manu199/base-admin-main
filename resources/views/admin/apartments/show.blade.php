@@ -53,7 +53,7 @@
                                 {{ $apartment->square_meters }} mq</p>
                         </h6>
                         <div class="mb-4 border border-start-0 border-end-0 pb-2 pt-3 border-top-0">
-                            <h6>{{ $apartment->address }}</h6>
+                            <h6 class="fw-bold">{{ $apartment->address }}</h6>
                         </div>
                         <p class="mb-4 fs-6">{{ $apartment->description }}</p>
                     </div>
