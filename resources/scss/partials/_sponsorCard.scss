@@ -45,17 +45,17 @@
     }
     #generic_price_table .generic_content .generic_feature_list ul li:hover{
         background-color: #E4E4E4;
-        border-left: 5px solid #2ECC71;
+        border-left: 5px solid $primaryColor;
     }
 
-    #generic_price_table .generic_content .generic_price_btn a{
-        border: 1px solid #2ECC71;
-        color: #2ECC71;
+    #generic_price_table .generic_content .generic_price_btn .radio-label{
+        border: 1px solid $primaryColor;
+        color: $primaryColor;
     }
 
     #generic_price_table .generic_content.active .generic_head_price .generic_head_content .head_bg,
     #generic_price_table .generic_content:hover .generic_head_price .generic_head_content .head_bg{
-        border-color: #2ECC71 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #2ECC71;
+        border-color: $primaryColor rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) $primaryColor;
         color: #fff;
     }
 
@@ -64,9 +64,9 @@
         color: #fff;
     }
 
-    #generic_price_table .generic_content:hover .generic_price_btn a,
-    #generic_price_table .generic_content.active .generic_price_btn a{
-        background-color: #2ECC71;
+    #generic_price_table .generic_content:hover .generic_price_btn .radio-label,
+    #generic_price_table .generic_content.active .generic_price_btn .radio-label{
+        background-color: $primaryColor;
         color: #fff;
     }
     #generic_price_table{
@@ -184,7 +184,7 @@
         margin: 20px 0 32px;
     }
 
-    #generic_price_table .generic_content .generic_price_btn a{
+    #generic_price_table .generic_content .generic_price_btn .radio-label{
         border-radius: 50px;
         -moz-border-radius: 50px;
         -ms-border-radius: 50px;
@@ -207,8 +207,8 @@
     #generic_price_table .generic_content:hover .generic_head_price .generic_head_content .head h2,
     #generic_price_table .generic_content .price,
     #generic_price_table .generic_content:hover .price,
-    #generic_price_table .generic_content .generic_price_btn a,
-    #generic_price_table .generic_content:hover .generic_price_btn a{
+    #generic_price_table .generic_content .generic_price_btn .radio-label,
+    #generic_price_table .generic_content:hover .generic_price_btn .radio-label{
         transition: all 0.3s ease-in-out 0s;
         -moz-transition: all 0.3s ease-in-out 0s;
         -ms-transition: all 0.3s ease-in-out 0s;
@@ -284,7 +284,7 @@
         transition: all 0.3s ease-in-out 0s;
     }
     #generic_price_table_home .emerald{
-        background: #2ECC71;
+        background: $primaryColor;
         transition: all 0.3s ease-in-out 0s;
     }
     #generic_price_table_home .grey{

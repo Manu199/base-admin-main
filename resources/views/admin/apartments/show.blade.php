@@ -161,18 +161,6 @@
 
         </div>
 
-
-
-        {{-- Open box service --}}
-        <script>
-            const btnChevron = document.getElementById('btn-chevron');
-            const servicesContainer = document.getElementById('services-container');
-            btnChevron.addEventListener('click', function() {
-                servicesContainer.classList.toggle('reset-max-height');
-                btnChevron.classList.toggle('rotate-180');
-            });
-        </script>
-
         {{-- Modal custom delete apartment --}}
         @include('admin.partials.modal_custom', [
             'id' => 'modal-delete-apartment',
@@ -208,6 +196,24 @@
         ])
 
     </div>
+
+    {{-- active class for sponsor card --}}
+    <script>
+        const checkSponsor = document.querySelectorAll('[id^="radio-sponsor-"]');
+        checkSponsor.forEach(radio => {
+            radio.addEventListener("change", function(){
+
+                document.querySelectorAll('.generic_content').forEach(container => {
+                    container.classList.remove('active');
+                });
+
+                const container = this.closest('.generic_content');
+                if(this.checked){
+                    container.classList.add('active');
+                }
+            });
+        });
+    </script>
 
     {{-- Add class modal-lg alla modal-sponsor --}}
     <script>
@@ -326,20 +332,20 @@
                 btnSpinnerSponsor.classList.toggle('d-none');
 
                 instance.requestPaymentMethod(function(err, payload) {
-                    const selectedAmount = document.querySelector(
-                        'input[name="radio-sponsor"]:checked');
+                    const selectedAmount = document.querySelector('input[name="radio-sponsor"]:checked');
                     if (selectedAmount) {
                         const amount = selectedAmount.value;
+                        console.log(amount);
                         const idSponsor = selectedAmount.id;
+                        console.log(idSponsor);
                         const idApartment = apartment['id'];
+                        console.log(idApartment);
 
                         $.get(paymentProcessRoute, {
                                 payload: payload,
                                 amount: amount, // Aggiungi l'importo alla richiesta
-                                idSponsor: idSponsor,
-                                /* mi passo idSponsor */
-                                idApartment: idApartment,
-                                /* mi passo idApartment */
+                                idSponsor: idSponsor,/* mi passo idSponsor */
+                                idApartment: idApartment,/* mi passo idApartment */
                             }, function(response) {
                                 btnConfirmSponsor.classList.toggle('d-none');
                                 btnDeleteSponsor.classList.toggle('d-none');
@@ -349,6 +355,7 @@
 
                                 modalSponsor.hide();
                                 if (response.success) {
+                                    console.log('success');
                                     // Target modal sponsor-success
                                     const modalResultSuccess = new bootstrap.Modal(
                                         '#modal-result-sponsor-success', {});
@@ -384,6 +391,7 @@
                             }, 'json')
                             .fail(function() {
                                 // Questo blocco di codice verrà eseguito in caso di errore
+                                console.log('fail');
                                 btnConfirmSponsor.classList.toggle('d-none');
                                 btnDeleteSponsor.classList.toggle('d-none');
                                 btnSpinnerSponsor.classList.toggle('d-none');

@@ -11,7 +11,7 @@
                 <div class="col">
 
                     <!--PRICE CONTENT START-->
-                    <div class="generic_content clearfix">
+                    <div class="generic_content {{$sponsor->id === 2 ? 'active' : ''}} clearfix">
 
                         <!--HEAD PRICE DETAIL START-->
                         <div class="generic_head_price clearfix">
@@ -52,13 +52,15 @@
 
                         <!--BUTTON START-->
                         <div class="generic_price_btn clearfix">
-                            <a class="" href="">Sign up</a>
-                            {{-- <input class='form-check-input' @if ($sponsor->id === 1) checked @endif
-                                type='radio' name='radio-sponsor' id='{{ $sponsor->id }}'
+                            <input
+                                class="d-none"
+                                @if ($sponsor->id === 2) checked @endif
+                                type='radio'
+                                name='radio-sponsor'
+                                id='radio-sponsor-{{ $sponsor->id }}'
                                 value='{{ $sponsor->price }}'>
-                            <label class='form-check-label' for='{{ $sponsor->id }}'>
-                                {{ $sponsor->duration }} ore / {{ $sponsor->price }} &euro;
-                            </label> --}}
+
+                            <label class="radio-label" for='radio-sponsor-{{ $sponsor->id }}'>Seleziona</label>
                         </div>
                         <!--//BUTTON END-->
 
@@ -72,3 +74,5 @@
     </div>
 </div>
 <div id='dropin-container'></div>
+
+
