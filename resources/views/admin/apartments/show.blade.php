@@ -209,6 +209,12 @@
 
     </div>
 
+    {{-- Add class modal-lg alla modal-sponsor --}}
+    <script>
+        const modalDialogSponsor = document.querySelector('#modal-sponsor .modal-dialog');
+        modalDialogSponsor.classList.add('modal-xl');
+    </script>
+
     {{-- Open box service --}}
     <script>
         const btnChevron = document.getElementById('btn-chevron');
