@@ -27,7 +27,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <div class="title d-sm-flex">
-                                <div class="d-flex flex-column align-items-center">
+                                <div class="flex-column align-items-center">
                                     <h1 class="modal-title fs-5 fw-bold" id="staticBackdropLabel">
                                         {{ $message->name }}
                                     </h1>
@@ -37,7 +37,7 @@
                                         {{ $message->email_sender }}
                                     </p>
                                 </div>
-                                <div class="address_date d-flex align-items-end mt-3 ms-4">
+                                <div class="address_date d-flex align-items-end mt-3 ms-sm-3">
                                     <p class="m-0 p-0">{{ date('d/m/Y - H:i', strtotime($message->date)) }}</p>
                                 </div>
                             </div>
