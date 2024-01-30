@@ -3,7 +3,15 @@
 
 @section('content')
     <div class="show-apartment">
-        <h1 class="text-center mb-5">Dettaglio Appartamento</h1>
+        <div class="row d-flex flex-column align-items-center justify-content-center flex-lg-row">
+            <div class="col d-flex justify-content-center col-lg-4 ">
+                <a href="{{ route('admin.apartment.index') }}" class="btn btn-custom-index d-flex align-items-center"><i class="fa-solid fa-arrow-right-to-bracket fa-rotate-180 fs-5 me-2"></i> Torna indietro</a>
+            </div>
+            <div class="col col-lg-7">
+                <h1 class="my-4 text-center">Dettaglio Appartamento</h1>
+            </div>
+        </div>
+
         <div class="d-flex align-items-center justify-content-center mb-3 flex-column text-center flex-lg-row">
             <h3 class="m-0">{{ $apartment->title }}</h3>
             <div class=" d-flex ms-2">

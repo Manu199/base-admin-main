@@ -1,5 +1,4 @@
 .show-apartment {
-
     .container-sponsor {
         margin-top: 32px;
     }
@@ -11,7 +10,7 @@
         }
     }
 
-    #services-container{
+    #services-container {
         max-height: 160px;
         overflow: hidden;
         transition: max-height 1s ease-in-out;
@@ -39,13 +38,38 @@
         cursor: pointer;
         outline: none;
         &:hover {
-            background-color:$primaryColor;
+            background-color: $primaryColor;
             box-shadow: 0px 8px 8px rgba($primaryColor, 0.5);
             color: #fff;
-            transform: translateY(-7px);
-          }
-          &:active {
+            transform: translateY(-3px);
+        }
+        &:active {
             transform: translateY(-1px);
-          }
-      }
+        }
+    }
+    .btn-custom-index {
+        padding: 1.3em 3em;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 2.5px;
+        font-weight: 500;
+        color: #000;
+        background-color: #fff;
+        border: none;
+        border-radius: 45px;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease 0s;
+        cursor: pointer;
+        outline: none;
+        &:hover {
+            background-color: $primaryColor;
+            box-shadow: 0px 15px 20px rgba($primaryColor, 0.5);
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        &:active {
+            transform: translateY(-1px);
+        }
+    }
 }
