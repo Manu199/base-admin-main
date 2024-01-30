@@ -14,9 +14,9 @@ class SponsorsTableSeeder extends Seeder
     public function run(): void
     {
         $data = [
-            ['name' => '24 ore di sponsorizzazione', 'description' => 'Sponsorizzazione per 24 ore', 'price' => 2.99, 'duration' => 24],
-            ['name' => '72 ore di sponsorizzazione', 'description' => 'Sponsorizzazione per 72 ore', 'price' => 5.99, 'duration' => 72],
-            ['name' => '144 ore di sponsorizzazione', 'description' => 'Sponsorizzazione per 144 ore', 'price' => 9.99, 'duration' => 144],
+            ['name' => 'Basic', 'description' => 'Sponsorizzazione per 24 ore', 'price' => 2.99, 'duration' => 24],
+            ['name' => 'Standard', 'description' => 'Sponsorizzazione per 72 ore', 'price' => 5.99, 'duration' => 72],
+            ['name' => 'Premium', 'description' => 'Sponsorizzazione per 144 ore', 'price' => 9.99, 'duration' => 144],
         ];
 
         foreach ($data as $sponsorData) {
