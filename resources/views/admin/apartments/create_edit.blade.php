@@ -264,7 +264,7 @@
     {{-- Modal custom toggle visible --}}
     @include('admin.partials.modal_custom', [
         'id' => 'modal-toggle-visible',
-        'title' => 'Attenzione &middot; Sei sponsorizzato',
+        'title' => 'Attenzione &middot; Appartamento sponsorizzato',
         'message' => '<p class="text-center">Vuoi davvero cambiare la visibilità dell\'appartamento?</p>',
     ])
 

@@ -234,7 +234,7 @@ class ApartmentController extends Controller
 
     public function listMessages(Apartment $apartment)
     {
-        $messages = Message::where('apartment_id', $apartment->id)->orderBy('date', 'desc')->take(5)->get();
+        $messages = Message::where('apartment_id', $apartment->id)->orderBy('date', 'desc')->get();
         return view('admin.apartments.listMessages', compact('messages'));
     }
 

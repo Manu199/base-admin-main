@@ -38,6 +38,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     // Rotte personalizzate
     Route::get('apartments/messages', [ApartmentController::class, 'listMessagesUser'])->name('apartments.listMessages');
     Route::get('apartment/{apartment}/messages', [ApartmentController::class, 'listMessages'])->name('apartment.listMessages');
+
     Route::get('apartment/{apartment}/edit-visible', [ApartmentController::class, 'editVisible'])->name('apartment.edit-visible');
 
     // Rotte di resource
