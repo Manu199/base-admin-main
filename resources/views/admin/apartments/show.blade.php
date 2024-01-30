@@ -333,10 +333,11 @@
 
                 instance.requestPaymentMethod(function(err, payload) {
                     const selectedAmount = document.querySelector('input[name="radio-sponsor"]:checked');
+                    console.log(selectedAmount);
                     if (selectedAmount) {
                         const amount = selectedAmount.value;
                         console.log(amount);
-                        const idSponsor = selectedAmount.id;
+                        const idSponsor = selectedAmount.getAttribute('data-idSponsor');
                         console.log(idSponsor);
                         const idApartment = apartment['id'];
                         console.log(idApartment);

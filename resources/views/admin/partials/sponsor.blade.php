@@ -58,6 +58,7 @@
                                 type='radio'
                                 name='radio-sponsor'
                                 id='radio-sponsor-{{ $sponsor->id }}'
+                                data-idSponsor='{{ $sponsor->id }}'
                                 value='{{ $sponsor->price }}'>
 
                             <label class="radio-label" for='radio-sponsor-{{ $sponsor->id }}'>Seleziona</label>
