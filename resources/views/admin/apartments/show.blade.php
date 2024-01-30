@@ -3,14 +3,10 @@
 
 @section('content')
     <div class="show-apartment">
-        <div class="row d-flex flex-column align-items-center justify-content-center flex-lg-row">
-            <div class="col d-flex justify-content-center col-lg-4 ">
-                <a href="{{ route('admin.apartment.index') }}" class="btn btn-custom-index d-flex align-items-center"><i class="fa-solid fa-arrow-right-to-bracket fa-rotate-180 fs-5 me-2"></i> Torna indietro</a>
-            </div>
-            <div class="col col-lg-7">
-                <h1 class="my-4 text-center">Dettaglio Appartamento</h1>
-            </div>
-        </div>
+
+        <a href="{{ route('admin.apartment.index') }}" class="btn btn-custom-index"><i
+                class="fa-solid fa-arrow-right-to-bracket fa-rotate-180 fs-5 me-2"></i> Torna indietro</a>
+        <h1 class="my-4 text-center">Dettaglio Appartamento</h1>
 
         <div class="d-flex align-items-center justify-content-center mb-3 flex-column text-center flex-lg-row">
             <h3 class="m-0">{{ $apartment->title }}</h3>
@@ -53,7 +49,8 @@
                 <div class="div border rounded p-3 my-3 bg-white">
                     <div class="w-100 border-bottom mb-2">
                         <h6 class="m-0">
-                            <p class="mb-2"><span class="fw-bold">&euro; {{ number_format($apartment->price, 2) }}</span>/notte</p>
+                            <p class="mb-2"><span class="fw-bold">&euro;
+                                    {{ number_format($apartment->price, 2) }}</span>/notte</p>
                             <p class="mb-2">{{ $apartment->num_of_room }} stanze &middot;
                                 {{ $apartment->num_of_bed }} letti
                                 &middot;
