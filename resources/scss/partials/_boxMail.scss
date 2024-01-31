@@ -1,0 +1,70 @@
+/* ========================================================================
+ * MAIL
+ * ======================================================================== */
+
+.box-email{
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+}
+.box-email:hover,
+.box-email.active{
+    background-color: #f5f5f5;
+}
+
+.box-email .media {
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+}
+.box-email .media-body{
+    padding: 8px;
+}
+.box-email .media h4 {
+    margin: 0px;
+    font-size: 14px;
+    line-height: normal;
+}
+.box-email .media-meta {
+    font-size: 11px;
+    color: #999;
+    position: absolute;
+}
+
+.box-email .media-meta-right {
+    right: 10px;
+}
+.box-email .media-meta-left {
+    left: 10px;
+}
+
+
+.box-email .media-meta {
+    top: 0px;
+}
+.box-email .email-summary {
+    margin: 0px 110px 0px 0px;
+}
+
+.messages .shadow{
+    overflow-x: auto;
+}
+
+/* Fino al breakpoint lg (incluso) */
+@media (max-width: 992px) {
+    .messages .shadow {
+        max-height: calc(100vh - 450px);
+
+    }
+}
+
+/* Da lg in su */
+@media (min-width: 993px) {
+    .messages .shadow {
+        max-height: calc(100vh - 250px);
+    }
+}
+
+
+
+
+
