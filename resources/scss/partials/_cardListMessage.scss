@@ -12,4 +12,30 @@
     .list-group-item:nth-child(3) {
         width: calc(100% / 2);
     }
+    .btn-custom-index {
+        width: 200px;
+        font-size: 12px;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        letter-spacing: 2.5px;
+        font-weight: 500;
+        color: #000;
+        background-color: #fff;
+        border: none;
+        border-radius: 45px;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease 0s;
+        cursor: pointer;
+        outline: none;
+        &:hover {
+            background-color: $primaryColor;
+            box-shadow: 0px 15px 20px rgba($primaryColor, 0.5);
+            color: #fff;
+            transform: translateY(-1px);
+        }
+
+        &:active {
+            transform: translateY(-1px);
+        }
+    }
 }
