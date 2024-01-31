@@ -105,13 +105,42 @@
                     <div class="card-body cursor-pointer">
 
                         @foreach ($messages as $message)
-                            <ul class="list-group list-group-horizontal mb-1 " data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop{{ $message->id }}">
-                                <li class="list-group-item single-line-ellipsis list-group-item-success">
-                                    {{ $message->email_sender }}</li>
-                                <li class="list-group-item single-line-ellipsis list-group-item-success">
-                                    {{ date('d/m/Y - H:i', strtotime($message->date)) }}</li>
-                            </ul>
+                            @php
+                                // Data corrente
+                                $today = new DateTime();
+                                // Mappa dei nomi dei giorni della settimana
+                                $dayNameArray = [
+                                    'Mon' => 'Lun',
+                                    'Tue' => 'Mar',
+                                    'Wed' => 'Mer',
+                                    'Thu' => 'Gio',
+                                    'Fri' => 'Ven',
+                                    'Sat' => 'Sab',
+                                    'Sun' => 'Dom',
+                                ];
+                                // Converti la stringa in un oggetto DateTime
+                                $datetime = new DateTime($message->date);
+                                $dayName = $dayNameArray[$datetime->format('D')];
+                                // Calcola la differenza in giorni tra la data ricevuta e oggi
+                                $dif = $today->diff($datetime)->days;
+                                // Formattazione della data in base alla differenza
+                                if ($dif <= 7) {
+                                    $formattedDate = $dayName . ' ' . $datetime->format('H:i');
+                                } else {
+                                    $formattedDate = $dayName . ' ' . $datetime->format('d/m/y');
+                                }
+                            @endphp
+                            <div class="box-email cursor-pointer" data-idMessage="{{ $message->id }}" data-titleApartment="{{ $message->apartment->title }}" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $message->id }}">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <span class="media-meta media-meta-right">{{ $formattedDate }}</span>
+                                        <h4 class="text-success fw-bold">{{ $message->name }}</h4>
+                                        <p class="email-summary text-truncate">
+                                            {{ $message->text }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- Modal -->
                             <div class="modal fade" id="staticBackdrop{{ $message->id }}" data-bs-backdrop="static"
                                 data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
