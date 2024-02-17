@@ -14,59 +14,49 @@ $dayNameArray = [
     'Sun' => 'Dom',
 ];
 
+$formattedDate = '';
+
 ?>
 
 
 <div class="row">
     <div class="messages col-12 order-1 col-lg-7 order-lg-0 mb-3">
         <div class="shadow">
-            @forelse ($messages as $message)
-                @php
-                    // Converti la stringa in un oggetto DateTime
-                    $datetime = new DateTime($message->date);
-                    $dayName = $dayNameArray[$datetime->format('D')];
-                    // Calcola la differenza in giorni tra la data ricevuta e oggi
-                    $dif = $today->diff($datetime)->days;
-                    // Formattazione della data in base alla differenza
-                    if ($dif <= 7) {
-                        $formattedDate = $dayName . ' ' . $datetime->format('H:i');
-                    } else {
-                        $formattedDate = $dayName . ' ' . $datetime->format('d/m/y');
-                    }
-                @endphp
-                <div class="box-email cursor-pointer" data-idMessage="{{ $message->id }}" data-titleApartment="{{ $message->apartment->title }}">
-                    <div class="media">
-                        <div class="media-body">
-                            <span class="media-meta media-meta-right">{{ $formattedDate }}</span>
-                            <h4 class="text-success fw-bold">{{ $message->name }}</h4>
-                            <p class="email-summary text-truncate">
-                                {{ $message->text }}
-                            </p>
+            {{-- Controlla se ci sono messaggi --}}
+            @if ($messages->isNotEmpty())
+                {{-- Inizia il ciclo solo se ci sono messaggi --}}
+                @forelse ($messages as $message)
+                    @php
+                        // Converti la stringa in un oggetto DateTime
+                        $datetime = new DateTime($message->date);
+                        $dayName = $dayNameArray[$datetime->format('D')];
+                        // Calcola la differenza in giorni tra la data ricevuta e oggi
+                        $dif = $today->diff($datetime)->days;
+                        // Formattazione della data in base alla differenza
+                        if ($dif <= 7) {
+                            $formattedDate = $dayName . ' ' . $datetime->format('H:i');
+                        } else {
+                            $formattedDate = $dayName . ' ' . $datetime->format('d/m/y');
+                        }
+                    @endphp
+                    <div class="box-email cursor-pointer" data-idMessage="{{ $message->id }}"
+                        data-titleApartment="{{ $message->apartment->title }}">
+                        <div class="media">
+                            <div class="media-body">
+                                <span class="media-meta media-meta-right">{{ $formattedDate }}</span>
+                                <h4 class="text-success fw-bold">{{ $message->name }}</h4>
+                                <p class="email-summary text-truncate">{{ $message->text }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @empty
-            @endforelse
-
-        </div>
-    </div>
-    <div class="single-message col-12 order-0 col-lg-5 order-lg-1 mb-3">
-        <div class="shadow bg-white">
-            <div class="box-email">
-                <div class="media">
-                    <div class="media-body">
-                        <span class="media-meta media-meta-right">{{ $formattedDate }}</span>
-                        <h4 class="mt-3 mb-2 py-2 border-bottom border-top">
-                            <span class="text-success fw-bold">{{ $message->name }}</span>
-                            <span> &middot; {{ $message->email_sender }}</span>
-                        </h4>
-                        <span class="media-meta media-meta-left">{{ $message->apartment->title }}</span>
-                        <p class="email-summary">
-                            {{ $message->text }}
-                        </p>
-                    </div>
-                </div>
-            </div>
+                @empty
+                    {{-- Caso in cui non ci sono messaggi --}}
+                    <p>Nessun messaggio disponibile al momento.</p>
+                @endforelse
+            @else
+                {{-- Caso in cui non ci sono messaggi --}}
+                <p>Nessun messaggio disponibile al momento.</p>
+            @endif
         </div>
     </div>
 </div>
@@ -109,17 +99,31 @@ $dayNameArray = [
             // Format the date based on the difference
             if (differenceInDays <= 7) {
                 // If within a week
-                formattedDate = date.toLocaleString('it-IT', { weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: false });
+                formattedDate = date.toLocaleString('it-IT', {
+                    weekday: 'short',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    hour12: false
+                });
             } else {
                 // If more than a week away
-                formattedDate = date.toLocaleString('it-IT', { weekday: 'short', day: '2-digit', month: '2-digit', year: '2-digit' });
+                formattedDate = date.toLocaleString('it-IT', {
+                    weekday: 'short',
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: '2-digit'
+                });
             }
 
             // Inserisci i dati all'interno degli elementi HTML
             document.querySelector('.single-message .media-meta-right').textContent = formattedDate;
             document.querySelector('.single-message .media-meta-left').textContent = apartmentTitle;
-            document.querySelector('.single-message .mt-3.mb-2.py-2.border-bottom.border-top .text-success').textContent = selectedMessage.name;
-            document.querySelector('.single-message .mt-3.mb-2.py-2.border-bottom.border-top span:last-child').textContent = ` · ${selectedMessage.email_sender}`;
+            document.querySelector(
+                    '.single-message .mt-3.mb-2.py-2.border-bottom.border-top .text-success')
+                .textContent = selectedMessage.name;
+            document.querySelector(
+                    '.single-message .mt-3.mb-2.py-2.border-bottom.border-top span:last-child')
+                .textContent = ` · ${selectedMessage.email_sender}`;
             document.querySelector('.single-message .email-summary').textContent = selectedMessage.text;
 
 
