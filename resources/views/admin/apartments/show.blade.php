@@ -104,86 +104,100 @@
                     </div>
                     <div class="card-body cursor-pointer">
 
-                        @foreach ($messages as $message)
-                            @php
-                                // Data corrente
-                                $today = new DateTime();
-                                // Mappa dei nomi dei giorni della settimana
-                                $dayNameArray = [
-                                    'Mon' => 'Lun',
-                                    'Tue' => 'Mar',
-                                    'Wed' => 'Mer',
-                                    'Thu' => 'Gio',
-                                    'Fri' => 'Ven',
-                                    'Sat' => 'Sab',
-                                    'Sun' => 'Dom',
-                                ];
-                                // Converti la stringa in un oggetto DateTime
-                                $datetime = new DateTime($message->date);
-                                $dayName = $dayNameArray[$datetime->format('D')];
-                                // Calcola la differenza in giorni tra la data ricevuta e oggi
-                                $dif = $today->diff($datetime)->days;
-                                // Formattazione della data in base alla differenza
-                                if ($dif <= 7) {
-                                    $formattedDate = $dayName . ' ' . $datetime->format('H:i');
-                                } else {
-                                    $formattedDate = $dayName . ' ' . $datetime->format('d/m/y');
-                                }
-                            @endphp
-                            <div class="box-email cursor-pointer" data-idMessage="{{ $message->id }}" data-titleApartment="{{ $message->apartment->title }}" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $message->id }}">
+                        @if ($messages->isEmpty())
+                            <div class="box-email">
                                 <div class="media">
                                     <div class="media-body">
-                                        <span class="media-meta media-meta-right">{{ $formattedDate }}</span>
-                                        <h4 class="text-success fw-bold">{{ $message->name }}</h4>
-                                        <p class="email-summary text-truncate">
-                                            {{ $message->text }}
-                                        </p>
+                                        <p>Nessun messaggio ricevuto.</p>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Modal -->
-                            <div class="modal fade" id="staticBackdrop{{ $message->id }}" data-bs-backdrop="static"
-                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <div class="title d-sm-flex">
-                                                <div class="flex-column align-items-center">
-                                                    <h1 class="modal-title fs-5 fw-bold" id="staticBackdropLabel">
-                                                        {{ $message->name }}
-                                                    </h1>
-                                                    <p class="pb-0 inline-block">
-                                                        <i class="fa-solid fa-at" style="color: #047458"> :</i>
-                                                        {{ $message->email_sender }}
-                                                    </p>
+                        @else
+                            @foreach ($messages as $message)
+                                @php
+                                    // Data corrente
+                                    $today = new DateTime();
+                                    // Mappa dei nomi dei giorni della settimana
+                                    $dayNameArray = [
+                                        'Mon' => 'Lun',
+                                        'Tue' => 'Mar',
+                                        'Wed' => 'Mer',
+                                        'Thu' => 'Gio',
+                                        'Fri' => 'Ven',
+                                        'Sat' => 'Sab',
+                                        'Sun' => 'Dom',
+                                    ];
+                                    // Converti la stringa in un oggetto DateTime
+                                    $datetime = new DateTime($message->date);
+                                    $dayName = $dayNameArray[$datetime->format('D')];
+                                    // Calcola la differenza in giorni tra la data ricevuta e oggi
+                                    $dif = $today->diff($datetime)->days;
+                                    // Formattazione della data in base alla differenza
+                                    if ($dif <= 7) {
+                                        $formattedDate = $dayName . ' ' . $datetime->format('H:i');
+                                    } else {
+                                        $formattedDate = $dayName . ' ' . $datetime->format('d/m/y');
+                                    }
+                                @endphp
+                                <div class="box-email cursor-pointer" data-idMessage="{{ $message->id }}"
+                                    data-titleApartment="{{ $message->apartment->title }}" data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop{{ $message->id }}">
+                                    <div class="media">
+                                        <div class="media-body">
+                                            <span class="media-meta media-meta-right">{{ $formattedDate }}</span>
+                                            <h4 class="text-success fw-bold">{{ $message->name }}</h4>
+                                            <p class="email-summary text-truncate">
+                                                {{ $message->text }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="staticBackdrop{{ $message->id }}" data-bs-backdrop="static"
+                                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <div class="title d-sm-flex">
+                                                    <div class="flex-column align-items-center">
+                                                        <h1 class="modal-title fs-5 fw-bold" id="staticBackdropLabel">
+                                                            {{ $message->name }}
+                                                        </h1>
+                                                        <p class="pb-0 inline-block">
+                                                            <i class="fa-solid fa-at" style="color: #047458"> :</i>
+                                                            {{ $message->email_sender }}
+                                                        </p>
+                                                    </div>
+                                                    <div class="address_date d-flex align-items-end mt-3 ms-sm-3 ">
+                                                        <p class="m-0 p-0">
+                                                            {{ date('d/m/Y - H:i', strtotime($message->date)) }}
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                                <div class="address_date d-flex align-items-end mt-3 ms-sm-3 ">
-                                                    <p class="m-0 p-0">{{ date('d/m/Y - H:i', strtotime($message->date)) }}
-                                                    </p>
-                                                </div>
+                                                <button type="button" class="btn-close m-0" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
                                             </div>
-                                            <button type="button" class="btn-close m-0" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body mx-4">
-                                            {{ $message->text }}
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Close</button>
-                                            {{-- <button type="button" class="btn btn-primary">Understood</button> --}}
+                                            <div class="modal-body mx-4">
+                                                {{ $message->text }}
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                {{-- <button type="button" class="btn btn-primary">Understood</button> --}}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
-
-                        <p class="text-end">
-                            <a href="{{ route('admin.apartment.listMessages', $apartment->id) }}"
-                                class="btn rounded-0 custom-btn-primary">Mostra tutto...</a>
-                        </p>
-
+                            @endforeach
+                        @endif
+                        {{-- Se no e' vuoto e i messaggi sono maggiori di 5 appare il link --}}
+                        @if ($messages->isNotEmpty() && count($apartment->messages) > 5)
+                            <p class="text-end">
+                                <a href="{{ route('admin.apartment.listMessages', $apartment->id) }}"
+                                    class="btn rounded-0 custom-btn-primary">Mostra tutto...</a>
+                            </p>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -230,14 +244,14 @@
     <script>
         const checkSponsor = document.querySelectorAll('[id^="radio-sponsor-"]');
         checkSponsor.forEach(radio => {
-            radio.addEventListener("change", function(){
+            radio.addEventListener("change", function() {
 
                 document.querySelectorAll('.generic_content').forEach(container => {
                     container.classList.remove('active');
                 });
 
                 const container = this.closest('.generic_content');
-                if(this.checked){
+                if (this.checked) {
                     container.classList.add('active');
                 }
             });
@@ -361,7 +375,8 @@
                 btnSpinnerSponsor.classList.toggle('d-none');
 
                 instance.requestPaymentMethod(function(err, payload) {
-                    const selectedAmount = document.querySelector('input[name="radio-sponsor"]:checked');
+                    const selectedAmount = document.querySelector(
+                        'input[name="radio-sponsor"]:checked');
                     console.log(selectedAmount);
                     if (selectedAmount) {
                         const amount = selectedAmount.value;
@@ -374,8 +389,10 @@
                         $.get(paymentProcessRoute, {
                                 payload: payload,
                                 amount: amount, // Aggiungi l'importo alla richiesta
-                                idSponsor: idSponsor,/* mi passo idSponsor */
-                                idApartment: idApartment,/* mi passo idApartment */
+                                idSponsor: idSponsor,
+                                /* mi passo idSponsor */
+                                idApartment: idApartment,
+                                /* mi passo idApartment */
                             }, function(response) {
                                 btnConfirmSponsor.classList.toggle('d-none');
                                 btnDeleteSponsor.classList.toggle('d-none');
